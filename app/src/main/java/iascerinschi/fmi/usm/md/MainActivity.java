@@ -29,12 +29,12 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         setContentView(R.layout.navigation_drawer);
 
         //[1]vert + Toolbar
-        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
         //[2]ori
-        drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
-        navigationView = (NavigationView) findViewById(R.id.navigation_view);
+        drawerLayout = findViewById(R.id.drawer_layout);
+        navigationView = findViewById(R.id.navigation_view);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.open_drawer, R.string.close_drawer);
 
         navigationView.setNavigationItemSelectedListener(this);
@@ -43,7 +43,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         toggle.syncState();
 
         //[3]browser
-        WebView webView = (WebView) findViewById(R.id.webView);
+        WebView webView = findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("http://fmi.usm.md");
@@ -56,26 +56,6 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             drawerLayout.closeDrawer(GravityCompat.START);
         else
             super.onBackPressed();
-    }
-
-    //[1]Trei puncte(verticale): crearea optiunilor "trimite feedback", "Detalii aplicatie".
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.main_menu, menu);
-        return true;
-    }
-
-    //[1]Trei puncte: executarea codului dorit la selectarea optiunilor alese
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-
-        if (id == R.id.menu_feedback) {
-            Toast.makeText(getApplicationContext(), "Feedback", Toast.LENGTH_SHORT).show();
-            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.yea_boii);
-            mediaPlayer.start();
-        }
-        return super.onOptionsItemSelected(item);
     }
 
     //[2]Trei linii(orizontale): executarea codului la select. optiunilor gen "orar" etc.
