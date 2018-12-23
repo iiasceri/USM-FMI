@@ -56,7 +56,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         if (drawerLayout.isDrawerOpen(GravityCompat.START))
             drawerLayout.closeDrawer(GravityCompat.START);
         else
-            super.onBackPressed();
+            Toast.makeText(getApplicationContext(), "Dute in branza", Toast.LENGTH_SHORT).show();
     }
 
     //[2]Trei linii(orizontale): executarea codului la select. optiunilor gen "orar" etc.
