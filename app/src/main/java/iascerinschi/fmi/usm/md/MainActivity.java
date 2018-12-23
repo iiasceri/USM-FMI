@@ -31,6 +31,7 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         //[1]vert + Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayShowTitleEnabled(false);
 
         //[2]ori
         drawerLayout = findViewById(R.id.drawer_layout);
