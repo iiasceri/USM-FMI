@@ -53,16 +53,12 @@ public class LoginRegisterActivity extends ToolbarActivity {
     }
 
     public void tryLogin(View view) {
-        final RoundButton lbtn = findViewById(R.id.loginButton);
         final Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivity(intent);
     }
 
     public void tryRegister(View view) {
-
-        final RoundButton rbtn = findViewById(R.id.registerButton);
-        final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-
+        final Intent intent = new Intent(getApplicationContext(), RegisterActivity.class);
         startActivity(intent);
     }
 

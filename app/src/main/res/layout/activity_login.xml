@@ -16,7 +16,7 @@
         android:layout_marginEnd="4dp"
         android:gravity="center"
         android:onClick="tryLogin"
-        android:text="@string/login2button"
+        android:text="@string/login_button2"
         android:textAppearance="@android:style/TextAppearance.Widget.DropDownHint"
         android:textSize="22sp"
         android:textStyle="bold"
@@ -44,7 +44,7 @@
         android:layout_height="190dp"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="50dp"
-        android:contentDescription="@string/descr_logo"
+        android:contentDescription="@string/faculty_logo"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -52,7 +52,7 @@
         app:srcCompat="@drawable/usm_white_450x455" />
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:id="@+id/materialTextField"
+        android:id="@+id/mailMaterialTextFieldRegister"
         android:layout_width="320dp"
         android:layout_height="80dp"
         android:layout_marginBottom="8dp"
@@ -71,13 +71,13 @@
             android:textColor="#000000"
             android:textSize="17sp"
             android:inputType="text"
-            android:id="@+id/editTextLogin"
+            android:id="@+id/mailEditTextRegister"
             />
 
     </com.github.florent37.materialtextfield.MaterialTextField>
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:id="@+id/materialTextField2"
+        android:id="@+id/passwordMaterialTextFieldLogin"
         android:layout_width="320dp"
         android:layout_height="80dp"
         android:layout_marginBottom="8dp"
@@ -90,11 +90,11 @@
         app:mtf_openKeyboardOnFocus="true">
 
         <EditText
-            android:id="@+id/editTextLogin2"
+            android:id="@+id/passwordEditTextLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Password"
-            android:inputType="text"
+            android:inputType="textPassword"
             android:textColor="#000000"
             android:textSize="17sp" />
 

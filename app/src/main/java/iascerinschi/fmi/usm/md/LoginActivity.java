@@ -1,21 +1,13 @@
 package iascerinschi.fmi.usm.md;
 
-import android.animation.AnimatorSet;
-import android.animation.ObjectAnimator;
 import android.content.Intent;
 import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
-import android.text.Editable;
 import android.util.DisplayMetrics;
 import android.view.Gravity;
 import android.view.View;
-import android.view.animation.AccelerateInterpolator;
-import android.widget.EditText;
-import android.widget.FrameLayout;
 import android.widget.ImageView;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.github.florent37.materialtextfield.MaterialTextField;
@@ -24,10 +16,12 @@ import com.marozzi.roundbutton.RoundButton;
 public class LoginActivity extends ToolbarActivity {
 
     Toolbar toolbar;
-    int firstAnimationDuration = 1500;
     String mail = "";
     String password = "";
 
+    int LONG_ANIMATION_DURATION = 1200;
+    int MEDIUM_ANIMATION_DURATION = 800;
+    int SHORT_ANIMATION_DURATION = 220;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +37,8 @@ public class LoginActivity extends ToolbarActivity {
         //UI
         final ImageView imageView = findViewById(R.id.fmi_logo_view_login);
         final RoundButton roundButton = findViewById(R.id.login2Button);
-        final MaterialTextField materialTextField = findViewById(R.id.materialTextField);
-        final MaterialTextField materialTextField2 = findViewById(R.id.materialTextField2);
+        final MaterialTextField materialTextField = findViewById(R.id.mailMaterialTextFieldRegister);
+        final MaterialTextField materialTextField2 = findViewById(R.id.passwordMaterialTextFieldLogin);
 
         materialTextField.setAlpha(0f);
         materialTextField2.setAlpha(0f);
@@ -55,18 +49,26 @@ public class LoginActivity extends ToolbarActivity {
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowTitleEnabled(false);*/
 
-        imageView.animate().scaleX(0.5f).scaleY(0.5f).setDuration(firstAnimationDuration);
-        imageView.animate().translationXBy(-(width/3)).setDuration(firstAnimationDuration);
-        imageView.animate().translationYBy(-(height/10) - 15).setDuration(firstAnimationDuration);
+        imageView.animate().scaleX(0.5f).scaleY(0.5f).setDuration(LONG_ANIMATION_DURATION);
+        imageView.animate().translationXBy(-(width/3)).setDuration(LONG_ANIMATION_DURATION);
+        imageView.animate().translationYBy(-(height/10) - 15).setDuration(LONG_ANIMATION_DURATION);
 
         //Animatia txt & buton
-        materialTextField.animate().alpha(1f).setDuration(firstAnimationDuration);
-        roundButton.animate().alpha(1f).setDuration(firstAnimationDuration);
+        materialTextField.animate().alpha(1f).setDuration(LONG_ANIMATION_DURATION);
+        roundButton.animate().alpha(1f).setDuration(LONG_ANIMATION_DURATION);
 
-        materialTextField.animate().translationYBy(-height/2 + 200).setDuration(firstAnimationDuration);
-        materialTextField2.animate().translationYBy(-height/2 + 200).setDuration(firstAnimationDuration);
-        materialTextField2.animate().translationXBy(1000).setDuration(800);
-        roundButton.animate().translationYBy(-height/2 + 200).setDuration(firstAnimationDuration);
+        materialTextField.animate().translationYBy(-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
+        materialTextField2.animate().translationYBy(-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
+        materialTextField2.animate().translationXBy(1000).setDuration(MEDIUM_ANIMATION_DURATION);
+        roundButton.animate().translationYBy(-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
+
+        final Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                materialTextField.setHasFocus(true);
+            }
+        }, LONG_ANIMATION_DURATION);
 
     }
 
@@ -78,26 +80,23 @@ public class LoginActivity extends ToolbarActivity {
     }
 
     public void animateMailField(View view) {
-        final MaterialTextField materialTextField = findViewById(R.id.materialTextField);
-        materialTextField.animate().translationXBy(70).setDuration(220);
+        final MaterialTextField materialTextField = findViewById(R.id.mailMaterialTextFieldRegister);
+        materialTextField.animate().translationXBy(70).setDuration(SHORT_ANIMATION_DURATION);
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
-                materialTextField.animate().translationXBy(-140).setDuration(220);
+                materialTextField.animate().translationXBy(-140).setDuration(SHORT_ANIMATION_DURATION);
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        materialTextField.animate().translationXBy(70).setDuration(220);
+                        materialTextField.animate().translationXBy(70).setDuration(SHORT_ANIMATION_DURATION);
 
                     }
-                }, 220);
+                }, SHORT_ANIMATION_DURATION);
 
             }
-        }, 220);
-
-
-
+        }, SHORT_ANIMATION_DURATION);
     }
 
     public void tryLogin(View view) {
@@ -107,31 +106,28 @@ public class LoginActivity extends ToolbarActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         final int height = displayMetrics.heightPixels;
 
-        MaterialTextField materialTextField = findViewById(R.id.materialTextField);
-        MaterialTextField materialTextField2 = findViewById(R.id.materialTextField2);
+        MaterialTextField materialTextField = findViewById(R.id.mailMaterialTextFieldRegister);
+        MaterialTextField materialTextField2 = findViewById(R.id.passwordMaterialTextFieldLogin);
 
         mail = materialTextField.getEditText().getText().toString();
         password = materialTextField2.getEditText().getText().toString();
 
-        if (mail.equals("")) {
+        if (mail.isEmpty()) {
             errorToasts(view, "Introduceti mail-ul dvs");
             animateMailField(view);
         }
-        else if(password.equals("")) {
-            materialTextField2.setHasFocus(true);
-            materialTextField.animate().translationXBy(-1000).setDuration(800);
-            materialTextField.animate().alpha(0f).setDuration(800);
-            materialTextField2.animate().translationXBy(-1000).setDuration(800);
-            materialTextField2.animate().alpha(1f).setDuration(800);
+        else if(password.isEmpty()) {
+
+            //Animatia: bring password field and get rid of mail field
+            materialTextField2.expand();
+            materialTextField.animate().translationXBy(-1000).setDuration(MEDIUM_ANIMATION_DURATION);
+            materialTextField.animate().alpha(0f).setDuration(MEDIUM_ANIMATION_DURATION);
+            materialTextField2.animate().translationXBy(-1000).setDuration(MEDIUM_ANIMATION_DURATION);
+            materialTextField2.animate().alpha(1f).setDuration(MEDIUM_ANIMATION_DURATION);
         }
-        else
-        {
+        else {
             Intent intent = new Intent(getApplicationContext(), MainActivity.class);
             startActivity(intent);
         }
-        /*
-        if (password.equals("") || password.equals(" ")) {
-            errorToasts(view, "Introduceti parola dvs");
-        }*/
     }
 }

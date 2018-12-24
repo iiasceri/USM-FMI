@@ -14,10 +14,14 @@
     <string name="settings">Setari</string>
     <string name="open_drawer">Open navigation drawer</string>
     <string name="close_drawer">Close navigation drawer</string>
-    <string name="loginButton">Intra</string>
-    <string name="registerButton">Inregistreazate</string>
-    <string name="descr_logo">Logoul FMI</string>
-    <string name="loginFacText1">Facultatea de Matematica</string>
-    <string name="loginFacText2">si Informatica</string>
-    <string name="login2button">Confirmare</string>
+    <string name="login_button1">Intra</string>
+    <string name="faculty_logo">Logoul FMI</string>
+    <string name="faculty_text1">Facultatea de Matematica</string>
+    <string name="faculty_text2">si Informatica</string>
+    <string name="login_button2">Confirmare</string>
+    <string name="register_button1">Inregistreazate</string>
+    <string name="register_button2">Inregistreaza-ma</string>
+    <string name="password">Parola</string>
+    <string name="confirm_password">Confirma parola</string>
+    <string name="mail">Mail</string>
 </resources>
