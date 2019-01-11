@@ -68,6 +68,10 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.orarhh);
             mediaPlayer.start();
         }
+        if (id == R.id.navigation_schedule_exams) {
+            Intent intent = new Intent(getApplicationContext(), ExamScheduleActivity.class);
+            startActivity(intent);
+        }
         else if (id == R.id.nav_subheader_messages) {
             Toast.makeText(getApplicationContext(), "Messages", Toast.LENGTH_SHORT).show();
         }
