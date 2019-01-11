@@ -26,8 +26,8 @@
                 <input type="password" name="password" required="required" class="inp"/>
 
                 <label>Grupa</label>
-                <div align="center" style="padding-top: 10px">
-                    <select name="groupName" required="required" id="groupName" >
+                <div align="center" style="padding-top: 1px">
+                    <select name="groupName" id="groupName" >
                         <c:forEach var="groups" items="${groupList}">
                             <option value="${groups.name}">${groups.name}</option>
                         </c:forEach>

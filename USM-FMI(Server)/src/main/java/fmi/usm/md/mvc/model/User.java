@@ -2,6 +2,7 @@ package fmi.usm.md.mvc.model;
 
 import lombok.*;
 
+import static fmi.usm.md.mvc.model.Privilege.ADMIN;
 import static fmi.usm.md.mvc.model.Status.ACTIVE;
 import static fmi.usm.md.mvc.model.Privilege.USER;
 

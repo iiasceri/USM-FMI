@@ -101,8 +101,8 @@
       <Comment>standard public schema</Comment>
       <StateNumber>360</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2019-01-06.13:34:25.702</IntrospectionTimestamp>
-      <IntrospectionStateNumber>690</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2019-01-11.01:39:25.660</IntrospectionTimestamp>
+      <IntrospectionStateNumber>738</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -163,51 +163,51 @@
       <SchemaId>11</SchemaId>
     </extension>
     <sequence id="26" parent="18" name="hibernate_sequence">
-      <ObjectId>24788</ObjectId>
+      <ObjectId>24844</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>681</StateNumber>
+      <StateNumber>737</StateNumber>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
     </sequence>
     <table id="27" parent="18" name="groups">
-      <ObjectId>24785</ObjectId>
+      <ObjectId>24831</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>690</StateNumber>
+      <StateNumber>738</StateNumber>
     </table>
     <table id="28" parent="18" name="users">
-      <ObjectId>24790</ObjectId>
+      <ObjectId>24836</ObjectId>
       <Owner>postgres</Owner>
-      <StateNumber>690</StateNumber>
+      <StateNumber>738</StateNumber>
     </table>
     <column id="29" parent="27" name="id">
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>679</StateNumber>
+      <StateNumber>735</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="30" parent="27" name="name">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>679</StateNumber>
+      <StateNumber>735</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="31" parent="27" name="year">
       <Position>3</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>679</StateNumber>
+      <StateNumber>735</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <index id="32" parent="27" name="groups_pkey">
-      <ObjectId>24796</ObjectId>
-      <StateNumber>688</StateNumber>
+      <ObjectId>24834</ObjectId>
+      <StateNumber>735</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="33" parent="27" name="groups_pkey">
-      <ObjectId>24797</ObjectId>
-      <StateNumber>688</StateNumber>
+      <ObjectId>24835</ObjectId>
+      <StateNumber>735</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>groups_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
@@ -216,63 +216,63 @@
       <Position>1</Position>
       <DataType>integer|0s</DataType>
       <NotNull>1</NotNull>
-      <StateNumber>683</StateNumber>
+      <StateNumber>736</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <column id="35" parent="28" name="mail">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>683</StateNumber>
+      <StateNumber>736</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="36" parent="28" name="password">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>683</StateNumber>
+      <StateNumber>736</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="37" parent="28" name="privilege">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>683</StateNumber>
+      <StateNumber>736</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="38" parent="28" name="status">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>683</StateNumber>
+      <StateNumber>736</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="39" parent="28" name="username">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
-      <StateNumber>683</StateNumber>
+      <StateNumber>736</StateNumber>
       <TypeId>1043</TypeId>
     </column>
     <column id="40" parent="28" name="group_id">
       <Position>7</Position>
       <DataType>integer|0s</DataType>
-      <StateNumber>683</StateNumber>
+      <StateNumber>736</StateNumber>
       <TypeId>23</TypeId>
     </column>
     <index id="41" parent="28" name="users_pkey">
-      <ObjectId>24798</ObjectId>
-      <StateNumber>689</StateNumber>
+      <ObjectId>24842</ObjectId>
+      <StateNumber>736</StateNumber>
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
     <key id="42" parent="28" name="users_pkey">
-      <ObjectId>24799</ObjectId>
-      <StateNumber>689</StateNumber>
+      <ObjectId>24843</ObjectId>
+      <StateNumber>736</StateNumber>
       <ColNames>id</ColNames>
       <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
     </key>
     <foreign-key id="43" parent="28" name="fkemfuglprp85bh5xwhfm898ysc">
-      <ObjectId>24800</ObjectId>
-      <StateNumber>690</StateNumber>
+      <ObjectId>24846</ObjectId>
+      <StateNumber>738</StateNumber>
       <ColNames>group_id</ColNames>
-      <RefTableId>24785</RefTableId>
+      <RefTableId>24831</RefTableId>
       <RefColPositions>1</RefColPositions>
       <RefTableName>groups</RefTableName>
       <RefKeyName>groups_pkey</RefKeyName>

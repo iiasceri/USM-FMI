@@ -27,7 +27,7 @@
 
                 <label>Grupa</label>
                 <div align="center" style="padding-top: 1px">
-                    <select name="groupName" required="required" id="groupName" >
+                    <select name="groupName" id="groupName" >
                         <c:forEach var="groups" items="${groupList}">
                             <option value="${groups.name}">${groups.name}</option>
                         </c:forEach>

@@ -32,7 +32,7 @@ public class ScheduleRestController {
     * @scheduleType [weekly, exam]
     *
      */
-    @RequestMapping(value = "/get_schedule", method = GET)
+    @RequestMapping(value = "/api/get_schedule", method = GET)
     @ResponseBody
     public String getMySchedule(@RequestParam(name = "groupName") String groupName,
                                 @RequestParam(name = "subGroup") String subGroup,

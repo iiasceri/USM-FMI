@@ -22,7 +22,7 @@ public class MarksRestController {
     @Autowired
     ServletContext context;
 
-    @RequestMapping(value = "/get_marks", method = GET)
+    @RequestMapping(value = "/api/get_marks", method = GET)
     public LinkedHashMap<String, Object> getMyMarks(@RequestParam(name = "id") String id) {
 
 

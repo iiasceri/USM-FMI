@@ -73,6 +73,8 @@ public class UserController {
     public String takeRegisterValues(@ModelAttribute("user") User user,
                                      @RequestParam(value = "groupName") String groupName) {
 
+        String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
+
         if (groupName != null) {
             Optional<Group> go = groupService.getGroupByName(groupName);
             Group g = new Group();
@@ -81,7 +83,7 @@ public class UserController {
             }
             user.setGroup(g);
         }
-        user.setPassword(BCrypt.hashpw(user.getPassword(), BCrypt.gensalt()));
+        user.setPassword(BCrypt.hashpw(user.getPassword(), hash));
         userService.add(user);
         return "redirect:/show-groups";
     }
