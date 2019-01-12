@@ -17,13 +17,13 @@ public class ScheduleActivity extends AppCompatActivity {
 
     // Titles of the individual pages (displayed in tabs)
     private final String[] PAGE_TITLES = new String[] {
-            "Page 1",
-            "Page 2"
+            "L",
+            "M"
     };
 
     // The fragments that are used as the individual pages
     private final android.support.v4.app.Fragment[] PAGES = new android.support.v4.app.Fragment[] {
-            new Page1Fragment(),
+            new MondayFragment(),
             new Page2Fragment()
     };
 

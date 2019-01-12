@@ -4,8 +4,9 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
-import android.view.MenuItem;
-import android.widget.TextView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,55 +19,30 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ExamScheduleActivity extends ToolbarActivity {
+/* Fragment used as page 1 */
+public class MondayFragment extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
-
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_exam_schedule);
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        View rootView = inflater.inflate(R.layout.fragment_monday, container, false);
 
-        //[1]vert + Toolbar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
-
-        // add back arrow to toolbar
-        if (getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
-        }
-
-        TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        String groupName = "IA1702";
-        toolbarTitle.setText("Examenele Grupei: " + groupName);
-
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
+        mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
+        RecyclerView.Adapter adapter = new RecyclerViewAdapter(getActivity(), mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
 
         addMenuItemsFromJson();
 
+        return rootView;
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
-        if (item.getItemId() == android.R.id.home) {
-            finish(); // close this activity and return to preview activity (if there is any)
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
 
     private void addMenuItemsFromJson() {
         try {
@@ -99,7 +75,7 @@ public class ExamScheduleActivity extends ToolbarActivity {
 
         try {
             String jsonDataString = null;
-            inputStream = getResources().openRawResource(R.raw.menu_item_exam);
+            inputStream = getResources().openRawResource(R.raw.menu_item_weekly);
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(inputStream, "UTF-8"));
             while ((jsonDataString = bufferedReader.readLine()) != null) {
