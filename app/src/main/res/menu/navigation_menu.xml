@@ -13,6 +13,10 @@
                     android:id="@+id/navigation_schedule_exams"
                     android:icon="@drawable/ic_av_timer_black_24dp"
                     android:title="@string/schedule_exams" />
+                <item
+                    android:id="@+id/navigation_marks"
+                    android:icon="@drawable/ic_sentiment_very_satisfied_black_24dp"
+                    android:title="@string/semestrial_marks" />
 
                 <item
                     android:id="@+id/navigation_defend_diploma"

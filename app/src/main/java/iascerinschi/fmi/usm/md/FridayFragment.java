@@ -20,14 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* Fragment used as page 1 */
-public class MondayFragment extends android.support.v4.app.Fragment {
+public class FridayFragment extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_monday, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_friday, container, false);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -58,10 +58,11 @@ public class MondayFragment extends android.support.v4.app.Fragment {
 
                 JSONObject zi = zile.getJSONObject(i);
 
-                if (zi.get("numeZi").equals("Luni")) {
+                if (zi.get("numeZi").equals("Vineri")) {
                     menuItemsJsonArray = zi.getJSONArray("lectii");
                 }
             }
+
 
             String paritate = Utilities.getParitate();
 

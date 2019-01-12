@@ -41,8 +41,7 @@ public class ExamScheduleActivity extends ToolbarActivity {
         }
 
         TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        String groupName = "IA1702";
-        toolbarTitle.setText("Examenele Grupei: " + groupName);
+        toolbarTitle.setText("Succese La Examene!");
 
 
         mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);

@@ -1,65 +1,147 @@
 [
-  {
-    "dataExamen": "18/12/18",
-    "ziExamen": "Marti",
-    "ora": "08:00",
-    "disciplina": "Baze de date",
-    "asistent": "V.Siminel",
-    "cabinet": "404/4",
-    "subgrupa": "-"
-  },
-  {
-    "dataExamen": "22/12/18",
-    "ziExamen": "Sambata",
-    "ora": "11:00",
-    "disciplina": "Principiile testarii software",
-    "asistent": "V.Primac",
-    "cabinet": "405/4",
-    "subgrupa": "-"
-  },
-  {
-    "dataExamen": "11/01/19",
-    "ziExamen": "Vineri",
-    "ora": "08:00",
-    "disciplina": "Algoritmica\ngrafurilor",
-    "asistent": "C.Turcanu",
-    "cabinet": "113/4",
-    "subgrupa": "-"
-  },
-  {
-    "dataExamen": "11/01/19",
-    "ziExamen": "Luni",
-    "ora": "11:00",
-    "disciplina": "Cultura Comunicarii",
-    "asistent": "N.Toma",
-    "cabinet": "113/4",
-    "subgrupa": "-"
-  },
-  {
-    "dataExamen": "11/01/19",
-    "ziExamen": "Vineri",
-    "ora": "08:00",
-    "disciplina": "Programare\norientata pe obiecte",
-    "asistent": "A.Prepelita",
-    "cabinet": "113/4",
-    "subgrupa": "-"
-  },
-  {
-    "dataExamen": "22/01/19",
-    "ziExamen": "Marti",
-    "ora": "08:00",
-    "disciplina": "Probabilitati si statistica",
-    "asistent": "I.Cucu",
-    "cabinet": "113/4",
-    "subgrupa": "-"
-  },
-  {
-    "dataExamen": "25/01/19",
-    "ziExamen": "Vineri",
-    "ora": "08:00",
-    "disciplina": "Retele de calculatoare",
-    "asistent": "A.Gladei",
-    "cabinet": "251/4",
-    "subgrupa": "-"
-  }
+    {
+      "lectii":[
+        {
+          "paritate":"-",
+          "disciplina":"LFA",
+          "tip":"sem",
+          "profesor":"M.Butnaru",
+          "cabinet":"419/4",
+          "ora":"9:45"
+        },
+        {
+          "paritate":"-",
+          "disciplina":"Limbaje formale si automate",
+          "tip":"curs",
+          "profesor":"G.Sturza",
+          "cabinet":"401/4",
+          "ora":"11:30"
+        }
+      ],
+      "numeZi":"Luni"
+    },
+    {
+      "lectii":[
+        {
+          "paritate":"-",
+          "disciplina":"Pachet optional",
+          "tip":"lab",
+          "profesor":"T.Pasa",
+          "cabinet":"237/4",
+          "ora":"15:15"
+        },
+        {
+          "paritate":"-",
+          "disciplina":"Pachet optional",
+          "tip":"lab",
+          "profesor":"O.Cerbu",
+          "cabinet":"113/4",
+          "ora":"17:00"
+        }
+      ],
+      "numeZi":"Marti"
+    },
+    {
+      "lectii":[
+        {
+          "paritate":"-",
+          "disciplina":"Pachet optional",
+          "tip":"lab",
+          "profesor":"N.Plesca",
+          "cabinet":"218/4",
+          "ora":"9:45"
+        },
+        {
+          "paritate":"-",
+          "disciplina":"Pachet optional",
+          "tip":"lab",
+          "profesor":"N.Plesca",
+          "cabinet":"328/4",
+          "ora":"11:30"
+        }
+      ],
+      "numeZi":"Miercuri"
+    },
+    {
+      "lectii":[
+        {
+          "paritate":"-",
+          "disciplina":"LFA",
+          "tip":"sem",
+          "profesor":"M.Butnaru",
+          "cabinet":"419/4",
+          "ora":"9:45"
+        },
+        {
+          "paritate":"-",
+          "disciplina":"Pachet optional",
+          "tip":"curs",
+          "profesor":"G.Sturza",
+          "cabinet":"401/4",
+          "ora":"11:30"
+        },
+        {
+          "paritate":"-",
+          "disciplina":"Pachet optional",
+          "tip":"lab",
+          "profesor":"T.Pasa",
+          "cabinet":"237/4",
+          "ora":"13:30"
+        },
+        {
+          "paritate":"-",
+          "disciplina":"Pachet optional",
+          "tip":"lab",
+          "profesor":"T.Pasa",
+          "cabinet":"237/4",
+          "ora":"15:15"
+        }
+      ],
+      "numeZi":"Joi"
+    },
+    {
+      "lectii":[
+        {
+          "paritate":"-",
+          "disciplina":"Etica",
+          "tip":"sem",
+          "profesor":"Gh.Capatana",
+          "cabinet":"419/4",
+          "ora":"11:30"
+        },
+        {
+          "paritate":"-",
+          "disciplina":"Aspecte etice in informatica",
+          "tip":"curs",
+          "profesor":"Gh.Capatana",
+          "cabinet":"213a/4",
+          "ora":"13:30"
+        },
+        {
+          "paritate":"-",
+          "disciplina":"Pachet optional",
+          "tip":"lab",
+          "profesor":"O.Cerbu",
+          "cabinet":"326/4",
+          "ora":"15:15"
+        },
+        {
+          "paritate":"imp",
+          "disciplina":"Pachet optional",
+          "tip":"lab",
+          "profesor":"O.Cerbu",
+          "cabinet":"326/4",
+          "ora":"17:00"
+        },
+        {
+          "paritate":"par",
+          "disciplina":"Pachet optional",
+          "tip":"lab",
+          "profesor":"N.Plesca",
+          "cabinet":"328/4",
+          "ora":"17:00"
+        }
+      ],
+      "numeZi":"Vineri"
+    }
 ]

@@ -20,14 +20,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 /* Fragment used as page 1 */
-public class MondayFragment extends android.support.v4.app.Fragment {
+public class WeekFragment extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_monday, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_thursday, container, false);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -54,36 +54,33 @@ public class MondayFragment extends android.support.v4.app.Fragment {
             JSONArray zile = new JSONArray(jsonDataString);
             JSONArray menuItemsJsonArray = new JSONArray();
 
-            for (int i = 0; i < zile.length(); i++) {
+            for (int i = 0; i < zile.length(); ++i) {
 
                 JSONObject zi = zile.getJSONObject(i);
 
-                if (zi.get("numeZi").equals("Luni")) {
-                    menuItemsJsonArray = zi.getJSONArray("lectii");
-                }
-            }
+                menuItemsJsonArray = zi.getJSONArray("lectii");
 
-            String paritate = Utilities.getParitate();
+                String ziTitle = zi.getString("numeZi");
+                for (int j = 0; j < menuItemsJsonArray.length(); ++j) {
 
-            for (int i = 0; i < menuItemsJsonArray.length(); ++i) {
+                    JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(j);
 
-                JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(i);
-
-                String strParitate = menuItemObject.getString("paritate");
-
-                if (strParitate.equals(paritate) || strParitate.equals("-")) {
-
-                    String menuItemName = menuItemObject.getString("disciplina");
-                    String menuItemDescription = menuItemObject.getString("profesor");
+                    String menuItemName = ziTitle;
+                    String menuItemDescription = menuItemObject.getString("disciplina") + " | paritate:  " + menuItemObject.getString("paritate");
                     String menuItemPrice = "(" + menuItemObject.getString("ora") + ")" + "  " + menuItemObject.getString("cabinet");
-                    String menuItemCategory = menuItemObject.getString("tip");
+                    String menuItemCategory = menuItemObject.getString("tip") + "   " + menuItemObject.getString("profesor");
                     String menuItemImageName = "menu_item_image";
 
                     Pojo pojo = new Pojo(menuItemName, menuItemDescription, menuItemPrice,
                             menuItemCategory, menuItemImageName);
                     mRecyclerViewItems.add(pojo);
+
                 }
             }
+
+
+
+
         } catch (IOException | JSONException exception) {
             Log.e(ExamScheduleActivity.class.getName(), "Unable to parse JSON file.", exception);
         }
