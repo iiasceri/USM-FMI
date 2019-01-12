@@ -5,4 +5,9 @@
     <color name="colorAccent">#10c75f</color>
     <color name="loginBackground">#29A13F</color>
     <color name="loginBackgroundDarker">#144527</color>
+
+    <!-- For pages of ViewPager -->
+    <color name="pageColor1">#FFF59D</color>
+    <color name="pageColor2">#FFCC80</color>
+    <color name="pageColor3">#FFAB91</color>
 </resources>

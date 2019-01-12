@@ -1,6 +1,5 @@
 package iascerinschi.fmi.usm.md;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -102,7 +101,7 @@ public class ExamScheduleActivity extends ToolbarActivity {
 
         try {
             String jsonDataString = null;
-            inputStream = getResources().openRawResource(R.raw.menu_item);
+            inputStream = getResources().openRawResource(R.raw.menu_item_exam);
             BufferedReader bufferedReader = new BufferedReader(
                     new InputStreamReader(inputStream, "UTF-8"));
             while ((jsonDataString = bufferedReader.readLine()) != null) {
