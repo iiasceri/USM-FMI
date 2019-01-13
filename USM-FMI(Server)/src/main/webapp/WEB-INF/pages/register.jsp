@@ -22,17 +22,24 @@
                 <label>Mail</label>
                 <input type="text" name="mail" required="required" class="inp"/>
 
+                <label>Nume Prenume</label>
+                <input type="text" name="familyname" required="required" class="inp"/>
+
                 <label>Parola</label>
                 <input type="password" name="password" required="required" class="inp"/>
 
+                <label>Genul </label>
+                <input type="radio" name="gender" value="FEMALE"> F
+                <input type="radio" name="gender" value="MALE"> M
+                <br>
+
                 <label>Grupa</label>
-                <div align="center" style="padding-top: 1px">
                     <select name="groupName" id="groupName" >
                         <c:forEach var="groups" items="${groupList}">
                             <option value="${groups.name}">${groups.name}</option>
                         </c:forEach>
                     </select>
-                </div>
+                <br>
 
                 <button type="submit" class="btn">Inregistreaza-ma</button>
             </div>

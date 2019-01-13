@@ -1,5 +1,6 @@
 package fmi.usm.md.mvc.controller;
 
+import fmi.usm.md.mvc.model.Gender;
 import fmi.usm.md.mvc.model.Group;
 import fmi.usm.md.mvc.model.User;
 import fmi.usm.md.mvc.model.UserJson;
@@ -56,7 +57,9 @@ public class UserRestController {
     public LinkedHashMap<String, Object> registerRest(
                                                         @RequestParam(value = "username") String username,
                                                         @RequestParam(value = "mail") String mail,
+                                                        @RequestParam(value = "familyName") String familyName,
                                                         @RequestParam(value = "password") String password,
+                                                        @RequestParam(value = "gender") String gender,
                                                         @RequestParam(value = "groupName") String groupName) {
 
         String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
@@ -64,6 +67,34 @@ public class UserRestController {
 
         User user = new User();
         Group g;
+
+        if (familyName != null) {
+            user.setFamilyname(familyName);
+        }
+        else {
+            map.put("status", "fail");
+            map.put("message", "Family name is null!");
+            return map;
+        }
+
+        if (gender != null) {
+            if (gender.equals("male")) {
+                user.setGender(Gender.MALE);
+            }
+            else if (gender.equals("female")) {
+                user.setGender(Gender.FEMALE);
+            }
+            else {
+                map.put("status", "fail");
+                map.put("message", "There are more than 2 genders in the world");
+                return map;
+            }
+        }
+        else {
+            map.put("status", "fail");
+            map.put("message", "Are u human ? (gender is null) wut?");
+            return map;
+        }
 
         if (groupName != null) {
             Optional<Group> go = groupService.getGroupByName(groupName);

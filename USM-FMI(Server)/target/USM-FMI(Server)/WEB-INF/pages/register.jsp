@@ -22,8 +22,18 @@
                 <label>Mail</label>
                 <input type="text" name="mail" required="required" class="inp"/>
 
+                <label>Nume Prenume</label>
+                <input type="text" name="familyname" required="required" class="inp"/>
+
                 <label>Parola</label>
                 <input type="password" name="password" required="required" class="inp"/>
+
+                <label>Genul </label>
+                <div align="center">
+                <input type="radio" name="gender" value="FEMALE"> F
+                <input type="radio" name="gender" value="MALE"> M
+                </div>
+                <br>
 
                 <label>Grupa</label>
                 <div align="center" style="padding-top: 1px">
@@ -33,6 +43,7 @@
                         </c:forEach>
                     </select>
                 </div>
+                <br>
 
                 <button type="submit" class="btn">Inregistreaza-ma</button>
             </div>

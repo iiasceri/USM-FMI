@@ -34,6 +34,9 @@ public class User {
     @Column(name = "mail")
     private String mail;
 
+    @Column(name = "familyname")
+    private String familyname;
+
     @Column(name = "status")
     @Enumerated(EnumType.STRING)
     private Status status = ACTIVE;
@@ -41,6 +44,10 @@ public class User {
     @Column(name = "privilege")
     @Enumerated(EnumType.STRING)
     private Privilege privilege = USER;
+
+    @Column(name = "gender")
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
 
     @ManyToOne
     @JoinColumn(name = "group_id")

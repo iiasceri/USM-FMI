@@ -27,8 +27,8 @@ public class Group {
     @Column(name = "name")
     private String name;
 
-    @Column(name = "year")
-    private int year;
+//    @Column(name = "year")
+//    private int year;
 
     @OneToMany(
             mappedBy = "group",
