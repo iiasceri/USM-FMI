@@ -29,22 +29,18 @@
                 <input type="password" name="password" required="required" class="inp"/>
 
                 <label>Genul </label>
-                <div align="center">
                 <input type="radio" name="gender" value="FEMALE"> F
                 <input type="radio" name="gender" value="MALE"> M
-                </div>
-                <br>
 
-                <label>Grupa</label>
-                <div align="center" style="padding-top: 1px">
+                <label>|Grupa</label>
                     <select name="groupName" id="groupName" >
                         <c:forEach var="groups" items="${groupList}">
                             <option value="${groups.name}">${groups.name}</option>
                         </c:forEach>
                     </select>
-                </div>
-                <br>
-
+                <label>SubGrupa </label>
+                <input type="radio" name="subGroup" value="I" id="subGroup"> I (s)
+                <input type="radio" name="subGroup" value="II" id="subGroup"> II (d)
                 <button type="submit" class="btn">Inregistreaza-ma</button>
             </div>
         </form:form>

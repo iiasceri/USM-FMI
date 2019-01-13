@@ -2,6 +2,7 @@ package fmi.usm.md.mvc.controller;
 
 import fmi.usm.md.mvc.model.Group;
 import fmi.usm.md.mvc.model.Status;
+import fmi.usm.md.mvc.model.SubGroup;
 import fmi.usm.md.mvc.model.User;
 import fmi.usm.md.mvc.service.GroupService;
 import fmi.usm.md.mvc.service.UserService;
@@ -71,7 +72,8 @@ public class UserController {
 
     @RequestMapping(value = "/register", method = POST)
     public String takeRegisterValues(@ModelAttribute("user") User user,
-                                     @RequestParam(value = "groupName") String groupName) {
+                                     @RequestParam(value = "groupName") String groupName,
+                                     @RequestParam(value = "subGroup") String subGroup) {
 
         String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
 
@@ -82,6 +84,13 @@ public class UserController {
                 g = go.get();
             }
             user.setGroup(g);
+        }
+
+        if (subGroup != null) {
+            if (subGroup.equals("I"))
+                user.setSubGroup(SubGroup.I);
+            else if (subGroup.equals("II"))
+                user.setSubGroup(SubGroup.II);
         }
         user.setPassword(BCrypt.hashpw(user.getPassword(), hash));
         userService.add(user);

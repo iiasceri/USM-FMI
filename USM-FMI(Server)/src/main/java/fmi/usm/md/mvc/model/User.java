@@ -52,4 +52,8 @@ public class User {
     @ManyToOne
     @JoinColumn(name = "group_id")
     private Group group;
+
+    @Column(name = "subgroup")
+    @Enumerated(EnumType.STRING)
+    private SubGroup subGroup;
 }

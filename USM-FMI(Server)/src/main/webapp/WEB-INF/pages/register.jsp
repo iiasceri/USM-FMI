@@ -31,16 +31,16 @@
                 <label>Genul </label>
                 <input type="radio" name="gender" value="FEMALE"> F
                 <input type="radio" name="gender" value="MALE"> M
-                <br>
 
-                <label>Grupa</label>
+                <label>|Grupa</label>
                     <select name="groupName" id="groupName" >
                         <c:forEach var="groups" items="${groupList}">
                             <option value="${groups.name}">${groups.name}</option>
                         </c:forEach>
                     </select>
-                <br>
-
+                <label>SubGrupa </label>
+                <input type="radio" name="subGroup" value="I" id="subGroup"> I (s)
+                <input type="radio" name="subGroup" value="II" id="subGroup"> II (d)
                 <button type="submit" class="btn">Inregistreaza-ma</button>
             </div>
         </form:form>

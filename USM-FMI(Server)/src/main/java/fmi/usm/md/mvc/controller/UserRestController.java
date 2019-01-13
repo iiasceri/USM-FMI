@@ -1,9 +1,6 @@
 package fmi.usm.md.mvc.controller;
 
-import fmi.usm.md.mvc.model.Gender;
-import fmi.usm.md.mvc.model.Group;
-import fmi.usm.md.mvc.model.User;
-import fmi.usm.md.mvc.model.UserJson;
+import fmi.usm.md.mvc.model.*;
 import fmi.usm.md.mvc.service.GroupService;
 import fmi.usm.md.mvc.service.UserService;
 import lombok.RequiredArgsConstructor;
@@ -60,13 +57,29 @@ public class UserRestController {
                                                         @RequestParam(value = "familyName") String familyName,
                                                         @RequestParam(value = "password") String password,
                                                         @RequestParam(value = "gender") String gender,
-                                                        @RequestParam(value = "groupName") String groupName) {
+                                                        @RequestParam(value = "groupName") String groupName,
+                                                        @RequestParam(value = "subGroup") String subGroup) {
 
         String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
 
         User user = new User();
         Group g;
+
+        if (subGroup != null) {
+            if (subGroup.equals("I"))
+                user.setSubGroup(SubGroup.I);
+            else if (subGroup.equals("II"))
+                user.setSubGroup(SubGroup.II);
+            else {
+                map.put("status", "fail");
+                map.put("message", "Non existing subGroup type: " + subGroup);
+            }
+        }
+        else {
+            map.put("status", "fail");
+            map.put("message", "subGroup is null");
+        }
 
         if (familyName != null) {
             user.setFamilyname(familyName);
@@ -86,7 +99,7 @@ public class UserRestController {
             }
             else {
                 map.put("status", "fail");
-                map.put("message", "There are more than 2 genders in the world");
+                map.put("message", "Male or female choose one, u gave: " + gender);
                 return map;
             }
         }
