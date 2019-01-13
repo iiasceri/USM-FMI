@@ -1,0 +1,197 @@
+[
+    {
+      "idSemestru":1,
+      "discipline":[
+        {
+          "denumire":"Algebra",
+          "idDisciplina":1,
+          "nota":"5.6"
+        },
+        {
+          "denumire":"Arhitectura calculatorului si limbaje de asamblare",
+          "idDisciplina":2,
+          "nota":"5.6"
+        },
+        {
+          "denumire":"Calcul diferential",
+          "idDisciplina":3,
+          "nota":"5"
+        },
+        {
+          "denumire":"Educatia fizica",
+          "idDisciplina":4,
+          "nota":"admis"
+        },
+        {
+          "denumire":"Fundamentele programarii",
+          "idDisciplina":5,
+          "nota":"8.6"
+        },
+        {
+          "denumire":"Limba straina",
+          "idDisciplina":6,
+          "nota":"9"
+        },
+        {
+          "denumire":"Logica computationala",
+          "idDisciplina":7,
+          "nota":"5.4"
+        }
+      ]
+    },
+    {
+      "idSemestru":2,
+      "discipline":[
+        {
+          "denumire":"Calcul integral",
+          "idDisciplina":1,
+          "nota":"5.6"
+        },
+        {
+          "denumire":"Economics",
+          "idDisciplina":2,
+          "nota":"7"
+        },
+        {
+          "denumire":"Educatia fizica",
+          "idDisciplina":3,
+          "nota":"admis"
+        },
+        {
+          "denumire":"Geometrie",
+          "idDisciplina":4,
+          "nota":"5"
+        },
+        {
+          "denumire":"HTML, CSS si JavaScript",
+          "idDisciplina":5,
+          "nota":"6.4"
+        },
+        {
+          "denumire":"Practica de initiere in specialitate",
+          "idDisciplina":6,
+          "nota":"10"
+        },
+        {
+          "denumire":"Sisteme de operare",
+          "idDisciplina":7,
+          "nota":"9.2"
+        },
+        {
+          "denumire":"Tehnici de programare",
+          "idDisciplina":8,
+          "nota":"8.2"
+        }
+      ]
+    },
+    {
+      "idSemestru":3,
+      "discipline":[
+        {
+          "denumire":"Algoritmica grafurilor",
+          "idDisciplina":1,
+          "nota":"5"
+        },
+        {
+          "denumire":"Baze de date",
+          "idDisciplina":2,
+          "nota":"5"
+        },
+        {
+          "denumire":"Cultura comunicarii Interpersonale si Organizationale",
+          "idDisciplina":3,
+          "nota":"6"
+        },
+        {
+          "denumire":"Principiile testarii software",
+          "idDisciplina":4,
+          "nota":"5"
+        },
+        {
+          "denumire":"Probabilitatii si statistica",
+          "idDisciplina":5,
+          "nota":"5.4"
+        },
+        {
+          "denumire":"Programarea orientata pe obiect",
+          "idDisciplina":6,
+          "nota":"7.6"
+        },
+        {
+          "denumire":"Retele de calculatoare",
+          "idDisciplina":7,
+          "nota":"5"
+        }
+      ]
+    },
+    {
+      "idSemestru":4,
+      "discipline":[
+        {
+          "denumire":"Algoritmi, Structuri de Date si Complexitate",
+          "idDisciplina":1,
+          "nota":"7.6"
+        },
+        {
+          "denumire":"Calcul Numeric si Metode de Optimizare",
+          "idDisciplina":2,
+          "nota":"6"
+        },
+        {
+          "denumire":"Criprografie si Securitatea Informatiei",
+          "idDisciplina":3,
+          "nota":"7.4"
+        },
+        {
+          "denumire":"Inteligenta artificiala",
+          "idDisciplina":4,
+          "nota":"7"
+        },
+        {
+          "denumire":"Practica de specialitate",
+          "idDisciplina":5,
+          "nota":"9"
+        },
+        {
+          "denumire":"Sisteme de gestiune a bazelor de date",
+          "idDisciplina":6,
+          "nota":"5"
+        },
+        {
+          "denumire":"Tehnici avansate de programare",
+          "idDisciplina":7,
+          "nota":"8.4"
+        }
+      ]
+    },
+    {
+      "idSemestru":5,
+      "discipline":[
+        {
+          "denumire":"Grafica pe calculator",
+          "idDisciplina":1,
+          "nota":"8.2"
+        },
+        {
+          "denumire":"Metode si Protocoale Criptografice",
+          "idDisciplina":2,
+          "nota":"8"
+        },
+        {
+          "denumire":"Programare Paralela si Distribuita",
+          "idDisciplina":3,
+          "nota":"6.2"
+        },
+        {
+          "denumire":"Proiectarea sistemelor informatice",
+          "idDisciplina":4,
+          "nota":"8.4"
+        },
+        {
+          "denumire":"Secutitatea Sistemelor Informatice",
+          "idDisciplina":5,
+          "nota":"7"
+        }
+      ]
+    }
+]

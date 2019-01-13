@@ -76,7 +76,8 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             startActivity(intent);
         }
         else if (id == R.id.navigation_marks) {
-
+            Intent intent = new Intent(getApplicationContext(), MarksActivity.class);
+            startActivity(intent);
         }
         else if (id == R.id.nav_subheader_messages) {
             Toast.makeText(getApplicationContext(), "Messages", Toast.LENGTH_SHORT).show();
