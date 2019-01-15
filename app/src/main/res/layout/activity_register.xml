@@ -125,7 +125,7 @@
                 android:layout_width="320dp"
                 android:layout_height="80dp"
                 android:layout_marginBottom="20dp"
-                app:layout_constraintBottom_toTopOf="@+id/registerButton"
+                app:layout_constraintBottom_toTopOf="@+id/genderRadioGroup"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
@@ -144,8 +144,35 @@
 
             </com.github.florent37.materialtextfield.MaterialTextField>
 
+            <RadioGroup
+                android:id="@+id/genderRadioGroup"
+                android:layout_width="250dp"
+                android:layout_height="80dp"
+                android:orientation="horizontal"
+                app:layout_constraintBottom_toTopOf="@+id/registerButton"
+                android:layout_marginTop="-30dp"
+                android:layout_marginBottom="-15dp"
+                >
 
-q
+                <RadioButton
+                    android:id="@+id/radioButtonMale"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/male_user"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5" />
+
+                <RadioButton
+                    android:id="@+id/radioButtonFemale"
+                    android:layout_width="1dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:drawableRight="@drawable/female_user"
+                    android:scaleX="0.5"
+                    android:scaleY="0.5" />
+            </RadioGroup>
+
             <com.marozzi.roundbutton.RoundButton
                 android:id="@+id/registerButton"
                 android:layout_width="271dp"

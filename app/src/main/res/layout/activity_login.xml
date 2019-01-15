@@ -52,7 +52,7 @@
         app:srcCompat="@drawable/usm_white_450x455" />
 
     <com.github.florent37.materialtextfield.MaterialTextField
-        android:id="@+id/mailMaterialTextFieldRegister"
+        android:id="@+id/usernameMaterialTextFieldLogin"
         android:layout_width="320dp"
         android:layout_height="80dp"
         android:layout_marginBottom="8dp"
@@ -67,11 +67,11 @@
         <EditText
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Mail"
+            android:hint="Nume Utilizator"
             android:textColor="#000000"
             android:textSize="17sp"
             android:inputType="text"
-            android:id="@+id/mailEditTextRegister"
+            android:id="@+id/usernameEditTextLogin"
             />
 
     </com.github.florent37.materialtextfield.MaterialTextField>

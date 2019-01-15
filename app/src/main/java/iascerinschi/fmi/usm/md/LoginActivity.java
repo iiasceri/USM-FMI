@@ -16,7 +16,7 @@ import com.marozzi.roundbutton.RoundButton;
 public class LoginActivity extends ToolbarActivity {
 
     Toolbar toolbar;
-    String mail = "";
+    String username = "";
     String password = "";
 
     int LONG_ANIMATION_DURATION = 1200;
@@ -37,7 +37,7 @@ public class LoginActivity extends ToolbarActivity {
         //UI
         final ImageView imageView = findViewById(R.id.fmi_logo_view_login);
         final RoundButton roundButton = findViewById(R.id.login2Button);
-        final MaterialTextField materialTextField = findViewById(R.id.mailMaterialTextFieldRegister);
+        final MaterialTextField materialTextField = findViewById(R.id.usernameMaterialTextFieldLogin);
         final MaterialTextField materialTextField2 = findViewById(R.id.passwordMaterialTextFieldLogin);
 
         materialTextField.setAlpha(0f);
@@ -60,7 +60,7 @@ public class LoginActivity extends ToolbarActivity {
         materialTextField.animate().translationYBy(-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
         materialTextField2.animate().translationYBy(-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
         materialTextField2.animate().translationXBy(1000).setDuration(MEDIUM_ANIMATION_DURATION);
-        roundButton.animate().translationYBy(-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
+        roundButton.animate().translationYBy(-height/2 + 190).setDuration(LONG_ANIMATION_DURATION);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -106,14 +106,14 @@ public class LoginActivity extends ToolbarActivity {
         getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         final int height = displayMetrics.heightPixels;
 
-        MaterialTextField materialTextField = findViewById(R.id.mailMaterialTextFieldRegister);
+        MaterialTextField materialTextField = findViewById(R.id.usernameMaterialTextFieldLogin);
         MaterialTextField materialTextField2 = findViewById(R.id.passwordMaterialTextFieldLogin);
 
-        mail = materialTextField.getEditText().getText().toString();
+        username = materialTextField.getEditText().getText().toString();
         password = materialTextField2.getEditText().getText().toString();
 
-        if (mail.isEmpty()) {
-            errorToasts(view, "Introduceti mail-ul dvs");
+        if (username.isEmpty()) {
+            errorToasts(view, "Introduceti Numele de Utilizator");
             animateMailField(view);
         }
         else if(password.isEmpty()) {
