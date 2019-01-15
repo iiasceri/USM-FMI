@@ -10,6 +10,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.github.florent37.materialtextfield.MaterialTextField;
+import com.jaredrummler.materialspinner.MaterialSpinner;
 
 public class RegisterActivity extends AppCompatActivity {
 
@@ -65,6 +66,24 @@ public class RegisterActivity extends AppCompatActivity {
                     default:
                         Toast.makeText(getApplicationContext(), "Alegeti una din optiuni", Toast.LENGTH_SHORT).show();
                 }
+            }
+        });
+
+        MaterialSpinner groupMaterialSpinner = findViewById(R.id.groupSpinner);
+        groupMaterialSpinner.setItems("IA1602rom", "IA1702rom", "MnI1601rom", "IA1701ru");
+        groupMaterialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                System.out.println(item);
+            }
+        });
+
+        MaterialSpinner subGroupMaterialSpinner = findViewById(R.id.subGroupSpinner);
+        subGroupMaterialSpinner.setItems("I (Securitate)", "II (Design)");
+        subGroupMaterialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+            @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                System.out.println(item);
             }
         });
 
