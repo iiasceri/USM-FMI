@@ -76,9 +76,9 @@ public class ExamScheduleActivity extends ToolbarActivity {
 
                 JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(i);
 
-                String menuItemName = menuItemObject.getString("ziExamen") + " " + menuItemObject.getString("dataExamen");
+                String menuItemName = "(" + menuItemObject.getString("ora") + ")  " +  menuItemObject.getString("ziExamen") + " " + menuItemObject.getString("dataExamen");
                 String menuItemDescription = menuItemObject.getString("disciplina");
-                String menuItemPrice = "(" + menuItemObject.getString("ora") + ")    " + menuItemObject.getString("cabinet");
+                String menuItemPrice =menuItemObject.getString("cabinet");
                 String menuItemCategory = menuItemObject.getString("asistent");
                 String menuItemImageName = "menu_item_image";
 

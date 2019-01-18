@@ -53,7 +53,7 @@ public class LoginRegisterActivity extends ToolbarActivity {
     }
 
     public void tryLogin(View view) {
-        final Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
+        final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
         startActivity(intent);
     }
 

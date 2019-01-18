@@ -73,9 +73,9 @@ public class TuesdayFragment extends android.support.v4.app.Fragment {
 
                 if (strParitate.equals(paritate) || strParitate.equals("-")) {
 
-                    String menuItemName = menuItemObject.getString("disciplina");
+                    String menuItemName = "(" + menuItemObject.getString("ora") + ")" + "  " +  menuItemObject.getString("disciplina");
                     String menuItemDescription = menuItemObject.getString("profesor");
-                    String menuItemPrice = "(" + menuItemObject.getString("ora") + ")" + "  " + menuItemObject.getString("cabinet");
+                    String menuItemPrice = menuItemObject.getString("cabinet");
                     String menuItemCategory = menuItemObject.getString("tip");
                     String menuItemImageName = "menu_item_image";
 
