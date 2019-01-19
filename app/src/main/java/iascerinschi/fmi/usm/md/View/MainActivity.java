@@ -1,6 +1,7 @@
 package iascerinschi.fmi.usm.md.View;
 
 import android.content.Intent;
+import android.os.Environment;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -10,9 +11,14 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import java.io.File;
+import java.nio.charset.StandardCharsets;
 
 import iascerinschi.fmi.usm.md.R;
 import iascerinschi.fmi.usm.md.View.Marks.MarksActivity;
@@ -43,16 +49,27 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
+
+        TextView t4 = findViewById(R.id.textView4);
+        TextView t5 = findViewById(R.id.textView5);
+
+        t4.setAlpha(0f);
+        t5.setAlpha(0f);
+
         //[3]browser
         WebView webView = findViewById(R.id.webView);
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("http://fmi.usm.md");
-
         if (InternetConnection.checkConnection(getApplicationContext())) {
+            webView.loadUrl("http://fmi.usm.md");
         } else {
+
+            t4.setAlpha(1f);
+            t5.setAlpha(1f);
             Snackbar.make(findViewById(R.id.layoutMain), "Verificati Conexiunea La Internet Pentru a Putea Inoi Datele! (Nu e obligatoriu daca deja le-ati descarcat)", Snackbar.LENGTH_LONG).show();
         }
+
+
     }
 
     @Override
