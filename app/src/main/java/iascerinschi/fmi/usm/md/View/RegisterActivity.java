@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -11,6 +11,8 @@ import android.widget.Toast;
 
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.jaredrummler.materialspinner.MaterialSpinner;
+
+import iascerinschi.fmi.usm.md.R;
 
 public class RegisterActivity extends AppCompatActivity {
 

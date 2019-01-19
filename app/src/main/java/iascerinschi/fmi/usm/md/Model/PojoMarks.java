@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.Model;
 
 public class PojoMarks {
 

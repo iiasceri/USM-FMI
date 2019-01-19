@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View.Marks;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -9,6 +9,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
+
+import iascerinschi.fmi.usm.md.Model.PojoMarks;
+import iascerinschi.fmi.usm.md.R;
 
 
 class MarksRecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {

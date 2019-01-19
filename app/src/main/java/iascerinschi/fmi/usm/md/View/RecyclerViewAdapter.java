@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -10,8 +10,11 @@ import android.widget.TextView;
 
 import java.util.List;
 
+import iascerinschi.fmi.usm.md.Model.Pojo;
+import iascerinschi.fmi.usm.md.R;
 
-class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+
+public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // A menu item view type.
     private static final int MENU_ITEM_VIEW_TYPE = 0;
 

@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View.Marks;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,15 +19,20 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import iascerinschi.fmi.usm.md.View.Marks.MarksRecyclerViewAdapter;
+import iascerinschi.fmi.usm.md.Model.PojoMarks;
+import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
+
 /* Fragment used as page 1 */
-public class S3Fragment extends android.support.v4.app.Fragment {
+public class GPAFragment extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_s3, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_gpa, container, false);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -54,25 +59,47 @@ public class S3Fragment extends android.support.v4.app.Fragment {
             JSONArray semestre = new JSONArray(jsonDataString);
             JSONArray menuItemsJsonArray = new JSONArray();
 
+            List<Float> mediiList = new ArrayList<>();
+
             for (int i = 0; i < semestre.length(); i++) {
 
                 JSONObject semestru = semestre.getJSONObject(i);
 
-                if ((Integer) semestru.get("idSemestru") == 3) {
-                    menuItemsJsonArray = semestru.getJSONArray("discipline");
+                String  denSem = "Semestru " + semestru.get("idSemestru").toString();
+                Float   mediaSem;
+                Float   sumaSem = 0f;
+                Float   counter = 0f;
+
+                menuItemsJsonArray = semestru.getJSONArray("discipline");
+
+                for (int j = 0; j < menuItemsJsonArray.length(); ++j) {
+
+                    JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(j);
+
+                    String nota = menuItemObject.getString("nota");
+                    if (nota.equals("admis") || nota.equals("neadmis") || nota.equals("np")) {
+                        System.out.println("its not number");
+                    }
+                    else {
+                        sumaSem += Float.valueOf(nota);
+                        counter++;
+                    }
                 }
-            }
 
-            for (int i = 0; i < menuItemsJsonArray.length(); ++i) {
-
-                JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(i);
-
-                String denumire = menuItemObject.getString("denumire");
-                String nota = "(" + menuItemObject.getString("nota") + ")";
-
-                PojoMarks pojoMarks = new PojoMarks(denumire, nota);
+                mediaSem = sumaSem / counter;
+                mediiList.add(mediaSem);
+                PojoMarks pojoMarks = new PojoMarks(denSem, mediaSem.toString());
                 mRecyclerViewItems.add(pojoMarks);
             }
+
+            Float mediaTotala = 0f;
+            Float sumaMediilor = 0f;
+            for (Object aMediiList : mediiList) sumaMediilor += (Float)aMediiList;
+            mediaTotala = sumaMediilor / mediiList.size();
+            PojoMarks pojoMarks = new PojoMarks("Media la toate semestrele", mediaTotala.toString());
+            mRecyclerViewItems.add(pojoMarks);
+
+
         } catch (IOException | JSONException exception) {
             Log.e(ExamScheduleActivity.class.getName(), "Unable to parse JSON file.", exception);
         }

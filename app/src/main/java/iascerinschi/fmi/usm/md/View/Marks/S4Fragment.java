@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View.Marks;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,15 +19,20 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import iascerinschi.fmi.usm.md.View.Marks.MarksRecyclerViewAdapter;
+import iascerinschi.fmi.usm.md.Model.PojoMarks;
+import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
+
 /* Fragment used as page 1 */
-public class S5Fragment extends android.support.v4.app.Fragment {
+public class S4Fragment extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_s5, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_s4, container, false);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -58,7 +63,7 @@ public class S5Fragment extends android.support.v4.app.Fragment {
 
                 JSONObject semestru = semestre.getJSONObject(i);
 
-                if ((Integer) semestru.get("idSemestru") == 5) {
+                if ((Integer) semestru.get("idSemestru") == 4) {
                     menuItemsJsonArray = semestru.getJSONArray("discipline");
                 }
             }

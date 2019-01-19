@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View.Schedule;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,15 +19,20 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import iascerinschi.fmi.usm.md.Model.Pojo;
+import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
+import iascerinschi.fmi.usm.md.View.RecyclerViewAdapter;
+
 /* Fragment used as page 1 */
-public class WednesdayFragment extends android.support.v4.app.Fragment {
+public class WeekFragment extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_wednesday, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_thursday, container, false);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -54,36 +59,33 @@ public class WednesdayFragment extends android.support.v4.app.Fragment {
             JSONArray zile = new JSONArray(jsonDataString);
             JSONArray menuItemsJsonArray = new JSONArray();
 
-            for (int i = 0; i < zile.length(); i++) {
+            for (int i = 0; i < zile.length(); ++i) {
 
                 JSONObject zi = zile.getJSONObject(i);
 
-                if (zi.get("numeZi").equals("Miercuri")) {
-                    menuItemsJsonArray = zi.getJSONArray("lectii");
-                }
-            }
+                menuItemsJsonArray = zi.getJSONArray("lectii");
 
-            String paritate = Utilities.getParitate();
+                String ziTitle = zi.getString("numeZi");
+                for (int j = 0; j < menuItemsJsonArray.length(); ++j) {
 
-            for (int i = 0; i < menuItemsJsonArray.length(); ++i) {
+                    JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(j);
 
-                JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(i);
-
-                String strParitate = menuItemObject.getString("paritate");
-
-                if (strParitate.equals(paritate) || strParitate.equals("-")) {
-
-                    String menuItemName = "(" + menuItemObject.getString("ora") + ")" + "  " +  menuItemObject.getString("disciplina");
-                    String menuItemDescription = menuItemObject.getString("profesor");
-                    String menuItemPrice = menuItemObject.getString("cabinet");
-                    String menuItemCategory = menuItemObject.getString("tip");
+                    String menuItemName = ziTitle;
+                    String menuItemDescription = menuItemObject.getString("disciplina") + " | paritate:  " + menuItemObject.getString("paritate");
+                    String menuItemPrice = "(" + menuItemObject.getString("ora") + ")" + "  " + menuItemObject.getString("cabinet");
+                    String menuItemCategory = menuItemObject.getString("tip") + "   " + menuItemObject.getString("profesor");
                     String menuItemImageName = "menu_item_image";
 
                     Pojo pojo = new Pojo(menuItemName, menuItemDescription, menuItemPrice,
                             menuItemCategory, menuItemImageName);
                     mRecyclerViewItems.add(pojo);
+
                 }
             }
+
+
+
+
         } catch (IOException | JSONException exception) {
             Log.e(ExamScheduleActivity.class.getName(), "Unable to parse JSON file.", exception);
         }

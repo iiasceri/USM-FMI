@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View.Schedule;
 
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -19,15 +19,21 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
+import iascerinschi.fmi.usm.md.Model.Pojo;
+import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
+import iascerinschi.fmi.usm.md.View.RecyclerViewAdapter;
+import iascerinschi.fmi.usm.md.Utilities.Utilities;
+
 /* Fragment used as page 1 */
-public class FridayFragment extends android.support.v4.app.Fragment {
+public class ThursdayFragment extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_friday, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_thursday, container, false);
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -58,11 +64,10 @@ public class FridayFragment extends android.support.v4.app.Fragment {
 
                 JSONObject zi = zile.getJSONObject(i);
 
-                if (zi.get("numeZi").equals("Vineri")) {
+                if (zi.get("numeZi").equals("Joi")) {
                     menuItemsJsonArray = zi.getJSONArray("lectii");
                 }
             }
-
 
             String paritate = Utilities.getParitate();
 

@@ -1,19 +1,17 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
-import android.os.Handler;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v7.widget.Toolbar;
-import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.marozzi.roundbutton.RoundButton;
+
+import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.Utilities.InternetConnection;
 
 public class LoginRegisterActivity extends ToolbarActivity {
 
@@ -50,6 +48,11 @@ public class LoginRegisterActivity extends ToolbarActivity {
         RoundButton roundButton2 = findViewById(R.id.registerButton);
         roundButton2.setAlpha(0);
         roundButton2.animate().alpha(1).setDuration(2000);
+
+        if (InternetConnection.checkConnection(getApplicationContext())) {
+        } else {
+            Snackbar.make(findViewById(R.id.layoutLoginRegister), "Verificati Conexiunea la Internet!", Snackbar.LENGTH_LONG).show();
+        }
     }
 
     public void tryLogin(View view) {

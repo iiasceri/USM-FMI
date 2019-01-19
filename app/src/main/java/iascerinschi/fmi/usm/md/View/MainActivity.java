@@ -1,9 +1,9 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View;
 
 import android.content.Intent;
-import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
+import android.support.design.widget.Snackbar;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -13,6 +13,11 @@ import android.view.MenuItem;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
+
+import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.Marks.MarksActivity;
+import iascerinschi.fmi.usm.md.View.Schedule.ScheduleActivity;
+import iascerinschi.fmi.usm.md.Utilities.InternetConnection;
 
 public class MainActivity extends ToolbarActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -43,6 +48,11 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         webView.getSettings().setJavaScriptEnabled(true);
         webView.setWebViewClient(new WebViewClient());
         webView.loadUrl("http://fmi.usm.md");
+
+        if (InternetConnection.checkConnection(getApplicationContext())) {
+        } else {
+            Snackbar.make(findViewById(R.id.layoutMain), "Verificati Conexiunea La Internet Pentru a Putea Inoi Datele! (Nu e obligatoriu daca deja le-ati descarcat)", Snackbar.LENGTH_LONG).show();
+        }
     }
 
     @Override

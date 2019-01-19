@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View.Marks;
 
 
 import android.os.Bundle;
@@ -10,6 +10,17 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import iascerinschi.fmi.usm.md.View.MainActivity;
+import iascerinschi.fmi.usm.md.View.Marks.GPAFragment;
+import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.Marks.S1Fragment;
+import iascerinschi.fmi.usm.md.View.Marks.S2Fragment;
+import iascerinschi.fmi.usm.md.View.Marks.S3Fragment;
+import iascerinschi.fmi.usm.md.View.Marks.S4Fragment;
+import iascerinschi.fmi.usm.md.View.Marks.S5Fragment;
+import iascerinschi.fmi.usm.md.View.Marks.S6Fragment;
+import iascerinschi.fmi.usm.md.View.ToolbarActivity;
 
 public class MarksActivity extends ToolbarActivity {
 

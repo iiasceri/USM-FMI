@@ -3,6 +3,8 @@
     package="iascerinschi.fmi.usm.md">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
         android:allowBackup="true"
@@ -11,19 +13,19 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".LoginRegisterActivity">
+        <activity android:name=".View.LoginRegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".LoginActivity" />
-        <activity android:name=".RegisterActivity" />
-        <activity android:name=".ExamScheduleActivity" />
-        <activity android:name=".ScheduleActivity"></activity>
-        <activity android:name=".MarksActivity"></activity>
+        <activity android:name=".View.MainActivity" />
+        <activity android:name=".View.LoginActivity" />
+        <activity android:name=".View.RegisterActivity" />
+        <activity android:name=".View.ExamScheduleActivity" />
+        <activity android:name=".View.Schedule.ScheduleActivity"></activity>
+        <activity android:name=".View.Marks.MarksActivity"></activity>
     </application>
 
 </manifest>

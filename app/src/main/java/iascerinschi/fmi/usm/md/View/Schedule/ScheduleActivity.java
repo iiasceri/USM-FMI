@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View.Schedule;
 
 
 import android.os.Bundle;
@@ -7,10 +7,14 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.MainActivity;
+import iascerinschi.fmi.usm.md.View.ToolbarActivity;
+import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
 public class ScheduleActivity extends ToolbarActivity {
 

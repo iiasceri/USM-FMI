@@ -1,4 +1,4 @@
-package iascerinschi.fmi.usm.md;
+package iascerinschi.fmi.usm.md.View;
 
 import android.content.Intent;
 import android.os.Handler;
@@ -12,6 +12,8 @@ import android.widget.Toast;
 
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.marozzi.roundbutton.RoundButton;
+
+import iascerinschi.fmi.usm.md.R;
 
 public class LoginActivity extends ToolbarActivity {
 
