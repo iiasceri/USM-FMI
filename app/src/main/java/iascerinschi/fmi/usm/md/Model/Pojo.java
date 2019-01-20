@@ -2,6 +2,9 @@ package iascerinschi.fmi.usm.md.Model;
 
 public class Pojo {
 
+    /**
+     * Ugly POJO TODO: Refactor all under app (price => schedule etc)
+     */
     private final String name;
     private final String description;
     private final String price;

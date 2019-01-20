@@ -1,13 +1,17 @@
 package iascerinschi.fmi.usm.md.Utilities;
 
-import java.io.IOException;
-import java.nio.charset.Charset;
-import java.nio.file.Files;
-import java.nio.file.Paths;
+import android.content.Context;
+import android.net.ConnectivityManager;
+import android.support.annotation.NonNull;
+
 import java.util.Calendar;
 
 public class Utilities {
 
+    /**
+     * RETURN JSON filter "par", "impar"
+     * @return type of week odd/even as defined in JSON
+     */
     public static String getParitate() {
         Calendar calender = Calendar.getInstance();
         if (calender.get(Calendar.WEEK_OF_YEAR) % 2 == 0)
@@ -16,15 +20,28 @@ public class Utilities {
             return "imp";
     }
 
+    /**
+     * RETURN TITLE FOR ACTIVITIES (TOOLBAR)
+     * @return type of week odd/even as String
+     */
     public static String getParitateTitlu() {
+
         String paritate = "";
         if (Utilities.getParitate().equals("par"))
             paritate = "para";
         else
             paritate = "impara";
 
-        String text = "Saptamana " + paritate;
-
-        return text;
+        return "Saptamana " + paritate;
     }
+
+    /**
+     * CHECK WHETHER INTERNET CONNECTION IS AVAILABLE OR NOT
+     * @return true or false if device has internet
+     */
+    public static boolean checkConnection(@NonNull Context context) {
+        return ((ConnectivityManager) context.getSystemService
+                (Context.CONNECTIVITY_SERVICE)).getActiveNetworkInfo() != null;
+    }
+    
 }

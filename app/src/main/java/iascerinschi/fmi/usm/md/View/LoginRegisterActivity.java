@@ -11,7 +11,7 @@ import android.widget.TextView;
 import com.marozzi.roundbutton.RoundButton;
 
 import iascerinschi.fmi.usm.md.R;
-import iascerinschi.fmi.usm.md.Utilities.InternetConnection;
+import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
 public class LoginRegisterActivity extends ToolbarActivity {
 
@@ -49,7 +49,7 @@ public class LoginRegisterActivity extends ToolbarActivity {
         roundButton2.setAlpha(0);
         roundButton2.animate().alpha(1).setDuration(2000);
 
-        if (InternetConnection.checkConnection(getApplicationContext())) {
+        if (Utilities.checkConnection(getApplicationContext())) {
         } else {
             Snackbar.make(findViewById(R.id.layoutLoginRegister), "Verificati Conexiunea la Internet!", Snackbar.LENGTH_LONG).show();
         }
