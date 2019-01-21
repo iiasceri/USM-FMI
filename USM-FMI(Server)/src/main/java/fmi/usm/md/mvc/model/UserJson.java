@@ -10,13 +10,17 @@ import lombok.Setter;
 public class UserJson {
     private String username;
     private String mail;
-    private String password;
+    private String familyName;
+    private String gender;
     private String groupName;
+    private String subGroup;
 
     public UserJson(User user) {
         username = user.getUsername();
         mail = user.getUsername();
-        password = user.getPassword();
+        familyName = user.getFamilyname();
+        gender = user.getGender().toString().toLowerCase();
         groupName = user.getGroup().getName();
+        subGroup = user.getSubGroup().toString();
     }
 }

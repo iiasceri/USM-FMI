@@ -37,7 +37,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:mtf_image="@drawable/ic_mail_gray_24dp"
+                app:mtf_image="@drawable/ic_text_format_black_24dp"
                 app:mtf_labelColor="#e0ffffff"
                 app:mtf_openKeyboardOnFocus="true">
 
@@ -83,7 +83,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:mtf_image="@drawable/ic_mail_gray_24dp"
+                app:mtf_image="@drawable/ic_text_format_black_24dp"
                 app:mtf_labelColor="#e0ffffff"
                 app:mtf_openKeyboardOnFocus="true">
 
@@ -201,7 +201,6 @@
                 android:layout_width="271dp"
                 android:layout_height="50dp"
                 android:gravity="center"
-                android:onClick="tryRegister"
                 android:text="@string/register_button2"
                 android:textAppearance="@android:style/TextAppearance.Widget.DropDownHint"
                 android:textSize="22sp"

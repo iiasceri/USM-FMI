@@ -32,7 +32,7 @@
                 <input type="radio" name="gender" value="FEMALE"> F
                 <input type="radio" name="gender" value="MALE"> M
 
-                <label>|Grupa</label>
+                <label>| Grupa</label>
                     <select name="groupName" id="groupName" >
                         <c:forEach var="groups" items="${groupList}">
                             <option value="${groups.name}">${groups.name}</option>

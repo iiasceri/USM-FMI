@@ -6,7 +6,14 @@ import android.support.annotation.NonNull;
 
 import java.util.Calendar;
 
+
 public class Utilities {
+
+    static String serverURL = "http://192.168.0.104:8080";
+
+    public static String getServerURL() {
+        return serverURL;
+    }
 
     /**
      * RETURN JSON filter "par", "impar"

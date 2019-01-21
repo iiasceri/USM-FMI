@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RestController;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RequiredArgsConstructor
@@ -143,7 +144,26 @@ public class UserRestController {
 
         map.put("status", "success");
         userService.add(user);
+        UserJson userJson = new UserJson(user);
+        map.put("user", userJson);
+        return map;
+    }
 
+    @RequestMapping(value = "/test", method = GET)
+    public LinkedHashMap<String, Object> testRestGET() {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+
+        map.put("status", "success");
+        map.put("message", "get");
+        return map;
+    }
+
+    @RequestMapping(value = "/test", method = POST)
+    public LinkedHashMap<String, Object> testRestPOST() {
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+
+        map.put("status", "success");
+        map.put("message", "post");
         return map;
     }
 }
