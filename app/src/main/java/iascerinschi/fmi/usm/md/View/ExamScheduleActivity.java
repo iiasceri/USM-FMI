@@ -1,36 +1,59 @@
 package iascerinschi.fmi.usm.md.View;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
 
 import iascerinschi.fmi.usm.md.Model.Pojo;
 import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
 public class ExamScheduleActivity extends ToolbarActivity {
 
     private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
+    private RequestQueue mQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_schedule);
+
+        mQueue = Volley.newRequestQueue(this);
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        JSONObject jo = null;
+        try {
+            jo = new JSONObject(mPrefs.getString("User", ""));
+            Log.i("user", mPrefs.getString("User", ""));
+
+            if (!mPrefs.contains("ExamSchedule"))
+                jsonGetExamSchedule(jo.getString("groupName"), jo.getString("subGroup"));
+
+            Log.i("groupName & subGroup", jo.getString("groupName") + jo.getString("subGroup"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         //[1]vert + Toolbar
         toolbar = findViewById(R.id.toolbar);
@@ -56,8 +79,8 @@ public class ExamScheduleActivity extends ToolbarActivity {
         RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
 
-        addMenuItemsFromJson();
 
+        addMenuItemsFromJson();
     }
 
     @Override
@@ -72,7 +95,9 @@ public class ExamScheduleActivity extends ToolbarActivity {
 
     private void addMenuItemsFromJson() {
         try {
-            String jsonDataString = readJsonDataFromFile();
+
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            String jsonDataString = mPrefs.getString("ExamSchedule", "");
             JSONArray menuItemsJsonArray = new JSONArray(jsonDataString);
 
             for (int i = 0; i < menuItemsJsonArray.length(); ++i) {
@@ -87,33 +112,65 @@ public class ExamScheduleActivity extends ToolbarActivity {
 
                 Pojo pojo = new Pojo(menuItemName, menuItemDescription, menuItemPrice,
                         menuItemCategory, menuItemImageName);
+
                 mRecyclerViewItems.add(pojo);
             }
-        } catch (IOException | JSONException exception) {
+        } catch (Exception exception) {
             Log.e(ExamScheduleActivity.class.getName(), "Unable to parse JSON file.", exception);
         }
     }
 
-    private String readJsonDataFromFile() throws IOException {
 
-        InputStream inputStream = null;
-        StringBuilder builder = new StringBuilder();
+    private void jsonGetExamSchedule(String groupName,
+                                     String subGroup) {
 
-        try {
-            String jsonDataString = null;
-            inputStream = getResources().openRawResource(R.raw.menu_item_exam);
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(inputStream, "UTF-8"));
-            while ((jsonDataString = bufferedReader.readLine()) != null) {
-                builder.append(jsonDataString);
+        String url = Utilities.getServerURL() +
+                "get_schedule?" +
+                "groupName=" + groupName +
+                "&subGroup=" + subGroup +
+                "&scheduleType=exam";
+
+        Log.i("URL", url);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                            if (response.has("orar")) {
+
+                                Log.i("exam schedule", response.getString("orar"));
+
+                                String json = response.getString("orar");
+
+                                prefsEditor.putString("ExamSchedule", json);
+                                prefsEditor.putString("ExamScheduleSuccess", "yes");
+                                prefsEditor.apply();
+                            }
+                            else {
+                                Log.e("error", "hmm");
+                                prefsEditor.putString("ExamScheduleSuccess", "no");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
             }
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        }
 
-        return new String(builder);
+        });
+
+        mQueue.add(request);
+
     }
 
 }

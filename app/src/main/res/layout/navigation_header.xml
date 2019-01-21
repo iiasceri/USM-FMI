@@ -8,10 +8,11 @@
     android:padding="6dp"
     android:gravity="bottom"
     android:theme="@style/ThemeOverlay.AppCompat.Dark"
-    android:background="@drawable/background_drawer">
+    android:background="@drawable/background_drawer"
+    android:id="@+id/navigation_header">
 
     <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/imageView"
+        android:id="@+id/genderImageViewDrawer"
         android:layout_width="56dp"
         android:layout_height="56dp"
         android:layout_marginLeft="8dp"
@@ -23,6 +24,7 @@
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
+        android:id="@+id/nameTextViewDrawer"
         android:layout_width="wrap_content"
         android:layout_height="29dp"
         android:layout_marginStart="6dp"
@@ -31,6 +33,6 @@
         android:textAppearance="@android:style/TextAppearance.WindowTitle"
         android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView" />
+        app:layout_constraintStart_toEndOf="@+id/genderImageViewDrawer" />
 
 </android.support.constraint.ConstraintLayout>

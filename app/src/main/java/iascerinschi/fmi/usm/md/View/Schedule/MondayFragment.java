@@ -1,12 +1,21 @@
 package iascerinschi.fmi.usm.md.View.Schedule;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -21,7 +30,6 @@ import java.util.List;
 
 import iascerinschi.fmi.usm.md.Model.Pojo;
 import iascerinschi.fmi.usm.md.R;
-import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
 import iascerinschi.fmi.usm.md.View.RecyclerViewAdapter;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
@@ -30,10 +38,27 @@ public class MondayFragment extends android.support.v4.app.Fragment {
 
     private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
+    private RequestQueue mQueue;
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_monday, container, false);
+
+        mQueue = Volley.newRequestQueue(getActivity());
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        JSONObject jo = null;
+        try {
+            jo = new JSONObject(mPrefs.getString("User", ""));
+            Log.i("user", mPrefs.getString("User", ""));
+
+                jsonGetSchedule(jo.getString("groupName"), jo.getString("subGroup"));
+
+            Log.i("groupName & subGroup", jo.getString("groupName") + jo.getString("subGroup"));
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -51,11 +76,64 @@ public class MondayFragment extends android.support.v4.app.Fragment {
     }
 
 
+    private void jsonGetSchedule(String groupName,
+                                 String subGroup) {
+
+        String url = Utilities.getServerURL() +
+                "get_schedule?" +
+                "groupName=" + groupName +
+                "&subGroup=" + subGroup +
+                "&scheduleType=weekly";
+
+        Log.i("URL", url);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                            if (response.has("orar")) {
+
+                                Log.i("schedule", response.getString("orar"));
+
+                                String json = response.getString("orar");
+
+                                prefsEditor.putString("Schedule", json);
+                                prefsEditor.putString("ScheduleSuccess", "yes");
+                                prefsEditor.apply();
+                            }
+                            else {
+                                Log.e("error", "hmm");
+                                prefsEditor.putString("ScheduleSuccess", "no");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+
+        });
+
+        mQueue.add(request);
+
+    }
+
     private void addMenuItemsFromJson() {
         try {
 
 
-            String jsonDataString = readJsonDataFromFile();
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String jsonDataString = mPrefs.getString("Schedule", "");
 
             JSONArray zile = new JSONArray(jsonDataString);
             JSONArray menuItemsJsonArray = new JSONArray();
@@ -90,8 +168,8 @@ public class MondayFragment extends android.support.v4.app.Fragment {
                     mRecyclerViewItems.add(pojo);
                 }
             }
-        } catch (IOException | JSONException exception) {
-            Log.e(ExamScheduleActivity.class.getName(), "Unable to parse JSON file.", exception);
+        } catch (JSONException exception) {
+            Log.e(MondayFragment.class.getName(), "Unable to parse JSON file.", exception);
         }
     }
 

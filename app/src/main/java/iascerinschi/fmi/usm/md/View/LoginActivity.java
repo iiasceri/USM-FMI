@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
@@ -127,7 +128,7 @@ public class LoginActivity extends ToolbarActivity {
                             handler.postDelayed(new Runnable() {
                                 @Override
                                 public void run() {
-                                    SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+                                    SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                                     String loginSuccess = mPrefs.getString("LoginSuccess", "");
 
                                     AlertDialog alertDialog;
@@ -175,7 +176,7 @@ public class LoginActivity extends ToolbarActivity {
                                String password) {
 
         String url = Utilities.getServerURL() +
-                "/api/login?" +
+                "login?" +
                 "username=" + username +
                 "&password=" + password;
 
@@ -187,7 +188,7 @@ public class LoginActivity extends ToolbarActivity {
                     public void onResponse(JSONObject response) {
                         try {
 
-                            SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                             SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
                             if (response.getString("status").equals("success")) {

@@ -2,6 +2,17 @@ package iascerinschi.fmi.usm.md.Model;
 
 public class Pojo {
 
+    @Override
+    public String toString() {
+        return "Pojo{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", price='" + price + '\'' +
+                ", category='" + category + '\'' +
+                ", imageName='" + imageName + '\'' +
+                '}';
+    }
+
     /**
      * Ugly POJO TODO: Refactor all under app (price => schedule etc)
      */

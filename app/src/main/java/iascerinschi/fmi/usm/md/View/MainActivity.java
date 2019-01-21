@@ -1,6 +1,8 @@
 package iascerinschi.fmi.usm.md.View;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.Snackbar;
@@ -9,11 +11,19 @@ import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
+import android.view.View;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.google.gson.Gson;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import iascerinschi.fmi.usm.md.R;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
@@ -44,6 +54,31 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         drawerLayout.setDrawerListener(toggle);
         toggle.syncState();
 
+        View hView =  navigationView.getHeaderView(0);
+        TextView nameTextView = hView.findViewById(R.id.nameTextViewDrawer);
+        ImageView genderImageView = hView.findViewById(R.id.genderImageViewDrawer);
+
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
+        JSONObject obj;
+        String name = "Linda Figlind";
+        String gender = "";
+
+        try {
+            String json = mPrefs.getString("User", "");
+            obj = new JSONObject(json);
+            name = obj.getString("familyName");
+            gender = obj.getString("gender");
+
+            Log.i("name", name);
+            Log.i("gender", gender);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
+        nameTextView.setText(name);
+        if (gender.equals("male"))
+            genderImageView.setImageDrawable(getResources().getDrawable(R.drawable.male_user));
 
         TextView t4 = findViewById(R.id.textView4);
         TextView t5 = findViewById(R.id.textView5);
@@ -63,7 +98,6 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             t5.setAlpha(1f);
             Snackbar.make(findViewById(R.id.layoutMain), "Verificati Conexiunea La Internet Pentru a Putea Inoi Datele! (Nu e obligatoriu daca deja le-ati descarcat)", Snackbar.LENGTH_LONG).show();
         }
-
 
     }
 
@@ -105,7 +139,13 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             Toast.makeText(getApplicationContext(), "Messages", Toast.LENGTH_SHORT).show();
         }
         else if (id == R.id.nav_subheader_logout) {
-                Intent intent = new Intent(getApplicationContext(), LoginRegisterActivity.class);
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+            prefsEditor.remove("User");
+            prefsEditor.remove("ExamSchedule");
+            prefsEditor.apply();
+
+            Intent intent = new Intent(getApplicationContext(), LoginRegisterActivity.class);
                 startActivity(intent);
         }
 

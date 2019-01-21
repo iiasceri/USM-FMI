@@ -9,7 +9,7 @@ import java.util.Calendar;
 
 public class Utilities {
 
-    static String serverURL = "http://192.168.0.104:8080";
+    static String serverURL = "http://192.168.0.103:8080/api/";
 
     public static String getServerURL() {
         return serverURL;

@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Handler;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -187,7 +188,7 @@ public class RegisterActivity extends AppCompatActivity {
                 handler.postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+                        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                         String registerSuccess = mPrefs.getString("RegisterSuccess", "");
 
                         AlertDialog alertDialog;
@@ -232,7 +233,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void jsonParseGroupNames() {
 
-        String url = Utilities.getServerURL() + "/api/getGroupNames";
+        String url = Utilities.getServerURL() + "getGroupNames";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -264,7 +265,7 @@ public class RegisterActivity extends AppCompatActivity {
                                   String password, String gender, String groupName, String subGroup) {
 
         String url = Utilities.getServerURL() +
-                "/api/register?" +
+                "register?" +
                 "username=" + username +
                 "&mail=" + mail +
                 "&familyName=" + familyName +
@@ -281,7 +282,8 @@ public class RegisterActivity extends AppCompatActivity {
                     public void onResponse(JSONObject response) {
                         try {
 
-                            SharedPreferences mPrefs = getPreferences(MODE_PRIVATE);
+                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+
                             SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
                             if (response.getString("status").equals("success")) {
