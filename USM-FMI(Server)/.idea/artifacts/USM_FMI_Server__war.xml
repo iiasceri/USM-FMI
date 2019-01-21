@@ -7,7 +7,7 @@
         <packaging>war</packaging>
       </options>
     </properties>
-    <root id="archive" name="USM-FMI(Server).war">
+    <root id="archive" name="USMFMI.war">
       <element id="artifact" artifact-name="USM-FMI(Server):war exploded" />
     </root>
   </artifact>

@@ -1,6 +1,6 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="USM-FMI(Server):war exploded">
-    <output-path>$PROJECT_DIR$/target/USM-FMI(Server)</output-path>
+    <output-path>$PROJECT_DIR$/target/USMFMI</output-path>
     <properties id="maven-jee-properties">
       <options>
         <exploded>true</exploded>
@@ -81,7 +81,7 @@
         </element>
       </element>
       <element id="directory" name="META-INF">
-        <element id="file-copy" path="$PROJECT_DIR$/target/USM-FMI(Server)/META-INF/MANIFEST.MF" />
+        <element id="file-copy" path="$PROJECT_DIR$/target/USMFMI/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="USM-FMI(Server)/web/Web" />
     </root>
