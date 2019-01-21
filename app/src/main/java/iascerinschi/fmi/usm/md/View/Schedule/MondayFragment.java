@@ -3,6 +3,7 @@ package iascerinschi.fmi.usm.md.View.Schedule;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -27,9 +28,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import iascerinschi.fmi.usm.md.Model.Pojo;
 import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
 import iascerinschi.fmi.usm.md.View.RecyclerViewAdapter;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
@@ -42,16 +45,17 @@ public class MondayFragment extends android.support.v4.app.Fragment {
 
 
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_monday, container, false);
 
-        mQueue = Volley.newRequestQueue(getActivity());
+        mQueue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
         JSONObject jo = null;
         try {
             jo = new JSONObject(mPrefs.getString("User", ""));
             Log.i("user", mPrefs.getString("User", ""));
 
+            if (!mPrefs.contains("Schedule"))
                 jsonGetSchedule(jo.getString("groupName"), jo.getString("subGroup"));
 
             Log.i("groupName & subGroup", jo.getString("groupName") + jo.getString("subGroup"));
@@ -70,6 +74,7 @@ public class MondayFragment extends android.support.v4.app.Fragment {
         mRecyclerView.setAdapter(adapter);
 
         mRecyclerViewItems.clear();
+
         addMenuItemsFromJson();
 
         return rootView;
@@ -106,6 +111,7 @@ public class MondayFragment extends android.support.v4.app.Fragment {
                                 prefsEditor.putString("Schedule", json);
                                 prefsEditor.putString("ScheduleSuccess", "yes");
                                 prefsEditor.apply();
+
                             }
                             else {
                                 Log.e("error", "hmm");
@@ -130,7 +136,6 @@ public class MondayFragment extends android.support.v4.app.Fragment {
 
     private void addMenuItemsFromJson() {
         try {
-
 
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
             String jsonDataString = mPrefs.getString("Schedule", "");
@@ -171,28 +176,6 @@ public class MondayFragment extends android.support.v4.app.Fragment {
         } catch (JSONException exception) {
             Log.e(MondayFragment.class.getName(), "Unable to parse JSON file.", exception);
         }
-    }
-
-    private String readJsonDataFromFile() throws IOException {
-
-        InputStream inputStream = null;
-        StringBuilder builder = new StringBuilder();
-
-        try {
-            String jsonDataString = null;
-            inputStream = getResources().openRawResource(R.raw.menu_item_weekly);
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(inputStream, "UTF-8"));
-            while ((jsonDataString = bufferedReader.readLine()) != null) {
-                builder.append(jsonDataString);
-            }
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        }
-
-        return new String(builder);
     }
 
 }

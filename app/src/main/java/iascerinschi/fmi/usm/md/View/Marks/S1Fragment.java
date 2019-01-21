@@ -1,6 +1,8 @@
 package iascerinschi.fmi.usm.md.View.Marks;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -54,7 +56,8 @@ public class S1Fragment extends android.support.v4.app.Fragment {
         try {
 
 
-            String jsonDataString = readJsonDataFromFile();
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String jsonDataString = mPrefs.getString("Marks", "");
 
             JSONArray semestre = new JSONArray(jsonDataString);
             JSONArray menuItemsJsonArray = new JSONArray();
@@ -78,31 +81,9 @@ public class S1Fragment extends android.support.v4.app.Fragment {
                 PojoMarks pojoMarks = new PojoMarks(denumire, nota);
                 mRecyclerViewItems.add(pojoMarks);
             }
-        } catch (IOException | JSONException exception) {
+        } catch (JSONException exception) {
             Log.e(ExamScheduleActivity.class.getName(), "Unable to parse JSON file.", exception);
         }
-    }
-
-    private String readJsonDataFromFile() throws IOException {
-
-        InputStream inputStream = null;
-        StringBuilder builder = new StringBuilder();
-
-        try {
-            String jsonDataString = null;
-            inputStream = getResources().openRawResource(R.raw.menu_item_marks);
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(inputStream, "UTF-8"));
-            while ((jsonDataString = bufferedReader.readLine()) != null) {
-                builder.append(jsonDataString);
-            }
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        }
-
-        return new String(builder);
     }
 
 }

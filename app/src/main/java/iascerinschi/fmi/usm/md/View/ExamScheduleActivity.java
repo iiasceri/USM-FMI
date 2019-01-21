@@ -1,6 +1,7 @@
 package iascerinschi.fmi.usm.md.View;
 
 import android.content.SharedPreferences;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -9,6 +10,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -78,7 +80,6 @@ public class ExamScheduleActivity extends ToolbarActivity {
 
         RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
-
 
         addMenuItemsFromJson();
     }
@@ -169,6 +170,10 @@ public class ExamScheduleActivity extends ToolbarActivity {
 
         });
 
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 4,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(request);
 
     }

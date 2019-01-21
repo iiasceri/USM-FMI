@@ -15,6 +15,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
+import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
 public class MarksRestController {
@@ -22,7 +23,7 @@ public class MarksRestController {
     @Autowired
     ServletContext context;
 
-    @RequestMapping(value = "/api/get_marks", method = GET)
+    @RequestMapping(value = "/api/get_marks", method = POST)
     public LinkedHashMap<String, Object> getMyMarks(@RequestParam(name = "id") String id) {
 
 

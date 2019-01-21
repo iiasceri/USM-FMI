@@ -1,15 +1,30 @@
 package iascerinschi.fmi.usm.md.View.Schedule;
 
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Objects;
 
 import iascerinschi.fmi.usm.md.R;
 import iascerinschi.fmi.usm.md.View.MainActivity;
@@ -19,6 +34,7 @@ import iascerinschi.fmi.usm.md.Utilities.Utilities;
 public class ScheduleActivity extends ToolbarActivity {
 
     Toolbar toolbar;
+    private RequestQueue mQueue;
 
     private final String LOG_TAG = MainActivity.class.getSimpleName();
 
@@ -50,6 +66,22 @@ public class ScheduleActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        mQueue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
+
+        if (!mPrefs.contains("Schedule")) {
+            JSONObject jo = null;
+            try {
+                jo = new JSONObject(mPrefs.getString("User", ""));
+                Log.i("user", mPrefs.getString("User", ""));
+                jsonGetSchedule(jo.getString("groupName"), jo.getString("subGroup"));
+                Log.i("groupName & subGroup", jo.getString("groupName") + jo.getString("subGroup"));
+
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
         // Set the Toolbar as the activity's app bar (instead of the default ActionBar)
 
         //[1]vert + Toolbar
@@ -109,6 +141,59 @@ public class ScheduleActivity extends ToolbarActivity {
         public CharSequence getPageTitle(int position) {
             return PAGE_TITLES[position];
         }
+
+    }
+
+    private void jsonGetSchedule(String groupName,
+                                 String subGroup) {
+
+        String url = Utilities.getServerURL() +
+                "get_schedule?" +
+                "groupName=" + groupName +
+                "&subGroup=" + subGroup +
+                "&scheduleType=weekly";
+
+        Log.i("URL", url);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                            if (response.has("orar")) {
+
+                                Log.i("schedule", response.getString("orar"));
+
+                                String json = response.getString("orar");
+
+                                prefsEditor.putString("Schedule", json);
+                                prefsEditor.putString("ScheduleSuccess", "yes");
+                                prefsEditor.apply();
+
+                            }
+                            else {
+                                Log.e("error", "hmm");
+                                prefsEditor.putString("ScheduleSuccess", "no");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+
+        });
+
+        mQueue.add(request);
 
     }
 }

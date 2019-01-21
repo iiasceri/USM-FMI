@@ -92,10 +92,16 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         webView.setWebViewClient(new WebViewClient());
         if (Utilities.checkConnection(getApplicationContext())) {
             webView.loadUrl("http://fmi.usm.md");
+//            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+//            prefsEditor.putString("WebViewWasLoaded", "yes");
+//            prefsEditor.apply();
         } else {
 
-            t4.setAlpha(1f);
-            t5.setAlpha(1f);
+//            if (!mPrefs.contains("WebViewWasLoaded")) {
+                t4.setAlpha(1f);
+                t5.setAlpha(1f);
+//            }
+
             Snackbar.make(findViewById(R.id.layoutMain), "Verificati Conexiunea La Internet Pentru a Putea Inoi Datele! (Nu e obligatoriu daca deja le-ati descarcat)", Snackbar.LENGTH_LONG).show();
         }
 
@@ -119,7 +125,11 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         int id = menuItem.getItemId();
 
 
-        if (id == R.id.navigation_schedule) {
+        if (id == R.id.nav_subheader_settings) {
+            Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+        }
+        else if (id == R.id.navigation_schedule) {
 //            Toast.makeText(getApplicationContext(), "Schedule", Toast.LENGTH_SHORT).show();
 //            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.orarhh);
 //            mediaPlayer.start();
@@ -142,7 +152,14 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor prefsEditor = mPrefs.edit();
             prefsEditor.remove("User");
+            prefsEditor.remove("LoginSuccess");
             prefsEditor.remove("ExamSchedule");
+            prefsEditor.remove("ExamScheduleSuccess");
+            prefsEditor.remove("Schedule");
+            prefsEditor.remove("ScheduleSuccess");
+            prefsEditor.remove("ID");
+            prefsEditor.remove("Marks");
+            prefsEditor.remove("MarksSuccess");
             prefsEditor.apply();
 
             Intent intent = new Intent(getApplicationContext(), LoginRegisterActivity.class);

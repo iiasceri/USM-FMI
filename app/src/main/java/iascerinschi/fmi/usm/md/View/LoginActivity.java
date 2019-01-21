@@ -130,6 +130,7 @@ public class LoginActivity extends ToolbarActivity {
                                 public void run() {
                                     SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                                     String loginSuccess = mPrefs.getString("LoginSuccess", "");
+                                    Log.d("log", mPrefs.getString("LoginSuccess", ""));
 
                                     AlertDialog alertDialog;
                                     AlertDialog.Builder builder;

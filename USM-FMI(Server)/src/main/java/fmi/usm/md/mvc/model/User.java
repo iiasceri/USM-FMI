@@ -49,7 +49,7 @@ public class User {
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "group_id")
     private Group group;
 

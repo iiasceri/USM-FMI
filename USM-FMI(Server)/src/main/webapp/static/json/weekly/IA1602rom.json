@@ -3,7 +3,7 @@
     "numeZi": "Luni",
     "lectii": [
       {
-        "ora": "9:45",
+        "ora": "9:45-11:15",
         "disciplina": "LFA",
         "tip": "sem",
         "profesor": "M.Butnaru",
@@ -12,7 +12,7 @@
         "subgrupa": "-"
       },
       {
-        "ora": "11:30",
+        "ora": "11:30-13:00",
         "disciplina": "Limbaje formale si automate",
         "tip": "curs",
         "profesor": "G.Sturza",
@@ -21,7 +21,7 @@
         "subgrupa": "-"
       },
       {
-        "ora": "17:00",
+        "ora": "17:00-18:30",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "O.Cerbu",
@@ -35,7 +35,7 @@
     "numeZi": "Marti",
     "lectii": [
       {
-        "ora": "13:30",
+        "ora": "13:30-15:00",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "V.Carhana",
@@ -44,7 +44,7 @@
         "subgrupa": "II"
       },
       {
-        "ora": "15:15",
+        "ora": "15:15-16:45",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "V.Carhana",
@@ -53,7 +53,7 @@
         "subgrupa": "II"
       },
       {
-        "ora": "15:15",
+        "ora": "15:15-16:45",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "T.Pasa",
@@ -62,7 +62,7 @@
         "subgrupa": "I"
       },
       {
-        "ora": "17:00",
+        "ora": "17:00-18:30",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "V.Carhana",
@@ -71,7 +71,7 @@
         "subgrupa": "II"
       },
       {
-        "ora": "17:00",
+        "ora": "17:00-18:30",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "O.Cerbu",
@@ -85,7 +85,7 @@
     "numeZi": "Miercuri",
     "lectii": [
       {
-        "ora": "9:45",
+        "ora": "9:45-11:15",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "N.Plesca",
@@ -94,7 +94,7 @@
         "subgrupa": "I"
       },
       {
-        "ora": "11:30",
+        "ora": "11:30-13:00",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "N.Plesca",
@@ -103,7 +103,16 @@
         "subgrupa": "I"
       },
       {
-        "ora": "15:15",
+        "ora": "13:30-15:00",
+        "disciplina": "Pachet optional",
+        "tip": "lab",
+        "profesor": "T.Pasa",
+        "cabinet": "237/4",
+        "paritate": "-",
+        "subgrupa": "I"
+      },
+      {
+        "ora": "15:15-16:45",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "O.Cerbu",
@@ -112,7 +121,7 @@
         "subgrupa": "II"
       },
       {
-        "ora": "17:00",
+        "ora": "17:00-18:30",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "O.Cerbu",
@@ -126,7 +135,7 @@
     "numeZi": "Joi",
     "lectii": [
       {
-        "ora": "9:45",
+        "ora": "9:45-11:15",
         "disciplina": "LFA",
         "tip": "sem",
         "profesor": "M.Butnaru",
@@ -135,7 +144,7 @@
         "subgrupa": "-"
       },
       {
-        "ora": "11:30",
+        "ora": "11:30-13:00",
         "disciplina": "Pachet optional",
         "tip": "curs",
         "profesor": "G.Sturza",
@@ -144,7 +153,7 @@
         "subgrupa": "-"
       },
       {
-        "ora": "13:30",
+        "ora": "13:30-15:00",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "N.Plesca",
@@ -153,7 +162,7 @@
         "subgrupa": "II"
       },
       {
-        "ora": "13:30",
+        "ora": "13:30-15:00",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "T.Pasa",
@@ -162,7 +171,7 @@
         "subgrupa": "I"
       },
       {
-        "ora": "15:15",
+        "ora": "15:15-16:45",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "T.Pasa",
@@ -176,7 +185,7 @@
     "numeZi": "Vineri",
     "lectii": [
       {
-        "ora": "11:30",
+        "ora": "11:30-13:00",
         "disciplina": "Etica",
         "tip": "sem",
         "profesor": "Gh.Capatana",
@@ -185,7 +194,7 @@
         "subgrupa": "-"
       },
       {
-        "ora": "13:30",
+        "ora": "13:30-15:00",
         "disciplina": "Aspecte etice in informatica",
         "tip": "curs",
         "profesor": "Gh.Capatana",
@@ -194,7 +203,7 @@
         "subgrupa": "-"
       },
       {
-        "ora": "15:15",
+        "ora": "15:15-16:45",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "N.Plesca",
@@ -203,7 +212,7 @@
         "subgrupa": "II"
       },
       {
-        "ora": "15:15",
+        "ora": "15:15-16:45",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "O.Cerbu",
@@ -212,7 +221,7 @@
         "subgrupa": "I"
       },
       {
-        "ora": "17:00",
+        "ora": "17:00-18:30",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "N.Plesca",
@@ -221,7 +230,7 @@
         "subgrupa": "II"
       },
       {
-        "ora": "17:00",
+        "ora": "17:00-18:30",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "O.Cerbu",
@@ -230,7 +239,7 @@
         "subgrupa": "I"
       },
       {
-        "ora": "17:00",
+        "ora": "17:00-18:30",
         "disciplina": "Pachet optional",
         "tip": "lab",
         "profesor": "N.Plesca",

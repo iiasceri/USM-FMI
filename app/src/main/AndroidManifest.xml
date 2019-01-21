@@ -13,6 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+        <activity android:name=".View.SettingsActivity"></activity>
         <activity android:name=".View.LoginRegisterActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,8 +25,8 @@
         <activity android:name=".View.LoginActivity" />
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.ExamScheduleActivity" />
-        <activity android:name=".View.Schedule.ScheduleActivity"></activity>
-        <activity android:name=".View.Marks.MarksActivity"></activity>
+        <activity android:name=".View.Schedule.ScheduleActivity" />
+        <activity android:name=".View.Marks.MarksActivity" />
     </application>
 
 </manifest>

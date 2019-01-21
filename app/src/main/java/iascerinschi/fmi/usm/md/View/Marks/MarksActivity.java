@@ -1,16 +1,33 @@
 package iascerinschi.fmi.usm.md.View.Marks;
 
 
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.Objects;
+
+import iascerinschi.fmi.usm.md.Utilities.Utilities;
 import iascerinschi.fmi.usm.md.View.MainActivity;
 import iascerinschi.fmi.usm.md.View.Marks.GPAFragment;
 import iascerinschi.fmi.usm.md.R;
@@ -20,6 +37,7 @@ import iascerinschi.fmi.usm.md.View.Marks.S3Fragment;
 import iascerinschi.fmi.usm.md.View.Marks.S4Fragment;
 import iascerinschi.fmi.usm.md.View.Marks.S5Fragment;
 import iascerinschi.fmi.usm.md.View.Marks.S6Fragment;
+import iascerinschi.fmi.usm.md.View.SettingsActivity;
 import iascerinschi.fmi.usm.md.View.ToolbarActivity;
 
 public class MarksActivity extends ToolbarActivity {
@@ -57,6 +75,12 @@ public class MarksActivity extends ToolbarActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marks);
+
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        if (!mPrefs.contains("ID")) {
+            final Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
+            startActivity(intent);
+        }
 
         // Set the Toolbar as the activity's app bar (instead of the default ActionBar)
 
@@ -119,4 +143,6 @@ public class MarksActivity extends ToolbarActivity {
         }
 
     }
+
+
 }

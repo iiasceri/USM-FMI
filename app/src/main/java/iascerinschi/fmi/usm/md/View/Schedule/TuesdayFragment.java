@@ -1,12 +1,21 @@
 package iascerinschi.fmi.usm.md.View.Schedule;
 
+import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.Volley;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -18,6 +27,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import iascerinschi.fmi.usm.md.Model.Pojo;
 import iascerinschi.fmi.usm.md.R;
@@ -55,7 +65,9 @@ public class TuesdayFragment extends android.support.v4.app.Fragment {
         try {
 
 
-            String jsonDataString = readJsonDataFromFile();
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            String jsonDataString = mPrefs.getString("Schedule", "");
+
 
             JSONArray zile = new JSONArray(jsonDataString);
             JSONArray menuItemsJsonArray = new JSONArray();
@@ -90,31 +102,9 @@ public class TuesdayFragment extends android.support.v4.app.Fragment {
                     mRecyclerViewItems.add(pojo);
                 }
             }
-        } catch (IOException | JSONException exception) {
+        } catch (JSONException exception) {
             Log.e(ExamScheduleActivity.class.getName(), "Unable to parse JSON file.", exception);
         }
-    }
-
-    private String readJsonDataFromFile() throws IOException {
-
-        InputStream inputStream = null;
-        StringBuilder builder = new StringBuilder();
-
-        try {
-            String jsonDataString = null;
-            inputStream = getResources().openRawResource(R.raw.menu_item_weekly);
-            BufferedReader bufferedReader = new BufferedReader(
-                    new InputStreamReader(inputStream, "UTF-8"));
-            while ((jsonDataString = bufferedReader.readLine()) != null) {
-                builder.append(jsonDataString);
-            }
-        } finally {
-            if (inputStream != null) {
-                inputStream.close();
-            }
-        }
-
-        return new String(builder);
     }
 
 }
