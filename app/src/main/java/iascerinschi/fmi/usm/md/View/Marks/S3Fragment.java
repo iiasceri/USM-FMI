@@ -39,10 +39,10 @@ public class S3Fragment extends android.support.v4.app.Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new MarksRecyclerViewAdapter(getActivity(), mRecyclerViewItems);
+        RecyclerView.Adapter adapter = new MarksRecyclerViewAdapter(getContext(), mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
 
         mRecyclerViewItems.clear();
@@ -56,7 +56,7 @@ public class S3Fragment extends android.support.v4.app.Fragment {
         try {
 
 
-            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             String jsonDataString = mPrefs.getString("Marks", "");
 
             JSONArray semestre = new JSONArray(jsonDataString);

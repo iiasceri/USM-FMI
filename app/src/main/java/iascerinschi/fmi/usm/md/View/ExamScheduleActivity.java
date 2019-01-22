@@ -82,6 +82,21 @@ public class ExamScheduleActivity extends ToolbarActivity {
         mRecyclerView.setAdapter(adapter);
 
         addMenuItemsFromJson();
+
+        String jsonDataString = mPrefs.getString("ExamSchedule", "");
+
+        if (jsonDataString == null) {
+            Pojo pojo = new Pojo("Grupa dvs inca nu are examene", "sau ele nu au fost adaugate", "",
+                    "", "");
+
+            mRecyclerViewItems.add(pojo);
+        }
+        else if (jsonDataString.equals("")) {
+            Pojo pojo = new Pojo("Grupa dvs inca nu are examene", "sau ele nu au fost adaugate", "",
+                    "", "");
+
+            mRecyclerViewItems.add(pojo);
+        }
     }
 
     @Override

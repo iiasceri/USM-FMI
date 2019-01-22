@@ -83,6 +83,7 @@ public class UserRestController {
         }
 
         if (familyName != null) {
+            familyName = familyName.replaceAll("%20", " ");
             user.setFamilyname(familyName);
         }
         else {

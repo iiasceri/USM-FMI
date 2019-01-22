@@ -134,7 +134,7 @@ public class RegisterActivity extends AppCompatActivity {
             public void run() {
 
                 subGroup = "I";
-                if (groupNames.get(0) != null) {
+                if (groupNames != null) {
                     groupName = groupNames.get(0);
                 }
                 else {
@@ -263,6 +263,8 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void jsonRegisterUser(String username, String mail, String familyName,
                                   String password, String gender, String groupName, String subGroup) {
+
+        familyName = familyName.replaceAll(" ", "%20");
 
         String url = Utilities.getServerURL() +
                 "register?" +

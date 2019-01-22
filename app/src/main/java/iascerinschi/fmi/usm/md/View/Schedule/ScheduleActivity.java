@@ -24,6 +24,7 @@ import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.Calendar;
 import java.util.Objects;
 
 import iascerinschi.fmi.usm.md.R;
@@ -108,6 +109,13 @@ public class ScheduleActivity extends ToolbarActivity {
         // and when the ViewPager switches to a new page, the corresponding tab is selected)
         TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
         tabLayout.setupWithViewPager(mViewPager);
+
+        Calendar calendar = Calendar.getInstance();
+        int day = calendar.get(Calendar.DAY_OF_WEEK);
+
+        if (day == 1)
+            day = 7;
+        tabLayout.getTabAt(day-2).select();
     }
 
     @Override

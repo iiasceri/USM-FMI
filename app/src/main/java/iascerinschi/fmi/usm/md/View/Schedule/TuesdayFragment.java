@@ -48,10 +48,10 @@ public class TuesdayFragment extends android.support.v4.app.Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new RecyclerViewAdapter(getActivity(), mRecyclerViewItems);
+        RecyclerView.Adapter adapter = new RecyclerViewAdapter(getContext(), mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
 
         mRecyclerViewItems.clear();
@@ -65,7 +65,7 @@ public class TuesdayFragment extends android.support.v4.app.Fragment {
         try {
 
 
-            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             String jsonDataString = mPrefs.getString("Schedule", "");
 
 

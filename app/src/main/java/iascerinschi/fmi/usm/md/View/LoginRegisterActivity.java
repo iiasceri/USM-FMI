@@ -12,6 +12,7 @@ import android.widget.TextView;
 
 import com.marozzi.roundbutton.RoundButton;
 
+import iascerinschi.fmi.usm.md.MyApplication;
 import iascerinschi.fmi.usm.md.R;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
@@ -57,6 +58,11 @@ public class LoginRegisterActivity extends ToolbarActivity {
         RoundButton roundButton2 = findViewById(R.id.registerButton);
         roundButton2.setAlpha(0);
         roundButton2.animate().alpha(1).setDuration(2000);
+
+        if (!MyApplication.isIntroShown(this)) {
+            startActivity(new Intent(this, IntroActivity.class));
+            overridePendingTransition(R.anim.push_left_in,R.anim.push_left_out);
+        }
 
         if (Utilities.checkConnection(getApplicationContext())) {
         } else {

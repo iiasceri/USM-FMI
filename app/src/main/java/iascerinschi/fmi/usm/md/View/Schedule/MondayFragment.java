@@ -48,8 +48,8 @@ public class MondayFragment extends android.support.v4.app.Fragment {
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_monday, container, false);
 
-        mQueue = Volley.newRequestQueue(Objects.requireNonNull(getActivity()));
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        mQueue = Volley.newRequestQueue(Objects.requireNonNull(getContext()));
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
         JSONObject jo = null;
         try {
             jo = new JSONObject(mPrefs.getString("User", ""));
@@ -67,16 +67,15 @@ public class MondayFragment extends android.support.v4.app.Fragment {
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
 
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getActivity());
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new RecyclerViewAdapter(getActivity(), mRecyclerViewItems);
+        RecyclerView.Adapter adapter = new RecyclerViewAdapter(getContext(), mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
 
         mRecyclerViewItems.clear();
 
         addMenuItemsFromJson();
-
         return rootView;
     }
 
@@ -99,7 +98,7 @@ public class MondayFragment extends android.support.v4.app.Fragment {
 
                         try {
 
-                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
                             SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
                             if (response.has("orar")) {
@@ -137,7 +136,7 @@ public class MondayFragment extends android.support.v4.app.Fragment {
     private void addMenuItemsFromJson() {
         try {
 
-            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getActivity());
+            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             String jsonDataString = mPrefs.getString("Schedule", "");
 
             JSONArray zile = new JSONArray(jsonDataString);
