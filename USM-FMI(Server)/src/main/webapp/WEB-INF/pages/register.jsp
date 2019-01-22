@@ -43,7 +43,12 @@
                 <input type="radio" name="subGroup" value="II" id="subGroup"> II (d)
                 <button type="submit" class="btn">Inregistreaza-ma</button>
             </div>
+
+
         </form:form>
+        <div align="right">
+             <a href="<c:url value="/logout" />">Iesire</a>
+        </div>
     </div>
 </div>
 </body>

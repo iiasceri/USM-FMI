@@ -9,7 +9,7 @@
 <body>
 <div align="center">
     <div style="width: 300px; height: 500px;">
-        <form:form method="POST" action="/login" modelAttribute="user" cssClass="frm">
+        <form:form method="POST" action="${pageContext.servletContext.contextPath}/login" modelAttribute="user" cssClass="frm">
             <div class="imgcontainer">
                 <img src="../resources/pictures/usm_bottle_green_400x400.png" alt="Avatar" class="avatar">
             </div>
@@ -26,7 +26,7 @@
                 <button type="submit" class="btn">Autentificare</button>
 
                 <div align="center">
-                    <a href="/register">Creaza cont!</a>
+                    <a href="${pageContext.servletContext.contextPath}/register">Creaza cont!</a>
                 </div>
             </div>
         </form:form>

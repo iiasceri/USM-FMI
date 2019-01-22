@@ -16,7 +16,7 @@
                 <security:authentication property="principal.username" />
             </security:authorize>!
         </h1>
-        <form:form method="POST" action="/add-group" modelAttribute="group" cssClass="frm">
+        <form:form method="POST" action="${pageContext.servletContext.contextPath}/add-group" modelAttribute="group" cssClass="frm">
             <div class="container" align="left">
                 <label>Numele grupei</label>
                 <input type="text" name="name" required="required" class="inp"/>

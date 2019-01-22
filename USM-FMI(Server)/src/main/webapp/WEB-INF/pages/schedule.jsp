@@ -20,7 +20,7 @@
     </style>
 </head>
 <body>
-<form:form method="POST" action="/save-json/${groupName}/${scheduleType}" modelAttribute="json">
+<form:form method="POST" action="${pageContext.servletContext.contextPath}/save-json/${groupName}/${scheduleType}" modelAttribute="json">
 
 <div class="container" align="center">
     <h1>Grupa </h1><h1 class="nameGroup">${groupName}</h1>
