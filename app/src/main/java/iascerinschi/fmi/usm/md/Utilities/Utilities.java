@@ -11,6 +11,8 @@ public class Utilities {
 
 //    static String serverURL = "http://192.168.0.104:8080/api/";
     static String serverURL = "http://172.20.10.3:8080/api/";
+//    static String serverURL = "http://159.65.122.118:8080/USMFMI/api/";
+
 
     public static String getServerURL() {
         return serverURL;

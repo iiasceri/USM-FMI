@@ -4,6 +4,9 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriver;
+import org.openqa.selenium.phantomjs.PhantomJSDriverService;
+import org.openqa.selenium.remote.DesiredCapabilities;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -28,28 +31,44 @@ public class MarksRestController {
 
 
         String osProp = System.getProperty("os.name");
-        StringBuilder sb = new StringBuilder();
-        int i = 0;
-        while (osProp.charAt(i) != ' ') {
-            sb.append(osProp.charAt(i));
-            i++;
-        }
 
         String os = "";
 
-        if (sb.toString().equals("Windows"))
-            os = ".exe";
-        else
-            os = sb.toString();
+        StringBuilder sb = new StringBuilder();
+
+        if (osProp.equals("Linux")) {
+            os = osProp;
+        }
+        else {
+            int i = 0;
+
+            while (osProp.charAt(i) != ' ') {
+                sb.append(osProp.charAt(i));
+                i++;
+            }
+
+            if (sb.toString().equals("Windows"))
+                os = ".exe";
+            else
+                os = sb.toString();
+        }
 
         String driversPath = context.getRealPath("") + "static/drivers/";
+//
+//        System.setProperty("webdriver.gecko.driver", driversPath + "geckodriver" + os);
+//
+//
+//        //log4j
+//        System.out.println(driversPath + "geckodriver" + os);
 
-        System.setProperty("webdriver.gecko.driver", driversPath + "geckodriver" + os);
+        WebDriver driver;
 
-        //log4j
-        //System.out.println(driversPath + "geckodriver" + os);
+        DesiredCapabilities caps = new DesiredCapabilities();
+        caps.setJavascriptEnabled(true); // not really needed: JS enabled by default
+        String driverName = "phantomjs" + os;
+        caps.setCapability(PhantomJSDriverService.PHANTOMJS_EXECUTABLE_PATH_PROPERTY, driversPath + driverName);
 
-        WebDriver driver = new FirefoxDriver();
+        driver = new PhantomJSDriver(caps);
         driver.get("http://crd.usm.md/student");
 
         WebElement txtCodperson = driver.findElement(By.id("txtCodperson"));
