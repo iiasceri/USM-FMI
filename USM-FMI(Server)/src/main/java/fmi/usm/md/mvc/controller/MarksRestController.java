@@ -3,7 +3,6 @@ package fmi.usm.md.mvc.controller;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriver;
 import org.openqa.selenium.phantomjs.PhantomJSDriverService;
 import org.openqa.selenium.remote.DesiredCapabilities;
@@ -17,7 +16,6 @@ import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
 
 @RestController
@@ -29,19 +27,16 @@ public class MarksRestController {
     @RequestMapping(value = "/api/get_marks", method = POST)
     public LinkedHashMap<String, Object> getMyMarks(@RequestParam(name = "id") String id) {
 
-
         String osProp = System.getProperty("os.name");
-
-        String os = "";
-
+        String os;
         StringBuilder sb = new StringBuilder();
 
-        if (osProp.equals("Linux")) {
-            os = osProp;
+        if (osProp.contains("Linux")) {
+            os = "Linux";
         }
         else {
-            int i = 0;
 
+            int i = 0;
             while (osProp.charAt(i) != ' ') {
                 sb.append(osProp.charAt(i));
                 i++;
@@ -54,12 +49,6 @@ public class MarksRestController {
         }
 
         String driversPath = context.getRealPath("") + "static/drivers/";
-//
-//        System.setProperty("webdriver.gecko.driver", driversPath + "geckodriver" + os);
-//
-//
-//        //log4j
-//        System.out.println(driversPath + "geckodriver" + os);
 
         WebDriver driver;
 
@@ -124,7 +113,7 @@ public class MarksRestController {
             nr_disciplina++;
         }
 
-        //Pentru semestru curent parsuim obiectele ramase < 7, de altfel ave inca sus sa se faca
+        //Pentru semestru curent primim obiectele ramase < 7, daca sunt
         if (!discipline7or8.isEmpty()) {
             LinkedHashMap<String, Object> semestru = new LinkedHashMap<>();
             semestru.put("idSemestru", nr_semestru);

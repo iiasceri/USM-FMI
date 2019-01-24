@@ -10,9 +10,9 @@
 <body>
 
 <form:form action="/show-users" method="POST">
-<a href="/show-users/FEMALE">Show females</a>
-<a href="/show-users/MALE">Show males</a>
-<br>
+    <a href="/show-users/FEMALE">Show females</a>
+    <a href="/show-users/MALE">Show males</a>
+    <br>
 </form:form>
 
 <form:form action="/show-users/by-gender" method="GET" style="border: none;">

@@ -7,10 +7,12 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="USM-FMI(Server)" />
+        <module name="USMFMI" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="USM-FMI(Server)" target="1.8" />
+      <module name="USMFMI" target="1.8" />
     </bytecodeTargetLevel>
   </component>
 </project>

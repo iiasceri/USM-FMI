@@ -6,13 +6,16 @@
 <html>
 <head>
     <title>Login page</title>
-    <link rel="stylesheet" href="../resources/style/style.css">
+    <%--<link rel="stylesheet" href="http://localhost:8080/USMFMI/resources/style/style.css">--%>
+    <link href="<c:url value="/resources/style/style.css" />" rel="stylesheet">
+    <%--<link rel="stylesheet" href="/resources/style/style.css">--%>
     <meta charset="UTF-8">
     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
+
     <style>
         body { background-color: #e9e9e9; }
         .container { margin: 1px auto; }
@@ -23,7 +26,7 @@
     <div style="width: 300px; height: 500px;">
         <form:form method="POST" action="${pageContext.servletContext.contextPath}/login" modelAttribute="user" cssClass="frm">
             <div class="imgcontainer">
-                <img src="../resources/pictures/usm_bottle_green_400x400.png" alt="Avatar" class="avatar">
+                <img src="<c:url value="/resources/pictures/usm_bottle_green_400x400.png" />" alt="Avatar" class="avatar">
             </div>
             <h3 align="center" style="color:#009b76;">Autentificati-va</h3>
 
@@ -48,14 +51,6 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.ui.position.js"></script>
-
-        <script src="../resources/js/jsoneditor.js"></script>
-
-        <script>
-            $(document).ready(function () {
-                jsonEditorInit('table_container', 'Textarea1', 'result_container', 'json_to_table_btn', 'table_to_json_btn');
-            });
-        </script>
     </div>
 </div>
 </body>
