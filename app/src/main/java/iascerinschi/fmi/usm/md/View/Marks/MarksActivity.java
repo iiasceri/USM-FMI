@@ -1,6 +1,7 @@
 package iascerinschi.fmi.usm.md.View.Marks;
 
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -28,23 +30,14 @@ import org.json.JSONObject;
 import java.util.Objects;
 
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
-import iascerinschi.fmi.usm.md.View.MainActivity;
-import iascerinschi.fmi.usm.md.View.Marks.GPAFragment;
 import iascerinschi.fmi.usm.md.R;
-import iascerinschi.fmi.usm.md.View.Marks.S1Fragment;
-import iascerinschi.fmi.usm.md.View.Marks.S2Fragment;
-import iascerinschi.fmi.usm.md.View.Marks.S3Fragment;
-import iascerinschi.fmi.usm.md.View.Marks.S4Fragment;
-import iascerinschi.fmi.usm.md.View.Marks.S5Fragment;
-import iascerinschi.fmi.usm.md.View.Marks.S6Fragment;
 import iascerinschi.fmi.usm.md.View.SettingsActivity;
 import iascerinschi.fmi.usm.md.View.ToolbarActivity;
 
 public class MarksActivity extends ToolbarActivity {
 
     Toolbar toolbar;
-
-    private final String LOG_TAG = MainActivity.class.getSimpleName();
+    private RequestQueue mQueue;
 
     // Titles of the individual pages (displayed in tabs)
     private final String[] PAGE_TITLES = new String[] {
@@ -68,9 +61,7 @@ public class MarksActivity extends ToolbarActivity {
             new GPAFragment()
     };
 
-    // The ViewPager is responsible for sliding pages (fragments) in and out upon user input
-    private ViewPager mViewPager;
-
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -81,33 +72,39 @@ public class MarksActivity extends ToolbarActivity {
             final Intent intent = new Intent(getApplicationContext(), SettingsActivity.class);
             startActivity(intent);
         }
+        else {
+            // Set the Toolbar as the activity's app bar (instead of the default ActionBar)
+            //[1]vert + Toolbar
+            toolbar = findViewById(R.id.toolbar);
+            setSupportActionBar(toolbar);
+            Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
-        // Set the Toolbar as the activity's app bar (instead of the default ActionBar)
+            // add back arrow to toolbar
+            if (getSupportActionBar() != null){
+                getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+                getSupportActionBar().setDisplayShowHomeEnabled(true);
+            }
 
-        //[1]vert + Toolbar
-        toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+            if (!mPrefs.contains("Marks")) {
+                mQueue = Volley.newRequestQueue(this);
+                mQueue.start();
+                //start anim
+                jsonGetMarks(mPrefs.getString("ID", ""));
+            }
+            else {
+                // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
+                // (fragments) to the ViewPager, which the ViewPager needs to display.
+                // The ViewPager is responsible for sliding pages (fragments) in and out upon user input
+                ViewPager mViewPager = findViewById(R.id.viewpager);
+                mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
 
-        // add back arrow to toolbar
-        if (getSupportActionBar() != null){
-            getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-            getSupportActionBar().setDisplayShowHomeEnabled(true);
+                // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
+                // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
+                // and when the ViewPager switches to a new page, the corresponding tab is selected)
+                TabLayout tabLayout = findViewById(R.id.tab_layout);
+                tabLayout.setupWithViewPager(mViewPager);
+            }
         }
-
-        TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setText("Semestre si Medii");
-
-        // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
-        // (fragments) to the ViewPager, which the ViewPager needs to display.
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-
-        // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
-        // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
-        // and when the ViewPager switches to a new page, the corresponding tab is selected)
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(mViewPager);
     }
 
     @Override
@@ -123,7 +120,7 @@ public class MarksActivity extends ToolbarActivity {
     /* PagerAdapter for supplying the ViewPager with the pages (fragments) to display. */
     public class MyPagerAdapter extends FragmentPagerAdapter {
 
-        public MyPagerAdapter(FragmentManager fragmentManager) {
+        MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
@@ -144,5 +141,72 @@ public class MarksActivity extends ToolbarActivity {
 
     }
 
+    private void jsonGetMarks(String idnp) {
+
+        String url = Utilities.getServerURL() +
+                "get_marks?" +
+                "id=" + idnp;
+
+        Log.i("URL", url);
+
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null,
+                new Response.Listener<JSONObject>() {
+                    @SuppressLint("SetTextI18n")
+                    @Override
+                    public void onResponse(JSONObject response) {
+
+                        try {
+
+                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                            SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                            if (response.has("semestre")) {
+
+                                Log.i("note", response.getString("semestre"));
+
+                                String json = response.getString("semestre");
+
+                                prefsEditor.putString("Marks", json);
+                                prefsEditor.putString("MarksSuccess", "yes");
+                                prefsEditor.apply();
+
+                                TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
+                                toolbarTitle.setText("Semestre si Medii");
+
+                                // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
+                                // (fragments) to the ViewPager, which the ViewPager needs to display.
+                                // The ViewPager is responsible for sliding pages (fragments) in and out upon user input
+                                ViewPager mViewPager = findViewById(R.id.viewpager);
+                                mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
+                                // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
+                                // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
+                                // and when the ViewPager switches to a new page, the corresponding tab is selected)
+                                TabLayout tabLayout = findViewById(R.id.tab_layout);
+                                tabLayout.setupWithViewPager(mViewPager);
+                            }
+                            else {
+                                Log.e("error", "hmm");
+                                prefsEditor.putString("MarksSuccess", "no");
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                error.printStackTrace();
+            }
+
+        });
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 100,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mQueue.add(request);
+    }
 
 }

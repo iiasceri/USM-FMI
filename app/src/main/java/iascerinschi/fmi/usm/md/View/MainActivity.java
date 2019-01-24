@@ -152,14 +152,10 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor prefsEditor = mPrefs.edit();
             prefsEditor.remove("User");
-            prefsEditor.remove("LoginSuccess");
             prefsEditor.remove("ExamSchedule");
-            prefsEditor.remove("ExamScheduleSuccess");
             prefsEditor.remove("Schedule");
-            prefsEditor.remove("ScheduleSuccess");
             prefsEditor.remove("ID");
             prefsEditor.remove("Marks");
-            prefsEditor.remove("MarksSuccess");
             prefsEditor.apply();
 
             Intent intent = new Intent(getApplicationContext(), LoginRegisterActivity.class);

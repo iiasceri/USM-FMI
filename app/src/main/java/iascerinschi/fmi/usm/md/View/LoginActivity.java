@@ -94,6 +94,7 @@ public class LoginActivity extends ToolbarActivity {
 
 
         mQueue = Volley.newRequestQueue(this);
+        mQueue.start();
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,43 +122,7 @@ public class LoginActivity extends ToolbarActivity {
                             errorToasts(view, "Introduceti Parola");
                             animatePasswordField(view);
                         } else {
-
                             jsonLoginUser(username, password);
-
-                            final Handler handler = new Handler();
-                            handler.postDelayed(new Runnable() {
-                                @Override
-                                public void run() {
-                                    SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                                    String loginSuccess = mPrefs.getString("LoginSuccess", "");
-                                    Log.d("log", mPrefs.getString("LoginSuccess", ""));
-
-                                    AlertDialog alertDialog;
-                                    AlertDialog.Builder builder;
-                                    builder = new AlertDialog.Builder(LoginActivity.this);
-                                    builder.setMessage("Utilizator sau parola gresita");
-                                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                        @Override
-                                        public void onClick(DialogInterface dialog, int which) {
-                                            recreate();
-                                        }
-                                    });
-                                    alertDialog = builder.create();
-
-                                    if (loginSuccess != null) {
-                                        if (loginSuccess.equals("yes")) {
-                                            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                            startActivity(intent);
-                                        }
-                                        else {
-                                            alertDialog.show();
-                                        }
-                                    } else {
-                                        alertDialog.show();
-                                    }
-                                }
-                            }, 300);
-
                         }
                     } else {
                         //Animatia: bring password field and get rid of mail field
@@ -203,10 +168,24 @@ public class LoginActivity extends ToolbarActivity {
                                 prefsEditor.putString("LoginSuccess", "yes");
                                 prefsEditor.apply();
 
+                                Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
+
                             }
                             else {
-                                Log.e("error", "hmm");
-                                prefsEditor.putString("LoginSuccess", "no");
+                                AlertDialog alertDialog;
+                                AlertDialog.Builder builder;
+                                builder = new AlertDialog.Builder(LoginActivity.this);
+                                builder.setMessage("Utilizator sau parola gresita");
+                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        recreate();
+                                    }
+                                });
+
+                                alertDialog = builder.create();
+                                alertDialog.show();
                             }
 
                         } catch (JSONException e) {

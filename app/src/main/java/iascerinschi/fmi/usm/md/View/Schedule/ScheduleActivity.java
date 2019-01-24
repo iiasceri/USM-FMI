@@ -1,6 +1,5 @@
 package iascerinschi.fmi.usm.md.View.Schedule;
 
-
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -13,22 +12,18 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import android.widget.TextView;
-
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
-
 import org.json.JSONException;
 import org.json.JSONObject;
-
 import java.util.Calendar;
 import java.util.Objects;
-
 import iascerinschi.fmi.usm.md.R;
-import iascerinschi.fmi.usm.md.View.MainActivity;
 import iascerinschi.fmi.usm.md.View.ToolbarActivity;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
@@ -36,8 +31,9 @@ public class ScheduleActivity extends ToolbarActivity {
 
     Toolbar toolbar;
     private RequestQueue mQueue;
-
-    private final String LOG_TAG = MainActivity.class.getSimpleName();
+    Calendar calendar = Calendar.getInstance();
+    int day = calendar.get(Calendar.DAY_OF_WEEK);
+    int hour = calendar.get(Calendar.HOUR);
 
     // Titles of the individual pages (displayed in tabs)
     private final String[] PAGE_TITLES = new String[] {
@@ -67,28 +63,55 @@ public class ScheduleActivity extends ToolbarActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_schedule);
 
+        /*
+            Pe parcursul saptamanii arata orarul pentru ziua curenta
+            Daca e dupa ora 18, orarul va fi aratat pentru ziua urmatoare
+
+            Daca ne aflam Intre {Vineri:18} si {Duminica:21.59}
+            va fi aratat orarul pe toata saptamana la general
+        */
+        if (!(day == 1 || day == 7)) {
+            if (hour >= 18)
+                day++;
+        }
 
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        mQueue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
 
         if (!mPrefs.contains("Schedule")) {
-            JSONObject jo = null;
+            JSONObject jo;
             try {
                 jo = new JSONObject(mPrefs.getString("User", ""));
-                Log.i("user", mPrefs.getString("User", ""));
+                mQueue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
+                mQueue.start();
                 jsonGetSchedule(jo.getString("groupName"), jo.getString("subGroup"));
-                Log.i("groupName & subGroup", jo.getString("groupName") + jo.getString("subGroup"));
 
             } catch (JSONException e) {
                 e.printStackTrace();
             }
+        }
+        else {
+            // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
+            // (fragments) to the ViewPager, which the ViewPager needs to display.
+            mViewPager = findViewById(R.id.viewpager);
+            mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
+            // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
+            // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
+            // and when the ViewPager switches to a new page, the corresponding tab is selected)
+            TabLayout tabLayout = findViewById(R.id.tab_layout);
+            tabLayout.setupWithViewPager(mViewPager);
+
+
+            if (day == 1)
+                day = 7;
+            Objects.requireNonNull(tabLayout.getTabAt(day - 2)).select();
         }
         // Set the Toolbar as the activity's app bar (instead of the default ActionBar)
 
         //[1]vert + Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         // add back arrow to toolbar
         if (getSupportActionBar() != null){
@@ -98,24 +121,6 @@ public class ScheduleActivity extends ToolbarActivity {
 
         TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
         toolbarTitle.setText(Utilities.getParitateTitlu());
-
-        // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
-        // (fragments) to the ViewPager, which the ViewPager needs to display.
-        mViewPager = (ViewPager) findViewById(R.id.viewpager);
-        mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-
-        // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
-        // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
-        // and when the ViewPager switches to a new page, the corresponding tab is selected)
-        TabLayout tabLayout = (TabLayout) findViewById(R.id.tab_layout);
-        tabLayout.setupWithViewPager(mViewPager);
-
-        Calendar calendar = Calendar.getInstance();
-        int day = calendar.get(Calendar.DAY_OF_WEEK);
-
-        if (day == 1)
-            day = 7;
-        tabLayout.getTabAt(day-2).select();
     }
 
     @Override
@@ -131,7 +136,7 @@ public class ScheduleActivity extends ToolbarActivity {
     /* PagerAdapter for supplying the ViewPager with the pages (fragments) to display. */
     public class MyPagerAdapter extends FragmentPagerAdapter {
 
-        public MyPagerAdapter(FragmentManager fragmentManager) {
+        MyPagerAdapter(FragmentManager fragmentManager) {
             super(fragmentManager);
         }
 
@@ -183,6 +188,19 @@ public class ScheduleActivity extends ToolbarActivity {
                                 prefsEditor.putString("ScheduleSuccess", "yes");
                                 prefsEditor.apply();
 
+                                // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
+                                // (fragments) to the ViewPager, which the ViewPager needs to display.
+                                mViewPager = findViewById(R.id.viewpager);
+                                mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+
+                                // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
+                                // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
+                                // and when the ViewPager switches to a new page, the corresponding tab is selected)
+                                TabLayout tabLayout = findViewById(R.id.tab_layout);
+                                tabLayout.setupWithViewPager(mViewPager);
+                                if (day == 1)
+                                    day = 7;
+                                Objects.requireNonNull(tabLayout.getTabAt(day - 2)).select();
                             }
                             else {
                                 Log.e("error", "hmm");
@@ -201,6 +219,10 @@ public class ScheduleActivity extends ToolbarActivity {
 
         });
 
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 100,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(request);
 
     }

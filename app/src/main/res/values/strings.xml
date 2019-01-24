@@ -26,4 +26,6 @@
     <string name="mail">Mail</string>
     <string name="semestrial_marks">Note Semestriale</string>
     <string name="logout">Delogare</string>
+    <string name="id_editText">IDNP</string>
+    <string name="saveRoundButton">Salveaza</string>
 </resources>

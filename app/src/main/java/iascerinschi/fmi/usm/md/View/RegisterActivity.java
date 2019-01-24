@@ -15,14 +15,17 @@ import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Toast;
 
+import com.android.volley.Cache;
+import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.BasicNetwork;
+import com.android.volley.toolbox.DiskBasedCache;
+import com.android.volley.toolbox.HurlStack;
 import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.github.florent37.materialtextfield.MaterialTextField;
-import com.google.gson.Gson;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.marozzi.roundbutton.RoundButton;
 
@@ -30,11 +33,8 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Optional;
-import java.util.logging.Logger;
 
 import iascerinschi.fmi.usm.md.R;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
@@ -42,7 +42,6 @@ import iascerinschi.fmi.usm.md.Utilities.Utilities;
 public class RegisterActivity extends AppCompatActivity {
 
     RadioGroup rg;
-    private RequestQueue mQueue;
     List<String> groupNames = new LinkedList<>();
     MaterialTextField usernameMaterialTextField;
     MaterialTextField mailMaterialTextField;
@@ -53,11 +52,13 @@ public class RegisterActivity extends AppCompatActivity {
     String groupName = "";
     String subGroup = "";
 
+    RequestQueue mRequestQueue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
+
 
         usernameMaterialTextField = findViewById(R.id.usernameMaterialTextFieldRegister);
         mailMaterialTextField = findViewById(R.id.mailMaterialTextFieldRegister);
@@ -108,22 +109,33 @@ public class RegisterActivity extends AppCompatActivity {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radioButtonMale:
-                        Toast.makeText(getApplicationContext(), "Ai ales barbat", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Ai ales barbat", Toast.LENGTH_SHORT).show();
                         gender = "male";
                         break;
                     case R.id.radioButtonFemale:
-                        Toast.makeText(getApplicationContext(), "Ai ales femeie", Toast.LENGTH_SHORT).show();
+//                        Toast.makeText(getApplicationContext(), "Ai ales femeie", Toast.LENGTH_SHORT).show();
                         gender = "female";
                         break;
                     default:
-                        Toast.makeText(getApplicationContext(), "Alegeti una din optiuni", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getApplicationContext(), "Alegeti genul", Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
 
-        mQueue = Volley.newRequestQueue(this);
+        // Instantiate the cache
+        Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+
+        // Set up the network to use HttpURLConnection as the HTTP client.
+        Network network = new BasicNetwork(new HurlStack());
+
+        // Instantiate the RequestQueue with the cache and network.
+        mRequestQueue = new RequestQueue(cache, network);
+
+
         jsonParseGroupNames();
+        // Start the queue
+        mRequestQueue.start();
 
         /*
              Wait until groupNames will be parsed by jsonParseGroupNames()
@@ -158,19 +170,32 @@ public class RegisterActivity extends AppCompatActivity {
 
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
 
-                if (item.equals("I (Securitate)"))
-                    subGroup = "I";
-                else if (item.equals("II (Design)")){
-                    subGroup = "II";
-                }
-                else {
-                    System.out.println("error wrong subGroup");
+                switch (item) {
+                    case "I (Securitate)":
+                        subGroup = "I";
+                        break;
+                    case "II (Design)":
+                        subGroup = "II";
+                        break;
+                    default:
+                        System.out.println("error wrong subGroup");
+                        break;
                 }
             }
         });
 
         RoundButton registerButton = findViewById(R.id.registerButton);
-        mQueue = Volley.newRequestQueue(this);
+        // Instantiate the cache
+        cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+
+        // Set up the network to use HttpURLConnection as the HTTP client.
+        network = new BasicNetwork(new HurlStack());
+        // Instantiate the RequestQueue with the cache and network.
+        mRequestQueue = new RequestQueue(cache, network);
+        // Start the queue
+        mRequestQueue.start();
+        jsonParseGroupNames();
+
 
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -181,54 +206,8 @@ public class RegisterActivity extends AppCompatActivity {
                         familynameMaterialTextField.getEditText().getText().toString(),
                         passwordMaterialTextField.getEditText().getText().toString(),
                         gender, groupName, subGroup);
-
-
-
-                final Handler handler = new Handler();
-                handler.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                        String registerSuccess = mPrefs.getString("RegisterSuccess", "");
-
-                        AlertDialog alertDialog;
-                        AlertDialog.Builder builder;
-                        builder = new AlertDialog.Builder(RegisterActivity.this);
-                        builder.setMessage("Inregistrarea nu a mers cu success");
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                                recreate();
-                            }
-                        });
-                        alertDialog = builder.create();
-
-                        if (registerSuccess != null) {
-                            if (registerSuccess.equals("yes")) {
-                                final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                                startActivity(intent);
-                            }
-                            else {
-                                alertDialog.show();
-                            }
-                        } else {
-                            alertDialog.show();
-                        }
-                    }
-                }, 300);
-
-
             }
         });
-
-        /*
-
-
-
-        Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-        startActivity(intent);
-         */
-
     }
 
     private void jsonParseGroupNames() {
@@ -258,7 +237,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        mQueue.add(request);
+        mRequestQueue.add(request);
     }
 
     private void jsonRegisterUser(String username, String mail, String familyName,
@@ -299,10 +278,24 @@ public class RegisterActivity extends AppCompatActivity {
                                 prefsEditor.putString("RegisterSuccess", "yes");
                                 prefsEditor.apply();
 
+                                final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                                startActivity(intent);
                             }
                             else {
-                                Log.e("error", "hmm");
-                                prefsEditor.putString("RegisterSuccess", "no");
+
+                                AlertDialog alertDialog;
+                                AlertDialog.Builder builder;
+                                builder = new AlertDialog.Builder(RegisterActivity.this);
+                                builder.setMessage("Inregistrarea nu a mers cu success");
+                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        recreate();
+                                    }
+                                });
+                                alertDialog = builder.create();
+                                alertDialog.show();
+
                             }
 
                         } catch (JSONException e) {
@@ -316,7 +309,7 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        mQueue.add(request);
+        mRequestQueue.add(request);
 
     }
 }

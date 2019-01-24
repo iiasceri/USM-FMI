@@ -1,44 +1,28 @@
 package iascerinschi.fmi.usm.md.View;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
-import android.widget.ScrollView;
 import android.widget.TextView;
 
-import com.android.volley.DefaultRetryPolicy;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.Volley;
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.marozzi.roundbutton.RoundButton;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.Objects;
-import java.util.Set;
 
 import iascerinschi.fmi.usm.md.R;
-import iascerinschi.fmi.usm.md.Utilities.Utilities;
+import iascerinschi.fmi.usm.md.View.Marks.MarksActivity;
 
 public class SettingsActivity extends ToolbarActivity {
 
-    private RequestQueue mQueue;
-
-
+    @SuppressLint({"ClickableViewAccessibility", "SetTextI18n"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -48,7 +32,7 @@ public class SettingsActivity extends ToolbarActivity {
         //[1]vert + Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         // add back arrow to toolbar
         if (getSupportActionBar() != null){
@@ -60,43 +44,39 @@ public class SettingsActivity extends ToolbarActivity {
         toolbarTitle.setText("Setari");
 
         MaterialTextField idnp = findViewById(R.id.IDMaterialTextFieldSettings);
-        idnp.expand();
 
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        if (mPrefs.contains("ID")) {
-            String idnpString = mPrefs.getString("ID", "");
-
-            String fragmentString = "";
-            StringBuilder sb = new StringBuilder();
-            sb.append(idnpString.charAt(0));
-            sb.append(idnpString.charAt(1));
-            sb.append(idnpString.charAt(2));
-            sb.append("*");
-            sb.append("*");
-            sb.append("*");
-            sb.append(idnpString.charAt(idnpString.length()-3));
-            sb.append(idnpString.charAt(idnpString.length()-2));
-            sb.append(idnpString.charAt(idnpString.length()-1));
-            fragmentString = sb.toString();
-
-            idnp.getEditText().setText(fragmentString);
-        }
-        else {
+        if (!mPrefs.contains("ID")) {
             AlertDialog alertDialog;
             AlertDialog.Builder builder;
             builder = new AlertDialog.Builder(SettingsActivity.this);
-            builder.setMessage("Pentru a continua introduceti IDNP dvs");
+            builder.setMessage("Introduceti IDNP dvs pentru a putea vizualiza notele");
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
-//                    recreate();
+                    MaterialTextField idnp = findViewById(R.id.IDMaterialTextFieldSettings);
+                    idnp.expand();
+                    idnp.setHasFocus(true);
                 }
             });
             alertDialog = builder.create();
             alertDialog.show();
+
         }
+        else {
+            String idnpString = mPrefs.getString("ID", "");
+            assert idnpString != null;
+            String fragmentString =
+                    String.valueOf(idnpString.charAt(0)) +
+                            idnpString.charAt(1) +
+                            idnpString.charAt(2) +
+                            "∙∙∙∙∙∙∙" +
+                            idnpString.charAt(idnpString.length() - 3) +
+                            idnpString.charAt(idnpString.length() - 2) +
+                            idnpString.charAt(idnpString.length() - 1);
 
-
+            idnp.getEditText().setText(fragmentString);
+        }
 
         final EditText idnpEditText = idnp.findViewById(R.id.IDEditTextSettings);
 
@@ -105,102 +85,69 @@ public class SettingsActivity extends ToolbarActivity {
             public boolean onTouch(View v, MotionEvent event) {
                 if(MotionEvent.ACTION_UP == event.getAction()) {
                     idnpEditText.setText("");
-                    MaterialTextField mtf = findViewById(R.id.IDMaterialTextFieldSettings);
-                    mtf.setHasFocus(true);
+                    MaterialTextField idnp = findViewById(R.id.IDMaterialTextFieldSettings);
+                    idnp.expand();
+                    idnp.setHasFocus(true);
                 }
 
-                return true; // return is important...
+                return true;
             }
         });
 
-        RoundButton confirm = findViewById(R.id.confirmRoundButtonSettings);
+        RoundButton save = findViewById(R.id.saveRoundButtonSettings);
 
-        confirm.setOnClickListener(new View.OnClickListener() {
+        save.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 MaterialTextField idnpTMP = findViewById(R.id.IDMaterialTextFieldSettings);
+                if (idnpTMP.getEditText().getText().toString().length() != 13) {
+                    AlertDialog alertDialog;
+                    AlertDialog.Builder builder;
+                    builder = new AlertDialog.Builder(SettingsActivity.this);
+                    builder.setMessage("IDNP introdus nu e de 13 cifre!");
+                    builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialog, int which) {
+                            idnpEditText.setText("");
+                            MaterialTextField idnp = findViewById(R.id.IDMaterialTextFieldSettings);
+                            idnp.expand();
+                            idnp.setHasFocus(true);
+                        }
+                    });
+                    alertDialog = builder.create();
+                    alertDialog.show();
+                }
                 String idnpStringToPrefs = idnpTMP.getEditText().getText().toString();
 
                 SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
                 SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                prefsEditor.putString("ID", idnpStringToPrefs).apply();
 
-                prefsEditor.putString("ID", idnpStringToPrefs);
-                prefsEditor.apply();
-
-                if (!mPrefs.contains("Marks")) {
-                    mQueue = Volley.newRequestQueue(getApplicationContext());
-                    jsonGetMarks(mPrefs.getString("ID", ""));
-                }
-                final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-                startActivity(intent);
-//                finish();
+                startActivity(new Intent(getApplicationContext(), MainActivity.class));
             }
         });
     }
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        // handle arrow click here
+
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (item.getItemId() == android.R.id.home) {
-            final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
-            startActivity(intent);
-//            finish();
+            if (Objects.equals(mPrefs.getString("LastActivity", ""), "MarksActivity")) {
+                final Intent intent = new Intent(getApplicationContext(), MarksActivity.class);
+                startActivity(intent);
+            }
+            else if (Objects.equals(mPrefs.getString("LastActivity", ""), "AnotherActivity")) {
+                //Replace MainActivity.class with AnotherActivity
+                final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
+            else {
+                final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+                startActivity(intent);
+            }
         }
 
         return super.onOptionsItemSelected(item);
-    }
-
-    private void jsonGetMarks(String idnp) {
-
-        String url = Utilities.getServerURL() +
-                "get_marks?" +
-                "id=" + idnp;
-
-        Log.i("URL", url);
-
-        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null,
-                new Response.Listener<JSONObject>() {
-                    @Override
-                    public void onResponse(JSONObject response) {
-
-                        try {
-
-                            SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                            SharedPreferences.Editor prefsEditor = mPrefs.edit();
-
-                            if (response.has("semestre")) {
-
-                                Log.i("note", response.getString("semestre"));
-
-                                String json = response.getString("semestre");
-
-                                prefsEditor.putString("Marks", json);
-                                prefsEditor.putString("MarksSuccess", "yes");
-                                prefsEditor.apply();
-
-                            }
-                            else {
-                                Log.e("error", "hmm");
-                                prefsEditor.putString("MarksSuccess", "no");
-                            }
-
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
-            }
-
-        });
-
-        request.setRetryPolicy(new DefaultRetryPolicy(
-                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 10,
-                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
-                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
-        mQueue.add(request);
-
     }
 }

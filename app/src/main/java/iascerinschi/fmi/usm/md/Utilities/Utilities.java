@@ -9,13 +9,8 @@ import java.util.Calendar;
 
 public class Utilities {
 
-//    static String serverURL = "http://192.168.0.104:8080/api/";
-    static String serverURL = "http://172.20.10.3:8080/api/";
-//    static String serverURL = "http://159.65.122.118:8080/USMFMI/api/";
-
-
     public static String getServerURL() {
-        return serverURL;
+        return "http://192.168.0.100:8080/USMFMI/api/";
     }
 
     /**
@@ -36,7 +31,7 @@ public class Utilities {
      */
     public static String getParitateTitlu() {
 
-        String paritate = "";
+        String paritate;
         if (Utilities.getParitate().equals("par"))
             paritate = "para";
         else
