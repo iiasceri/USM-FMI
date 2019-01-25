@@ -31,67 +31,28 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/UserController.java">
+        <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/register.jsp">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="390">
-              <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
+            <state relative-caret-position="735">
+              <caret line="49" column="61" selection-start-line="49" selection-start-column="61" selection-end-line="49" selection-end-column="61" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/resources/database.properties">
+        <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/caddc36b-a798-45b7-9084-87d329eb5d21/console.sql">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="120">
-              <caret line="8" selection-start-line="8" selection-end-line="8" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/pom.xml">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="200">
-              <caret line="100" column="20" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/ScheduleRestController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="182">
-              <caret line="54" column="24" selection-start-line="54" selection-start-column="24" selection-end-line="54" selection-end-column="24" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/GroupRestController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="215">
-              <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
-              <folding>
-                <element signature="imports" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/GroupController.java">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="317">
-              <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+            <state>
+              <caret column="20" selection-start-column="20" selection-end-column="20" />
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/main/webapp/static/json/weekly/IA1702rom.json">
+        <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/UserRestController.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="300">
-              <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+            <state relative-caret-position="148">
+              <caret line="51" column="42" lean-forward="true" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
             </state>
           </provider>
         </entry>
@@ -108,6 +69,7 @@
   <component name="FindInProjectRecents">
     <findStrings>
       <find>save</find>
+      <find>/logi</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -122,11 +84,9 @@
         <option value="$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/model/UserJson.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/json/weekly/IA1602rom.json" />
         <option value="$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/ApplicationInitializer.java" />
-        <option value="$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/UserRestController.java" />
         <option value="$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/model/User.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/web.xml" />
         <option value="$PROJECT_DIR$/src/main/resources/database.properties" />
-        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/register.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/mvc-dispatcher-servlet.xml" />
         <option value="$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/config/SecurityConfiguration.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/login.jsp" />
@@ -136,10 +96,12 @@
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/schedul.jsp" />
         <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/schedule.jsp" />
         <option value="$APPLICATION_CONFIG_DIR$/consoles/db/a1303a33-940d-460a-83ae-bc6c44b249a8/console.sql" />
-        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/caddc36b-a798-45b7-9084-87d329eb5d21/console.sql" />
-        <option value="$PROJECT_DIR$/pom.xml" />
         <option value="$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/ScheduleRestController.java" />
         <option value="$PROJECT_DIR$/src/main/webapp/static/json/weekly/IA1702rom.json" />
+        <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/register.jsp" />
+        <option value="$APPLICATION_CONFIG_DIR$/consoles/db/caddc36b-a798-45b7-9084-87d329eb5d21/console.sql" />
+        <option value="$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/UserRestController.java" />
       </list>
     </option>
   </component>
@@ -186,8 +148,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="PackagesPane" />
       <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -236,33 +198,6 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="main" type="462c0819:PsiDirectoryNode" />
               <item name="webapp" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="USM-FMI(Server)" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USM-FMI(Server)" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="USM-FMI(Server)" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USM-FMI(Server)" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="json" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="USM-FMI(Server)" type="b2602c69:ProjectViewProjectNode" />
-              <item name="USM-FMI(Server)" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="main" type="462c0819:PsiDirectoryNode" />
-              <item name="webapp" type="462c0819:PsiDirectoryNode" />
-              <item name="static" type="462c0819:PsiDirectoryNode" />
-              <item name="json" type="462c0819:PsiDirectoryNode" />
-              <item name="weekly" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="USM-FMI(Server)" type="b2602c69:ProjectViewProjectNode" />
@@ -321,12 +256,12 @@
   </component>
   <component name="RunManager">
     <configuration name="Tomcat 8.5.37" type="#com.intellij.j2ee.web.tomcat.TomcatRunConfigurationFactory" factoryName="Local" APPLICATION_SERVER_NAME="Tomcat 8.5.37" ALTERNATIVE_JRE_ENABLED="false" nameIsGenerated="true">
-      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/USMFMI_war_exploded/" />
+      <option name="OPEN_IN_BROWSER_URL" value="http://localhost:8080/USMFMI/" />
       <option name="UPDATING_POLICY" value="restart-server" />
       <deployment>
         <artifact name="USMFMI:war exploded">
           <settings>
-            <option name="CONTEXT_PATH" value="/USMFMI_war_exploded" />
+            <option name="CONTEXT_PATH" value="/USMFMI" />
           </settings>
         </artifact>
       </deployment>
@@ -494,16 +429,18 @@
       <workItem from="1548357430370" duration="1511000" />
       <workItem from="1548359152440" duration="32000" />
       <workItem from="1548377130813" duration="594000" />
+      <workItem from="1548418648319" duration="1152000" />
+      <workItem from="1548422344461" duration="344000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="25882000" />
+    <option name="totallyTimeSpent" value="27378000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="727" extended-state="0" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.31260097" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.24394184" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Designer" order="2" />
       <window_info id="Image Layers" order="3" />
@@ -521,7 +458,7 @@
       <window_info anchor="bottom" id="Application Servers" order="7" weight="0.32899627" />
       <window_info anchor="bottom" id="Database Console" order="8" weight="0.32755905" />
       <window_info anchor="bottom" id="Spring" order="9" />
-      <window_info anchor="bottom" id="Terminal" order="10" weight="0.7464567" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.7133858" />
       <window_info anchor="bottom" id="Event Log" order="11" sideWeight="0.5024233" side_tool="true" weight="0.40944883" />
       <window_info anchor="bottom" id="Messages" order="12" weight="0.32755905" />
       <window_info anchor="bottom" id="Java Enterprise" order="13" />
@@ -719,13 +656,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/register.jsp">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="379">
-          <caret line="56" column="24" selection-start-line="56" selection-start-column="24" selection-end-line="56" selection-end-column="24" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/hello.jsp">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="183">
@@ -737,13 +667,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-131">
           <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/caddc36b-a798-45b7-9084-87d329eb5d21/console.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <caret column="19" lean-forward="true" selection-start-column="19" selection-end-column="19" />
         </state>
       </provider>
     </entry>
@@ -761,20 +684,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/UserRestController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="120">
-          <caret line="21" lean-forward="true" selection-start-line="21" selection-end-line="21" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/UserController.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="390">
-          <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/resources/database.properties">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="120">
@@ -782,10 +691,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pom.xml">
+    <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/UserController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="200">
-          <caret line="100" column="20" selection-start-line="100" selection-start-column="13" selection-end-line="100" selection-end-column="20" />
+        <state relative-caret-position="390">
+          <caret line="47" column="29" selection-start-line="47" selection-start-column="29" selection-end-line="47" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -798,7 +707,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/GroupRestController.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="215">
+        <state relative-caret-position="243">
           <caret line="25" column="20" selection-start-line="25" selection-start-column="20" selection-end-line="25" selection-end-column="20" />
           <folding>
             <element signature="imports" expanded="true" />
@@ -809,14 +718,42 @@
     <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/GroupController.java">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="317">
-          <caret line="76" lean-forward="true" selection-start-line="76" selection-end-line="76" />
+          <caret line="76" selection-start-line="76" selection-end-line="76" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/main/webapp/static/json/weekly/IA1702rom.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="300">
-          <caret line="20" column="23" lean-forward="true" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+          <caret line="20" column="23" selection-start-line="20" selection-start-column="23" selection-end-line="20" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pom.xml">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="260">
+          <caret line="104" selection-start-line="104" selection-end-line="104" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/webapp/WEB-INF/pages/register.jsp">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="735">
+          <caret line="49" column="61" selection-start-line="49" selection-start-column="61" selection-end-line="49" selection-end-column="61" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$APPLICATION_CONFIG_DIR$/consoles/db/caddc36b-a798-45b7-9084-87d329eb5d21/console.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="20" selection-start-column="20" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/fmi/usm/md/mvc/controller/UserRestController.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="148">
+          <caret line="51" column="42" lean-forward="true" selection-start-line="51" selection-start-column="42" selection-end-line="51" selection-end-column="42" />
         </state>
       </provider>
     </entry>

@@ -1,6 +1,5 @@
 package iascerinschi.fmi.usm.md.View;
 
-import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -8,7 +7,6 @@ import android.os.Handler;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
-import android.support.v7.widget.Toolbar;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -16,12 +14,14 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+//import com.github.florent37.materialtextfield.MaterialTextField;
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.marozzi.roundbutton.RoundButton;
 import com.roger.catloadinglibrary.CatLoadingView;
@@ -34,7 +34,6 @@ import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
 public class LoginActivity extends ToolbarActivity {
 
-    Toolbar toolbar;
     String username = "";
     String password = "";
 
@@ -76,17 +75,17 @@ public class LoginActivity extends ToolbarActivity {
         getSupportActionBar().setDisplayShowTitleEnabled(false);*/
 
         imageView.animate().scaleX(0.5f).scaleY(0.5f).setDuration(LONG_ANIMATION_DURATION);
-        imageView.animate().translationXBy(-(width/3)).setDuration(LONG_ANIMATION_DURATION);
-        imageView.animate().translationYBy(-(height/10) - 15).setDuration(LONG_ANIMATION_DURATION);
+        imageView.animate().translationXBy(-((float)width/3)).setDuration(LONG_ANIMATION_DURATION);
+        imageView.animate().translationYBy(-((float)height/10) - 15).setDuration(LONG_ANIMATION_DURATION);
 
         //Animatia txt & buton
         materialTextField.animate().alpha(1f).setDuration(LONG_ANIMATION_DURATION);
         loginButton.animate().alpha(1f).setDuration(LONG_ANIMATION_DURATION);
 
-        materialTextField.animate().translationYBy(-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
-        materialTextField2.animate().translationYBy(-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
+        materialTextField.animate().translationYBy((float)-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
+        materialTextField2.animate().translationYBy((float)-height/2 + 200).setDuration(LONG_ANIMATION_DURATION);
         materialTextField2.animate().translationXBy(1000).setDuration(MEDIUM_ANIMATION_DURATION);
-        loginButton.animate().translationYBy(-height/2 + 190).setDuration(LONG_ANIMATION_DURATION);
+        loginButton.animate().translationYBy((float)-height/2 + 190).setDuration(LONG_ANIMATION_DURATION);
 
         final Handler handler = new Handler();
         handler.postDelayed(new Runnable() {
@@ -106,7 +105,6 @@ public class LoginActivity extends ToolbarActivity {
                 //Primim height, width
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
-                final int height = displayMetrics.heightPixels;
 
                 MaterialTextField materialTextField = findViewById(R.id.usernameMaterialTextFieldLogin);
                 MaterialTextField materialTextField2 = findViewById(R.id.passwordMaterialTextFieldLogin);
@@ -115,7 +113,7 @@ public class LoginActivity extends ToolbarActivity {
                 password = materialTextField2.getEditText().getText().toString();
 
                 if (username.isEmpty()) {
-                    errorToasts(view, "Introduceti Numele de Utilizator");
+                    errorToasts("Introduceti Numele de Utilizator");
                     animateMailField(view);
                 }
                 else {
@@ -123,7 +121,7 @@ public class LoginActivity extends ToolbarActivity {
 
                     if (flag) {
                         if (password.isEmpty()) {
-                            errorToasts(view, "Introduceti Parola");
+                            errorToasts("Introduceti Parola");
                             animatePasswordField(view);
                         } else {
                             mView = new CatLoadingView();
@@ -165,9 +163,7 @@ public class LoginActivity extends ToolbarActivity {
 
                             if (response.getString("status").equals("success")) {
 
-
                                 Log.i("user", response.getString("user"));
-
                                 String json = response.getString("user");
 
                                 prefsEditor.putString("User", json);
@@ -175,25 +171,11 @@ public class LoginActivity extends ToolbarActivity {
                                 prefsEditor.apply();
 
                                 mView.dismiss();
-
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
-
                             }
                             else {
-                                AlertDialog alertDialog;
-                                AlertDialog.Builder builder;
-                                builder = new AlertDialog.Builder(LoginActivity.this);
-                                builder.setMessage("Utilizator sau parola gresita");
-                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        recreate();
-                                    }
-                                });
-
-                                alertDialog = builder.create();
-                                alertDialog.show();
+                                shoAlertDialog("Utilizator sau parola gresita");
                             }
 
                         } catch (JSONException e) {
@@ -207,11 +189,14 @@ public class LoginActivity extends ToolbarActivity {
             }
         });
 
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 2,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(request);
-
     }
 
-    public void errorToasts(View view, String hintAsError) {
+    public void errorToasts(String hintAsError) {
         Toast toast= Toast.makeText(getApplicationContext(),
                 hintAsError, Toast.LENGTH_SHORT);
         toast.setGravity(Gravity.CENTER_VERTICAL|Gravity.CENTER_HORIZONTAL, 0, 0);
@@ -256,5 +241,24 @@ public class LoginActivity extends ToolbarActivity {
 
             }
         }, SHORT_ANIMATION_DURATION);
+    }
+
+    public void shoAlertDialog(String message) {
+        mView.dismiss();
+        MaterialTextField materialTextField2 = findViewById(R.id.passwordMaterialTextFieldLogin);
+        materialTextField2.getEditText().setText("");
+        AlertDialog alertDialog;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(LoginActivity.this);
+        builder.setMessage(message);
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                recreate();
+            }
+        });
+
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 }

@@ -28,7 +28,6 @@ import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.Objects;
 import iascerinschi.fmi.usm.md.R;
-import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
 import iascerinschi.fmi.usm.md.View.ToolbarActivity;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
@@ -240,6 +239,7 @@ public class ScheduleActivity extends ToolbarActivity {
     }
 
     void showAlert() {
+        mView.dismiss();
         AlertDialog alertDialog;
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(ScheduleActivity.this);

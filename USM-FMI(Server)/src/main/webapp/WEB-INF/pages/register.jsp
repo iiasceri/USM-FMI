@@ -22,31 +22,31 @@
             <h3 align="center" style="color:#009b76;">Completati Campurile!</h3>
 
             <div class="container" align="left">
-                <label>Nume Utilizator</label>
+                <label>Nume Utilizator:</label>
                 <input type="text" name="username" required="required" class="inp"/>
 
-                <label>Mail</label>
+                <label>Mail:</label>
                 <input type="text" name="mail" required="required" class="inp"/>
 
-                <label>Nume Prenume</label>
+                <label>Nume Prenume:</label>
                 <input type="text" name="familyname" required="required" class="inp"/>
 
-                <label>Parola</label>
+                <label>Parola:</label>
                 <input type="password" name="password" required="required" class="inp"/>
 
-                <label>Genul </label>
+                <label style="margin-right: 20px">Genul:</label>
                 <input type="radio" name="gender" value="FEMALE"> F
                 <input type="radio" name="gender" value="MALE"> M
 
                 <br>
-                <label>Grupa</label>
-                <select name="groupName" id="groupName" >
+                <label style="margin-right: 15px">Grupa:</label>
+                <select name="groupName" id="groupName">
                     <c:forEach var="groups" items="${groupList}">
                         <option value="${groups.name}">${groups.name}</option>
                     </c:forEach>
                 </select>
                 <br>
-                <label>SubGrupa </label>
+                <label style="margin-right: 10px">SubGrupa:</label>
                 <input type="radio" name="subGroup" value="I" id="subGroup"> I (s)
                 <input type="radio" name="subGroup" value="II" id="subGroup"> II (d)
                 <button type="submit" class="btn">Inregistreaza-ma</button>

@@ -204,6 +204,7 @@ public class ExamScheduleActivity extends ToolbarActivity {
     }
 
     void showAlert() {
+        mView.dismiss();
         AlertDialog alertDialog;
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(ExamScheduleActivity.this);

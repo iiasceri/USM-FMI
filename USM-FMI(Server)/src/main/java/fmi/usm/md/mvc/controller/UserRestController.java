@@ -23,6 +23,24 @@ public class UserRestController {
     private final UserService userService;
     private final GroupService groupService;
 
+    @RequestMapping(value = "/userNameTaken", method = GET)
+    public LinkedHashMap<String, Object> userExists(@RequestParam(name = "username") String username){
+        LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+
+        String lowerCase = username.toLowerCase();
+        Optional<User> userOptional = userService.getUserByUsername(lowerCase);
+
+        String boolString;
+
+        if (userOptional.isPresent())
+            boolString = "yes";
+        else
+            boolString = "no";
+
+        map.put("response", boolString);
+        return map;
+    }
+
     @RequestMapping(value = "/login", method = POST)
     public LinkedHashMap<String, Object> loginRest(
                                                     @RequestParam(name = "username") String username,
@@ -31,23 +49,26 @@ public class UserRestController {
         String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
 
+        username = username.toLowerCase();
+
         Optional<User> uo = userService.getUserByUsername(username);
-        User user = new User();
+        User user;
+
         if (uo.isPresent()) {
             user = uo.get();
+
+            String hashPassword = BCrypt.hashpw(password, hash);
+
+            if(user.getPassword().equals(hashPassword)) {
+                map.put("status", "success");
+                UserJson userJson = new UserJson(user);
+                map.put("user", userJson);
+                return map;
+            }
         }
 
-        String hashPassword = BCrypt.hashpw(password, hash);
-
-        if(!user.getPassword().equals(hashPassword) || username == null) {
-            map.put("status", "fail");
-            map.put("message", "Credentials are incorrect");
-            return map;
-        }
-
-        map.put("status", "success");
-        UserJson userJson = new UserJson(user);
-        map.put("user", userJson);
+        map.put("status", "fail");
+        map.put("message", "Credentials are incorrect");
         return map;
     }
 
@@ -63,6 +84,8 @@ public class UserRestController {
 
         String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
         LinkedHashMap<String, Object> map = new LinkedHashMap<>();
+
+        username = username.toLowerCase();
 
         User user = new User();
         Group g;

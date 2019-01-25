@@ -34,7 +34,6 @@ import java.util.Objects;
 
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
 import iascerinschi.fmi.usm.md.R;
-import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
 import iascerinschi.fmi.usm.md.View.SettingsActivity;
 import iascerinschi.fmi.usm.md.View.ToolbarActivity;
 
@@ -96,6 +95,7 @@ public class MarksActivity extends ToolbarActivity {
                 //start anim
                 mView = new CatLoadingView();
                 mView.show(getSupportFragmentManager(), "");
+                mView.setCanceledOnTouchOutside(false);
                 jsonGetMarks(mPrefs.getString("ID", ""));
             }
             else {
@@ -219,6 +219,7 @@ public class MarksActivity extends ToolbarActivity {
     }
 
     void showAlert() {
+        mView.dismiss();
         AlertDialog alertDialog;
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(MarksActivity.this);

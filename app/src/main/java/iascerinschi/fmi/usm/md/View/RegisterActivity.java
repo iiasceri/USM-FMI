@@ -16,6 +16,7 @@ import android.widget.ScrollView;
 import android.widget.Toast;
 
 import com.android.volley.Cache;
+import com.android.volley.DefaultRetryPolicy;
 import com.android.volley.Network;
 import com.android.volley.Request;
 import com.android.volley.RequestQueue;
@@ -56,7 +57,6 @@ public class RegisterActivity extends AppCompatActivity {
     RequestQueue mRequestQueue;
 
     CatLoadingView mView;
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -205,28 +205,25 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                // Instantiate the cache
                 Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
-
-                // Set up the network to use HttpURLConnection as the HTTP client.
                 Network network = new BasicNetwork(new HurlStack());
 
-                // Instantiate the cache
-                cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
-
-                // Set up the network to use HttpURLConnection as the HTTP client.
-                network = new BasicNetwork(new HurlStack());
-                mRequestQueue = new RequestQueue(cache, network);
-                // Start the queue
-                mRequestQueue.start();
                 mView = new CatLoadingView();
                 mView.show(getSupportFragmentManager(), "");
 
-                jsonRegisterUser(usernameMaterialTextField.getEditText().getText().toString(),
-                        mailMaterialTextField.getEditText().getText().toString(),
-                        familynameMaterialTextField.getEditText().getText().toString(),
-                        passwordMaterialTextField.getEditText().getText().toString(),
-                        gender, groupName, subGroup);
+
+
+                String username = usernameMaterialTextField.getEditText().getText().toString();
+
+                if (username.contains(" ")) {
+                    showAlert("Numele continte simboluri nepermise!");
+                }
+                else {
+                    username = username.toLowerCase();
+                    mRequestQueue = new RequestQueue(cache, network);
+                    mRequestQueue.start();
+                    jsonVerifyUserNameTaken(username);
+                }
             }
         });
     }
@@ -276,9 +273,9 @@ public class RegisterActivity extends AppCompatActivity {
                 "&groupName=" + groupName +
                 "&subGroup=" + subGroup;
 
-       Log.i("URL", url);
+        Log.i("URL", url);
 
-       JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null,
+        JsonObjectRequest request = new JsonObjectRequest(Request.Method.POST, url, null,
                 new Response.Listener<JSONObject>() {
                     @Override
                     public void onResponse(JSONObject response) {
@@ -298,35 +295,92 @@ public class RegisterActivity extends AppCompatActivity {
                                 startActivity(intent);
                             }
                             else {
-                                showAlert();
+                                showAlert("Inregistrarea nu a mers cu success");
                             }
 
                         } catch (JSONException e) {
-                            showAlert();
+                            showAlert("Inregistrarea nu a mers cu success");
                             e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                showAlert();
+                showAlert("Inregistrarea nu a mers cu success");
                 error.printStackTrace();
             }
         });
 
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 4,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mRequestQueue.add(request);
 
     }
 
-    void showAlert() {
+    private void jsonVerifyUserNameTaken(final String username) {
+
+        String url = Utilities.getServerURL() +
+                "userNameTaken?" +
+                "username=" + username;
+
+       Log.i("URL", url);
+
+       JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
+                new Response.Listener<JSONObject>() {
+                    @Override
+                    public void onResponse(JSONObject response) {
+                        try {
+
+                            if (response.getString("response").equals("no")) {
+
+                                Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+                                Network network = new BasicNetwork(new HurlStack());
+
+                                mRequestQueue = new RequestQueue(cache, network);
+                                mRequestQueue.start();
+                                jsonRegisterUser(username,
+                                        mailMaterialTextField.getEditText().getText().toString(),
+                                        familynameMaterialTextField.getEditText().getText().toString(),
+                                        passwordMaterialTextField.getEditText().getText().toString(),
+                                        gender, groupName, subGroup);
+                            }
+                            else {
+                                showAlert("Numele de Utilizat este deja ocupat!");
+                            }
+
+                        } catch (JSONException e) {
+                            showAlert("La primirea raspunsului depe server a intervenit o eroare");
+                            e.printStackTrace();
+                        }
+                    }
+                }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                showAlert("Eroare in sistem");
+                error.printStackTrace();
+            }
+        });
+
+        request.setRetryPolicy(new DefaultRetryPolicy(
+                DefaultRetryPolicy.DEFAULT_TIMEOUT_MS * 4,
+                DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
+                DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
+        mRequestQueue.add(request);
+
+    }
+
+    void showAlert(String message) {
+        mView.dismiss();
         AlertDialog alertDialog;
         AlertDialog.Builder builder;
         builder = new AlertDialog.Builder(RegisterActivity.this);
-        builder.setMessage("Inregistrarea nu a mers cu success");
+        builder.setMessage(message);
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                finish();
+
             }
         });
         alertDialog = builder.create();

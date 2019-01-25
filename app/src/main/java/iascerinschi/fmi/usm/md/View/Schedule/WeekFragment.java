@@ -27,7 +27,7 @@ public class WeekFragment extends android.support.v4.app.Fragment {
 
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_thursday, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_week, container, false);
 
         RecyclerView mRecyclerView = rootView.findViewById(R.id.recycler_view);
         mRecyclerView.setHasFixedSize(true);
@@ -41,12 +41,12 @@ public class WeekFragment extends android.support.v4.app.Fragment {
         mRecyclerViewItems.clear();
         addMenuItemsFromJson();
 
-
         return rootView;
     }
 
     private void addMenuItemsFromJson() {
         try {
+
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             String jsonDataString = mPrefs.getString("Schedule", "");
 
@@ -56,7 +56,6 @@ public class WeekFragment extends android.support.v4.app.Fragment {
             for (int i = 0; i < zile.length(); ++i) {
 
                 JSONObject zi = zile.getJSONObject(i);
-
                 menuItemsJsonArray = zi.getJSONArray("lectii");
 
                 String ziTitle = zi.getString("numeZi");
@@ -72,7 +71,6 @@ public class WeekFragment extends android.support.v4.app.Fragment {
                     Pojo pojo = new Pojo(ziTitle, menuItemDescription, menuItemPrice,
                             menuItemCategory, menuItemImageName);
                     mRecyclerViewItems.add(pojo);
-
                 }
             }
 
@@ -80,6 +78,4 @@ public class WeekFragment extends android.support.v4.app.Fragment {
             Log.e(ExamScheduleActivity.class.getName(), "Unable to parse JSON file.", exception);
         }
     }
-
-
 }

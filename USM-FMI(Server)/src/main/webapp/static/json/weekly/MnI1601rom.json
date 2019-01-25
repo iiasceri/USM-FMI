@@ -8,8 +8,8 @@
         "tip": "curs",
         "profesor": "G.Sturza",
         "cabinet": "401/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       },
       {
         "ora": "13:30-15:00",
@@ -17,8 +17,8 @@
         "tip": "sem",
         "profesor": "Gh.Capatana",
         "cabinet": "218/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       },
       {
         "ora": "15:15-16:45",
@@ -26,8 +26,8 @@
         "tip": "lab",
         "profesor": "O.Cerbu",
         "cabinet": "145/a",
-        "paritate": "I/II",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       }
     ]
   },
@@ -40,8 +40,8 @@
         "tip": "sem",
         "profesor": "G.Sturza",
         "cabinet": "415/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       },
       {
         "ora": "15:15-16:45",
@@ -49,8 +49,8 @@
         "tip": "lab",
         "profesor": "T.Bragaru",
         "cabinet": "218/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       },
       {
         "ora": "17:00-18:30",
@@ -58,8 +58,8 @@
         "tip": "lab",
         "profesor": "T.Bragaru",
         "cabinet": "145a/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       }
     ]
   },
@@ -72,8 +72,8 @@
         "tip": "lab",
         "profesor": "O.Cerbu",
         "cabinet": "251/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       },
       {
         "ora": "15:15-16:45",
@@ -81,8 +81,8 @@
         "tip": "curs",
         "profesor": "O.Cerbu",
         "cabinet": "113/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       }
     ]
   },
@@ -95,8 +95,8 @@
         "tip": "sem",
         "profesor": "G.Sturza",
         "cabinet": "419/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       },
       {
         "ora": "15:15-16:45",
@@ -104,8 +104,8 @@
         "tip": "lab",
         "profesor": "T.Bragaru",
         "cabinet": "218/4",
-        "paritate": "Impar",
-        "subgrupa": "I/II"
+        "paritate": "imp",
+        "subgrupa": "-"
       },
       {
         "ora": "15:15-16:45",
@@ -113,8 +113,8 @@
         "tip": "lab",
         "profesor": "A.Tkacenko",
         "cabinet": "218/4",
-        "paritate": "Par",
-        "subgrupa": "I/II"
+        "paritate": "par",
+        "subgrupa": "-"
       }
     ]
   },
@@ -127,8 +127,8 @@
         "tip": "lab",
         "profesor": "A.Tkacenko",
         "cabinet": "419/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       },
       {
         "ora": "11:30-13:00",
@@ -136,8 +136,8 @@
         "tip": "lab",
         "profesor": "A.Tkacenko",
         "cabinet": "328/4",
-        "paritate": "Par/Impar",
-        "subgrupa": "I/II"
+        "paritate": "-",
+        "subgrupa": "-"
       }
     ]
   },
@@ -150,7 +150,7 @@
         "tip": "curs/lab/sem",
         "profesor": "Nume Profesor",
         "cabinet": "Nr.cabinet",
-        "paritate": "Par/Impar",
+        "paritate": "par/imp",
         "subgrupa": "I/II"
       }
     ]
