@@ -24,6 +24,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.marozzi.roundbutton.RoundButton;
+import com.roger.catloadinglibrary.CatLoadingView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -43,6 +44,9 @@ public class LoginActivity extends ToolbarActivity {
     boolean flag = false;
 
     private RequestQueue mQueue;
+
+    CatLoadingView mView;
+
 
 
     @Override
@@ -122,6 +126,8 @@ public class LoginActivity extends ToolbarActivity {
                             errorToasts(view, "Introduceti Parola");
                             animatePasswordField(view);
                         } else {
+                            mView = new CatLoadingView();
+                            mView.show(getSupportFragmentManager(), "");
                             jsonLoginUser(username, password);
                         }
                     } else {
@@ -167,6 +173,8 @@ public class LoginActivity extends ToolbarActivity {
                                 prefsEditor.putString("User", json);
                                 prefsEditor.putString("LoginSuccess", "yes");
                                 prefsEditor.apply();
+
+                                mView.dismiss();
 
                                 Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);

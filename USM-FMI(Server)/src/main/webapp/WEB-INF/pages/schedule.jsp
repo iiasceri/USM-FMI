@@ -26,7 +26,9 @@
     <h1>Grupa </h1><h1 class="nameGroup">${groupName}</h1>
     <h1 hidden class="typeSchedule">${scheduleType}</h1>
     <div id="header">
-        Daca oraru inca nu a fost creat va fi aratat exemplul modificati si salvati
+        Daca oraru inca nu a fost creat va fi aratat exemplul modificati-l si salvati-l
+	<br>
+	Simbolul "-" este folosit daca nu conteaza paritatea sau subgrupa
     </div>
 
 

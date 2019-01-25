@@ -1,9 +1,11 @@
 package iascerinschi.fmi.usm.md.View;
 
+import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -17,6 +19,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.roger.catloadinglibrary.CatLoadingView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,6 +27,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import iascerinschi.fmi.usm.md.Model.Pojo;
 import iascerinschi.fmi.usm.md.R;
@@ -31,25 +35,44 @@ import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
 public class ExamScheduleActivity extends ToolbarActivity {
 
-    private RecyclerView mRecyclerView;
     private List<Object> mRecyclerViewItems = new ArrayList<>();
 
     private RequestQueue mQueue;
 
+    CatLoadingView mView;
+
+
+    @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_schedule);
 
         mQueue = Volley.newRequestQueue(this);
+        mQueue.start();
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-        JSONObject jo = null;
+        JSONObject jo;
         try {
             jo = new JSONObject(mPrefs.getString("User", ""));
             Log.i("user", mPrefs.getString("User", ""));
 
-            if (!mPrefs.contains("ExamSchedule"))
+            if (!mPrefs.contains("ExamSchedule")) {
+                mView = new CatLoadingView();
+                mView.show(getSupportFragmentManager(), "");
                 jsonGetExamSchedule(jo.getString("groupName"), jo.getString("subGroup"));
+            }
+            else {
+                RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
+                mRecyclerView.setHasFixedSize(true);
+
+                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
+                mRecyclerView.setLayoutManager(layoutManager);
+
+                RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
+                mRecyclerView.setAdapter(adapter);
+
+                addMenuItemsFromJson();
+            }
 
             Log.i("groupName & subGroup", jo.getString("groupName") + jo.getString("subGroup"));
 
@@ -60,7 +83,7 @@ public class ExamScheduleActivity extends ToolbarActivity {
         //[1]vert + Toolbar
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setDisplayShowTitleEnabled(false);
+        Objects.requireNonNull(getSupportActionBar()).setDisplayShowTitleEnabled(false);
 
         // add back arrow to toolbar
         if (getSupportActionBar() != null){
@@ -71,32 +94,6 @@ public class ExamScheduleActivity extends ToolbarActivity {
         TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
         toolbarTitle.setText("Succese La Examene!");
 
-
-        mRecyclerView = (RecyclerView) findViewById(R.id.recycler_view);
-        mRecyclerView.setHasFixedSize(true);
-
-        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-        mRecyclerView.setLayoutManager(layoutManager);
-
-        RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
-        mRecyclerView.setAdapter(adapter);
-
-        addMenuItemsFromJson();
-
-        String jsonDataString = mPrefs.getString("ExamSchedule", "");
-
-        if (jsonDataString == null) {
-            Pojo pojo = new Pojo("Grupa dvs inca nu are examene", "sau ele nu au fost adaugate", "",
-                    "", "");
-
-            mRecyclerViewItems.add(pojo);
-        }
-        else if (jsonDataString.equals("")) {
-            Pojo pojo = new Pojo("Grupa dvs inca nu are examene", "sau ele nu au fost adaugate", "",
-                    "", "");
-
-            mRecyclerViewItems.add(pojo);
-        }
     }
 
     @Override
@@ -167,19 +164,32 @@ public class ExamScheduleActivity extends ToolbarActivity {
                                 prefsEditor.putString("ExamSchedule", json);
                                 prefsEditor.putString("ExamScheduleSuccess", "yes");
                                 prefsEditor.apply();
+
+                                RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
+                                mRecyclerView.setHasFixedSize(true);
+
+                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+                                mRecyclerView.setLayoutManager(layoutManager);
+
+                                RecyclerView.Adapter adapter = new RecyclerViewAdapter(getApplicationContext(), mRecyclerViewItems);
+                                mRecyclerView.setAdapter(adapter);
+
+                                addMenuItemsFromJson();
+                                mView.dismiss();
                             }
                             else {
-                                Log.e("error", "hmm");
-                                prefsEditor.putString("ExamScheduleSuccess", "no");
+                                showAlert();
                             }
 
                         } catch (JSONException e) {
+                            showAlert();
                             e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                showAlert();
                 error.printStackTrace();
             }
 
@@ -191,6 +201,21 @@ public class ExamScheduleActivity extends ToolbarActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(request);
 
+    }
+
+    void showAlert() {
+        AlertDialog alertDialog;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(ExamScheduleActivity.this);
+        builder.setMessage("La moment nu este orarul sesiunii pentru grupa dvs");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }

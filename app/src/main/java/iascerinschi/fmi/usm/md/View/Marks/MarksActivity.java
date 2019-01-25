@@ -2,6 +2,7 @@ package iascerinschi.fmi.usm.md.View.Marks;
 
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -11,6 +12,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -23,6 +25,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.roger.catloadinglibrary.CatLoadingView;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -31,6 +34,7 @@ import java.util.Objects;
 
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
 import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
 import iascerinschi.fmi.usm.md.View.SettingsActivity;
 import iascerinschi.fmi.usm.md.View.ToolbarActivity;
 
@@ -38,6 +42,7 @@ public class MarksActivity extends ToolbarActivity {
 
     Toolbar toolbar;
     private RequestQueue mQueue;
+    CatLoadingView mView;
 
     // Titles of the individual pages (displayed in tabs)
     private final String[] PAGE_TITLES = new String[] {
@@ -89,6 +94,8 @@ public class MarksActivity extends ToolbarActivity {
                 mQueue = Volley.newRequestQueue(this);
                 mQueue.start();
                 //start anim
+                mView = new CatLoadingView();
+                mView.show(getSupportFragmentManager(), "");
                 jsonGetMarks(mPrefs.getString("ID", ""));
             }
             else {
@@ -184,19 +191,21 @@ public class MarksActivity extends ToolbarActivity {
                                 // and when the ViewPager switches to a new page, the corresponding tab is selected)
                                 TabLayout tabLayout = findViewById(R.id.tab_layout);
                                 tabLayout.setupWithViewPager(mViewPager);
+                                mView.dismiss();
                             }
                             else {
-                                Log.e("error", "hmm");
-                                prefsEditor.putString("MarksSuccess", "no");
+                                showAlert();
                             }
 
                         } catch (JSONException e) {
+                            showAlert();
                             e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                showAlert();
                 error.printStackTrace();
             }
 
@@ -207,6 +216,21 @@ public class MarksActivity extends ToolbarActivity {
                 DefaultRetryPolicy.DEFAULT_MAX_RETRIES,
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(request);
+    }
+
+    void showAlert() {
+        AlertDialog alertDialog;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(MarksActivity.this);
+        builder.setMessage("A intervenit o eroare. \nVerificati IDNP din setari si conexiunea la internet");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 
 }

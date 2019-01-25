@@ -1,6 +1,13 @@
 <component name="ArtifactManager">
   <artifact type="exploded-war" name="USMFMI:war exploded">
-    <output-path>$PROJECT_DIR$/out/artifacts/USMFMI_war_exploded</output-path>
+    <output-path>$PROJECT_DIR$/target/USMFMI</output-path>
+    <properties id="maven-jee-properties">
+      <options>
+        <exploded>true</exploded>
+        <module>USMFMI</module>
+        <packaging>war</packaging>
+      </options>
+    </properties>
     <root id="root">
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
@@ -15,6 +22,7 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-aop:5.0.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-context:5.0.1.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-expression:5.0.1.RELEASE" />
+          <element id="library" level="project" name="Maven: javax.servlet:servlet-api:2.5" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.9.6" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.9.0" />
@@ -71,11 +79,14 @@
           <element id="library" level="project" name="Maven: commons-codec:commons-codec:1.4" />
           <element id="library" level="project" name="Maven: com.fasterxml.jackson.core:jackson-core:2.9.7" />
           <element id="library" level="project" name="Maven: org.apache.tomcat.maven:tomcat7-maven-plugin:2.2" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat.embed:tomcat-embed-core:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-util:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-coyote:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-api:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jdbc:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-dbcp:7.0.47" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-servlet-api:7.0.47" />
+          <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jsp-api:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jasper:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-jasper-el:7.0.47" />
           <element id="library" level="project" name="Maven: org.apache.tomcat:tomcat-el-api:7.0.47" />
@@ -143,10 +154,14 @@
           <element id="library" level="project" name="Maven: org.bouncycastle:bcprov-jdk15on:1.47" />
           <element id="library" level="project" name="Maven: org.bouncycastle:bcpkix-jdk15on:1.47" />
           <element id="library" level="project" name="Maven: mx4j:mx4j-tools:3.0.1" />
+          <element id="library" level="project" name="Maven: org.mortbay.jetty:servlet-api-2.5:6.1.9" />
           <element id="library" level="project" name="Maven: org.seleniumhq.selenium:jetty-repacked:7.6.1" />
           <element id="library" level="project" name="Maven: net.jcip:jcip-annotations:1.0" />
           <element id="library" level="project" name="Maven: org.yaml:snakeyaml:1.8" />
         </element>
+      </element>
+      <element id="directory" name="META-INF">
+        <element id="file-copy" path="$PROJECT_DIR$/target/USMFMI/META-INF/MANIFEST.MF" />
       </element>
       <element id="javaee-facet-resources" facet="USMFMI/web/Web" />
     </root>

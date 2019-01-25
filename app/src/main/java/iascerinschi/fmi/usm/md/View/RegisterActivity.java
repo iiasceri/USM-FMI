@@ -28,6 +28,7 @@ import com.android.volley.toolbox.JsonObjectRequest;
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.jaredrummler.materialspinner.MaterialSpinner;
 import com.marozzi.roundbutton.RoundButton;
+import com.roger.catloadinglibrary.CatLoadingView;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -53,6 +54,9 @@ public class RegisterActivity extends AppCompatActivity {
     String subGroup = "";
 
     RequestQueue mRequestQueue;
+
+    CatLoadingView mView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -201,6 +205,23 @@ public class RegisterActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
+                // Instantiate the cache
+                Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+
+                // Set up the network to use HttpURLConnection as the HTTP client.
+                Network network = new BasicNetwork(new HurlStack());
+
+                // Instantiate the cache
+                cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+
+                // Set up the network to use HttpURLConnection as the HTTP client.
+                network = new BasicNetwork(new HurlStack());
+                mRequestQueue = new RequestQueue(cache, network);
+                // Start the queue
+                mRequestQueue.start();
+                mView = new CatLoadingView();
+                mView.show(getSupportFragmentManager(), "");
+
                 jsonRegisterUser(usernameMaterialTextField.getEditText().getText().toString(),
                         mailMaterialTextField.getEditText().getText().toString(),
                         familynameMaterialTextField.getEditText().getText().toString(),
@@ -264,52 +285,51 @@ public class RegisterActivity extends AppCompatActivity {
                         try {
 
                             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-
                             SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
                             if (response.getString("status").equals("success")) {
 
-
-                                Log.i("user", response.getString("user"));
-
                                 String json = response.getString("user");
-
                                 prefsEditor.putString("User", json);
-                                prefsEditor.putString("RegisterSuccess", "yes");
                                 prefsEditor.apply();
+                                mView.dismiss();
 
                                 final Intent intent = new Intent(getApplicationContext(), MainActivity.class);
                                 startActivity(intent);
                             }
                             else {
-
-                                AlertDialog alertDialog;
-                                AlertDialog.Builder builder;
-                                builder = new AlertDialog.Builder(RegisterActivity.this);
-                                builder.setMessage("Inregistrarea nu a mers cu success");
-                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        recreate();
-                                    }
-                                });
-                                alertDialog = builder.create();
-                                alertDialog.show();
-
+                                showAlert();
                             }
 
                         } catch (JSONException e) {
+                            showAlert();
                             e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                showAlert();
                 error.printStackTrace();
             }
         });
 
         mRequestQueue.add(request);
 
+    }
+
+    void showAlert() {
+        AlertDialog alertDialog;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(RegisterActivity.this);
+        builder.setMessage("Inregistrarea nu a mers cu success");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 }

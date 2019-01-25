@@ -1,5 +1,6 @@
 package iascerinschi.fmi.usm.md.View.Schedule;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -8,6 +9,7 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
@@ -19,11 +21,14 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
+import com.roger.catloadinglibrary.CatLoadingView;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 import java.util.Calendar;
 import java.util.Objects;
 import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
 import iascerinschi.fmi.usm.md.View.ToolbarActivity;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
@@ -34,6 +39,9 @@ public class ScheduleActivity extends ToolbarActivity {
     Calendar calendar = Calendar.getInstance();
     int day = calendar.get(Calendar.DAY_OF_WEEK);
     int hour = calendar.get(Calendar.HOUR);
+
+    CatLoadingView mView;
+
 
     // Titles of the individual pages (displayed in tabs)
     private final String[] PAGE_TITLES = new String[] {
@@ -83,6 +91,8 @@ public class ScheduleActivity extends ToolbarActivity {
                 jo = new JSONObject(mPrefs.getString("User", ""));
                 mQueue = Volley.newRequestQueue(Objects.requireNonNull(getApplicationContext()));
                 mQueue.start();
+                mView = new CatLoadingView();
+                mView.show(getSupportFragmentManager(), "");
                 jsonGetSchedule(jo.getString("groupName"), jo.getString("subGroup"));
 
             } catch (JSONException e) {
@@ -201,19 +211,21 @@ public class ScheduleActivity extends ToolbarActivity {
                                 if (day == 1)
                                     day = 7;
                                 Objects.requireNonNull(tabLayout.getTabAt(day - 2)).select();
+                                mView.dismiss();
                             }
                             else {
-                                Log.e("error", "hmm");
-                                prefsEditor.putString("ScheduleSuccess", "no");
+                                showAlert();
                             }
 
                         } catch (JSONException e) {
+                            showAlert();
                             e.printStackTrace();
                         }
                     }
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
+                showAlert();
                 error.printStackTrace();
             }
 
@@ -225,5 +237,20 @@ public class ScheduleActivity extends ToolbarActivity {
                 DefaultRetryPolicy.DEFAULT_BACKOFF_MULT));
         mQueue.add(request);
 
+    }
+
+    void showAlert() {
+        AlertDialog alertDialog;
+        AlertDialog.Builder builder;
+        builder = new AlertDialog.Builder(ScheduleActivity.this);
+        builder.setMessage("La moment nu este orarul pentru grupa dvs");
+        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                finish();
+            }
+        });
+        alertDialog = builder.create();
+        alertDialog.show();
     }
 }

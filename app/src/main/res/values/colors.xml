@@ -7,10 +7,10 @@
     <color name="loginBackgroundDarker">#144527</color>
 
     <!-- For pages of ViewPager -->
-    <color name="pageColor1">#8e2c4e</color>
-    <color name="pageColor2">#FFF59D</color>
-    <color name="pageColor3">#FFAB91</color>
-    <color name="pageColor4">#5b37b6</color>
-    <color name="pageColor5">#FFCC80</color>
-    <color name="pageColor6">#4549ca</color>
+    <color name="pageColor1">#003300</color>
+    <color name="pageColor2">#005005</color>
+    <color name="pageColor3">#00b248</color>
+    <color name="pageColor4">#00e676</color>
+    <color name="pageColor5">#469C75</color>
+    <color name="pageColor6">#20505F</color>
 </resources>
