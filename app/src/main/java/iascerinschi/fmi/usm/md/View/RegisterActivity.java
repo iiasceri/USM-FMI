@@ -3,7 +3,6 @@ package iascerinschi.fmi.usm.md.View;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -176,28 +175,32 @@ public class RegisterActivity extends AppCompatActivity {
         mRequestQueue.start();
         jsonParseGroupNames();
 
-
         registerButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
-                Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
-                Network network = new BasicNetwork(new HurlStack());
-
+                //Start loading animation
                 mView = new CatLoadingView();
                 mView.show(getSupportFragmentManager(), "");
 
 
-
+                //Validations
                 String username = usernameMaterialTextField.getEditText().getText().toString();
+                String password = passwordMaterialTextField.getEditText().getText().toString();
+                String confirmPassword = confirmPasswordMaterialTextField.getEditText().getText().toString();
 
                 if (username.contains(" ")) {
                     showAlert("Numele continte simboluri nepermise!");
-                }
-                else {
+                } else if (!password.equals(confirmPassword)){
+                    showAlert("Parolele nu coincid!");
+                } else {
                     username = username.toLowerCase();
+                    //Prepare queue
+                    Cache cache = new DiskBasedCache(getCacheDir(), 1024 * 1024); // 1MB cap
+                    Network network = new BasicNetwork(new HurlStack());
                     mRequestQueue = new RequestQueue(cache, network);
                     mRequestQueue.start();
+                    //Start request
                     jsonVerifyUserNameTaken(username);
                 }
             }
