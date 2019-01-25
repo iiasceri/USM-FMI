@@ -49,6 +49,7 @@
                 <label style="margin-right: 10px">SubGrupa:</label>
                 <input type="radio" name="subGroup" value="I" id="subGroup"> I (s)
                 <input type="radio" name="subGroup" value="II" id="subGroup"> II (d)
+                <input type="radio" name="subGroup" value="Fara" id="subGroup"> Fara
                 <button type="submit" class="btn">Inregistreaza-ma</button>
             </div>
 

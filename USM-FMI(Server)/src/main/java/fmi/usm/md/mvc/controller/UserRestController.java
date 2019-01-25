@@ -95,6 +95,8 @@ public class UserRestController {
                 user.setSubGroup(SubGroup.I);
             else if (subGroup.equals("II"))
                 user.setSubGroup(SubGroup.II);
+            else if (subGroup.equals("Fara"))
+                user.setSubGroup(SubGroup.Fara);
             else {
                 map.put("status", "fail");
                 map.put("message", "Non existing subGroup type: " + subGroup);

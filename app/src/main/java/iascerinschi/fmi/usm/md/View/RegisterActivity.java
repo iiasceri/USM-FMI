@@ -141,35 +141,8 @@ public class RegisterActivity extends AppCompatActivity {
         // Start the queue
         mRequestQueue.start();
 
-        /*
-             Wait until groupNames will be parsed by jsonParseGroupNames()
-         */
-        final Handler handler = new Handler();
-        handler.postDelayed(new Runnable() {
-            @Override
-            public void run() {
-
-                subGroup = "I";
-                if (groupNames != null) {
-                    groupName = groupNames.get(0);
-                }
-                else {
-                    groupName = "IA1602rom";
-                }
-
-                MaterialSpinner groupMaterialSpinner = findViewById(R.id.groupSpinner);
-                groupMaterialSpinner.setItems(groupNames);
-                groupMaterialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
-                    @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-                        groupName = item;
-                    }
-                });
-            }
-        }, 1000);
-
         MaterialSpinner subGroupMaterialSpinner = findViewById(R.id.subGroupSpinner);
-        subGroupMaterialSpinner.setItems("I (Securitate)", "II (Design)");
+        subGroupMaterialSpinner.setItems("I (Securitate)", "II (Design)", "Fara Subrupe");
         subGroupMaterialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
@@ -180,6 +153,9 @@ public class RegisterActivity extends AppCompatActivity {
                         break;
                     case "II (Design)":
                         subGroup = "II";
+                        break;
+                    case "Fara Subrupe":
+                        subGroup = "Fara";
                         break;
                     default:
                         System.out.println("error wrong subGroup");
@@ -242,6 +218,19 @@ public class RegisterActivity extends AppCompatActivity {
                             for (int i = 0; i < jsonArray.length(); i++) {
 
                                 groupNames.add((String)jsonArray.get(i));
+                            }
+
+                            subGroup = "I";
+                            if (groupNames != null) {
+                                groupName = groupNames.get(0);
+                                MaterialSpinner groupMaterialSpinner = findViewById(R.id.groupSpinner);
+                                groupMaterialSpinner.setItems(groupNames);
+                                groupMaterialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
+
+                                    @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
+                                        groupName = item;
+                                    }
+                                });
                             }
 
                         } catch (JSONException e) {

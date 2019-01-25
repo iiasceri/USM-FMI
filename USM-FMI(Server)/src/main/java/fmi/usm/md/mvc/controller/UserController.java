@@ -77,6 +77,7 @@ public class UserController {
 
         String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
 
+        user.setUsername(user.getUsername().toLowerCase());
         if (groupName != null) {
             Optional<Group> go = groupService.getGroupByName(groupName);
             Group g = new Group();

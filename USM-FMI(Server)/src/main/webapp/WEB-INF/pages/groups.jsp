@@ -35,6 +35,7 @@
                 <input type="number" name="year" required="required" class="inp"/>
 
                 <button type="submit" class="btn">Creaza Grupa</button>
+                <button href="<c:url value="/show-users" />" class="btn">Arata Utilizatorii</button>
             </div>
         </form:form>
 
