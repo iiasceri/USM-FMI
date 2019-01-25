@@ -92,6 +92,8 @@ public class UserController {
                 user.setSubGroup(SubGroup.I);
             else if (subGroup.equals("II"))
                 user.setSubGroup(SubGroup.II);
+            else if (subGroup.equals("Fara"))
+            user.setSubGroup(SubGroup.Fara);
         }
         user.setPassword(BCrypt.hashpw(user.getPassword(), hash));
         userService.add(user);
