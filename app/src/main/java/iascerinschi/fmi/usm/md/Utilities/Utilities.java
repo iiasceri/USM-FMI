@@ -10,7 +10,7 @@ import java.util.Calendar;
 public class Utilities {
 
     public static String getServerURL() {
-        return "http://192.168.0.100:8080/USMFMI/api/";
+        return "http://192.168.0.104:8080/USMFMI/api/";
     }
 
     /**

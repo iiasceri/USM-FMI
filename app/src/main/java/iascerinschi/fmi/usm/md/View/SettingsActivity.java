@@ -55,13 +55,11 @@ public class SettingsActivity extends ToolbarActivity {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                     MaterialTextField idnp = findViewById(R.id.IDMaterialTextFieldSettings);
-                    idnp.expand();
                     idnp.setHasFocus(true);
                 }
             });
             alertDialog = builder.create();
             alertDialog.show();
-
         }
         else {
             String idnpString = mPrefs.getString("ID", "");
@@ -77,7 +75,7 @@ public class SettingsActivity extends ToolbarActivity {
 
             idnp.getEditText().setText(fragmentString);
         }
-
+        idnp.setHasFocus(true);
         final EditText idnpEditText = idnp.findViewById(R.id.IDEditTextSettings);
 
         idnpEditText.setOnTouchListener(new View.OnTouchListener() {

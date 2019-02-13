@@ -45,7 +45,7 @@
                     android:id="@+id/usernameEditTextRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nume Utilizator"
+                    android:hint="@string/register_username"
                     android:inputType="text"
                     android:textColor="#000000"
                     android:textSize="17sp" />
@@ -91,7 +91,7 @@
                     android:id="@+id/familynameEditTextRegister"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Nume Prenume"
+                    android:hint="@string/register_familyname"
                     android:inputType="text"
                     android:textColor="#000000"
                     android:textSize="17sp" />
@@ -177,7 +177,7 @@
                 android:id="@+id/groupSubGroupTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Alegeti grupa si subgrupa"
+                android:text="@string/register_group"
                 android:textColor="#FFFFFF"
                 android:textSize="20dp"
                 android:layout_marginBottom="5dp"/>

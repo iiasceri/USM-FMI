@@ -21,11 +21,14 @@
     <string name="login_button2">Confirmare</string>
     <string name="register_button1">Inregistreazate</string>
     <string name="register_button2">Inregistreaza-ma</string>
-    <string name="password">Parola</string>
-    <string name="confirm_password">Confirma parola</string>
+    <string name="password">Parola (Obligatoriu)</string>
+    <string name="confirm_password">Confirma parola (Obligatoriu)</string>
     <string name="mail">Mail</string>
     <string name="semestrial_marks">Note Semestriale</string>
     <string name="logout">Delogare</string>
     <string name="id_editText">IDNP</string>
     <string name="saveRoundButton">Salveaza</string>
+    <string name="register_username">Nume Utilizator (Obligatoriu)</string>
+    <string name="register_familyname">Nume Prenume</string>
+    <string name="register_group">Alegeti grupa si subgrupa</string>
 </resources>

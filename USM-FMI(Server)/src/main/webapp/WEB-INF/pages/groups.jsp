@@ -26,18 +26,33 @@
                 <security:authentication property="principal.username" />
             </security:authorize>!
         </h1>
+
+        <%
+            System.out.println("Groups userpriv:" + request.getAttribute("userPrivilege"));
+            Object param = request.getAttribute("userPrivilege");
+            String userPrivilege = param.toString();
+            if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {
+        %>
         <form:form method="POST" action="${pageContext.servletContext.contextPath}/add-group" modelAttribute="group" cssClass="frm">
             <div class="container" align="left">
                 <label>Numele grupei</label>
                 <input type="text" name="name" required="required" class="inp"/>
 
-                <label>Anul [1-3]</label>
-                <input type="number" name="year" required="required" class="inp"/>
+                    <%--<label>Anul [1-3]</label>--%>
+                    <%--<input type="number" name="year" required="required" class="inp"/>--%>
 
                 <button type="submit" class="btn">Creaza Grupa</button>
                 <button href="<c:url value="/show-users" />" class="btn">Arata Utilizatorii</button>
             </div>
         </form:form>
+        <%
+        } else {
+        %>
+        <p>Pentru a putea crea grupe sau a vedea utilizatorii trebuie sa va logati ca administrator</p>
+        <%
+            }
+        %>
+
 
         <div id="test" class="panel panel-default">
             <div class="panel-body">

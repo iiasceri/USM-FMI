@@ -34,6 +34,15 @@ public class UserDaoImpl implements UserDao {
     }
 
     @Override
+    public Optional<User> getUserByUsername(String username) {
+        return sessionFactory.getCurrentSession()
+                .createQuery("SELECT u FROM User u " +
+                        "WHERE username=:uUsername", User.class)
+                .setParameter("uUsername", username)
+                .getResultList().stream().findFirst();
+    }
+
+    @Override
     public List<User> getUsersByStatus(Status status) {
         return sessionFactory.getCurrentSession()
                 .createQuery("SELECT u FROM User u " +

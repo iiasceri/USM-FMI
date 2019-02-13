@@ -77,6 +77,8 @@ public class UserController {
 
         String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
 
+        //TODO: Regex Securitate
+
         user.setUsername(user.getUsername().toLowerCase());
         if (groupName != null) {
             Optional<Group> go = groupService.getGroupByName(groupName);

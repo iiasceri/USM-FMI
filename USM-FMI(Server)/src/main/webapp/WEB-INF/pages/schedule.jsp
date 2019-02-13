@@ -3,6 +3,10 @@
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="java.io.*"  %>
+<%@ page import="fmi.usm.md.mvc.service.UserService" %>
+<%@ page import="fmi.usm.md.mvc.model.User" %>
+<%@ page import="org.springframework.beans.factory.annotation.Autowired" %>
+<%@ page import="java.util.Enumeration" %>
 <html>
 <head>
 
@@ -51,7 +55,22 @@
 
     <label for='result_container'>Rezultatul:</label>
     <textarea name="json" id='result_container' class='col-md-12'></textarea>
+
+    <%
+        System.out.println("Schedule userpriv:" + request.getAttribute("userPrivilege"));
+        Object param = request.getAttribute("userPrivilege");
+        String userPrivilege = param.toString();
+        if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {
+    %>
     <button type="submit" class="btn">Salveaza schimbarile</button>
+    <%
+    } else {
+    %>
+    <p>Pentru a putea salva schimbarile, trebuie sa fiti administrator</p>
+    <%
+        }
+    %>
+
 
 
     </form:form>

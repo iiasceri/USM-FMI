@@ -183,7 +183,6 @@ public class RegisterActivity extends AppCompatActivity {
                 mView = new CatLoadingView();
                 mView.show(getSupportFragmentManager(), "");
 
-
                 //Validations
                 String username = usernameMaterialTextField.getEditText().getText().toString();
                 String password = passwordMaterialTextField.getEditText().getText().toString();

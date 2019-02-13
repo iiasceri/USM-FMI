@@ -23,5 +23,5 @@ public interface UserService {
 
     Optional<User> getUserByMail(String mail);
 
-    Optional<User> getUserByUsername(String mail);
+    Optional<User> getUserByUsername(String username);
 }
