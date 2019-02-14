@@ -13,7 +13,7 @@
       },
       {
         "ora": "11:30-13:00",
-        "disciplina": "Limbaje formale si automate",
+        "disciplina": "LFA",
         "tip": "curs",
         "profesor": "G.Sturza",
         "cabinet": "401/4",
@@ -54,7 +54,7 @@
       },
       {
         "ora": "15:15-16:45",
-        "disciplina": "Pachet optional",
+        "disciplina": "Sec BD",
         "tip": "lab",
         "profesor": "T.Pasa",
         "cabinet": "237/4",
@@ -72,7 +72,7 @@
       },
       {
         "ora": "17:00-18:30",
-        "disciplina": "Pachet optional",
+        "disciplina": "Sec Ret.",
         "tip": "lab",
         "profesor": "O.Cerbu",
         "cabinet": "113/4",
@@ -104,7 +104,7 @@
       },
       {
         "ora": "13:30-15:00",
-        "disciplina": "Pachet optional",
+        "disciplina": "Sec BD",
         "tip": "lab",
         "profesor": "T.Pasa",
         "cabinet": "237/4",
@@ -163,8 +163,8 @@
       },
       {
         "ora": "13:30-15:00",
-        "disciplina": "Pachet optional",
-        "tip": "lab",
+        "disciplina": "Sec BD",
+        "tip": "sem",
         "profesor": "T.Pasa",
         "cabinet": "237/4",
         "paritate": "-",
@@ -172,7 +172,7 @@
       },
       {
         "ora": "15:15-16:45",
-        "disciplina": "Pachet optional",
+        "disciplina": "Sec BD",
         "tip": "lab",
         "profesor": "T.Pasa",
         "cabinet": "237/4",
@@ -195,7 +195,7 @@
       },
       {
         "ora": "13:30-15:00",
-        "disciplina": "Aspecte etice in informatica",
+        "disciplina": "Etica",
         "tip": "curs",
         "profesor": "Gh.Capatana",
         "cabinet": "213a/4",
@@ -213,7 +213,7 @@
       },
       {
         "ora": "15:15-16:45",
-        "disciplina": "Pachet optional",
+        "disciplina": "Sec Ret.",
         "tip": "lab",
         "profesor": "O.Cerbu",
         "cabinet": "326/4",
@@ -231,7 +231,7 @@
       },
       {
         "ora": "17:00-18:30",
-        "disciplina": "Pachet optional",
+        "disciplina": "Sec Ret.",
         "tip": "lab",
         "profesor": "O.Cerbu",
         "cabinet": "326/4",

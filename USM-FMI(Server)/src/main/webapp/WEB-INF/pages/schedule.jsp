@@ -57,16 +57,14 @@
     <textarea name="json" id='result_container' class='col-md-12'></textarea>
 
     <%
-        System.out.println("Schedule userpriv:" + request.getAttribute("userPrivilege"));
-        Object param = request.getAttribute("userPrivilege");
-        String userPrivilege = param.toString();
+        String userPrivilege = request.getAttribute("userPrivilege").toString();
         if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {
     %>
     <button type="submit" class="btn">Salveaza schimbarile</button>
     <%
     } else {
     %>
-    <p>Pentru a putea salva schimbarile, trebuie sa fiti administrator</p>
+    <p>Nu aveti drepturi pentru a salva schimbarile</p>
     <%
         }
     %>

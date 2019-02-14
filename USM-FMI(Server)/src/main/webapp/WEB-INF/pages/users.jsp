@@ -13,6 +13,7 @@
 <h3>All users username:</h3>
 <div id="test" class="panel panel-default">
     <div class="panel-body">
+        <label>X - Pentru a sterge utilizator</label>
         <c:forEach items="${userList}" var="user">
             <p class="hea" style="cursor: pointer" onclick=getUserById(${user.id})>
                     ${user.username}

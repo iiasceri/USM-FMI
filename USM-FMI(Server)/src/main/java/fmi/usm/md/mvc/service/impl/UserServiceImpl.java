@@ -2,14 +2,17 @@ package fmi.usm.md.mvc.service.impl;
 
 import fmi.usm.md.mvc.dao.UserDao;
 import fmi.usm.md.mvc.dto.UserDto;
+import fmi.usm.md.mvc.model.Privilege;
 import fmi.usm.md.mvc.model.Status;
 import fmi.usm.md.mvc.model.User;
 import fmi.usm.md.mvc.service.UserService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
 

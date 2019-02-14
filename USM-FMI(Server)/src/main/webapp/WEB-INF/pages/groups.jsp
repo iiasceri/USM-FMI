@@ -2,6 +2,8 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%@ taglib prefix="security" uri="http://www.springframework.org/security/tags" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
+
 <html>
 <head>
     <title>Adauga grupe</title>
@@ -28,9 +30,7 @@
         </h1>
 
         <%
-            System.out.println("Groups userpriv:" + request.getAttribute("userPrivilege"));
-            Object param = request.getAttribute("userPrivilege");
-            String userPrivilege = param.toString();
+            String userPrivilege = request.getAttribute("userPrivilege").toString();
             if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {
         %>
         <form:form method="POST" action="${pageContext.servletContext.contextPath}/add-group" modelAttribute="group" cssClass="frm">
@@ -42,13 +42,13 @@
                     <%--<input type="number" name="year" required="required" class="inp"/>--%>
 
                 <button type="submit" class="btn">Creaza Grupa</button>
-                <button href="<c:url value="/show-users" />" class="btn">Arata Utilizatorii</button>
+
             </div>
         </form:form>
         <%
         } else {
         %>
-        <p>Pentru a putea crea grupe sau a vedea utilizatorii trebuie sa va logati ca administrator</p>
+        <p>Pentru a putea crea grupe sau a vedea utilizatorii trebuie sa aveti drepturile necesare</p>
         <%
             }
         %>
@@ -65,7 +65,10 @@
             </div>
         </div>
 
-        <div align="right">
+        <br>
+        <div align="center">
+            <a href="<c:url value="//show-users" />" style="padding-right: 5px;">Lista Utilizatorilor</a>
+            <a style="padding-right: 5px;">|</a>
             <a href="<c:url value="/logout" />">Iesire</a>
         </div>
 

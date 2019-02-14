@@ -2,6 +2,7 @@ package fmi.usm.md.mvc.controller;
 
 import fmi.usm.md.mvc.dao.impl.UserDaoImpl;
 import fmi.usm.md.mvc.model.Group;
+import fmi.usm.md.mvc.model.Privilege;
 import fmi.usm.md.mvc.model.User;
 import fmi.usm.md.mvc.service.GroupService;
 import com.google.gson.Gson;
@@ -11,6 +12,8 @@ import com.google.gson.JsonParser;
 import fmi.usm.md.mvc.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletContext;
 import java.io.*;
+import java.util.List;
 import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
@@ -33,7 +37,16 @@ public class GroupController {
 
     @RequestMapping(value = "/show-groups", method = GET)
     public String showGroups(Model model) {
-        model.addAttribute("userPrivilege", userService.getUserByUsername(System.getProperty("user.name")).get().getPrivilege());
+
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String username;
+        if (principal instanceof UserDetails)
+            username = ((UserDetails)principal).getUsername();
+        else
+            username = principal.toString();
+
+        model.addAttribute("userPrivilege", userService.getUserByUsername(username).get().getPrivilege());
         model.addAttribute("groupList", groupService.getAllGroups());
         return "groups";
     }
@@ -57,7 +70,15 @@ public class GroupController {
 
     @RequestMapping(value = "/schedule-by-name/{name}", method = GET)
     public String showScheduleByGroupName(Model model, @PathVariable(name = "name") String name) {
-        model.addAttribute("userPrivilege", userService.getUserByUsername(System.getProperty("user.name")).get().getPrivilege());
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String userName = "";
+        if (principal instanceof UserDetails)
+            userName = ((UserDetails)principal).getUsername();
+        else
+            userName = principal.toString();
+
+        model.addAttribute("userPrivilege", userService.getUserByUsername(userName).get().getPrivilege());
         model.addAttribute("groupName", groupService.getGroupByName(name).get().getName());
         model.addAttribute("scheduleType", "weekly");
         return "schedule";
@@ -65,7 +86,15 @@ public class GroupController {
 
     @RequestMapping(value = "/exam-schedule-by-name/{name}", method = GET)
     public String showExamScheduleByGroupName(Model model, @PathVariable(name = "name") String name) {
-        model.addAttribute("userPrivilege", userService.getUserByUsername(System.getProperty("user.name")).get().getPrivilege());
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+        String userName = "";
+        if (principal instanceof UserDetails)
+            userName = ((UserDetails)principal).getUsername();
+        else
+            userName = principal.toString();
+
+        model.addAttribute("userPrivilege", userService.getUserByUsername(userName).get().getPrivilege().toString());
         model.addAttribute("groupName", groupService.getGroupByName(name).get().getName());
         model.addAttribute("scheduleType", "exam");
         return "schedule";
