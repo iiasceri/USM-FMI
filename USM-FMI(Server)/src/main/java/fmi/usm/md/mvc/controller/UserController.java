@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.apache.commons.validator.routines.EmailValidator;
 
 import java.util.Arrays;
 import java.util.List;
@@ -70,6 +71,8 @@ public class UserController {
         return "register";
     }
 
+
+
     @RequestMapping(value = "/register", method = POST)
     public String takeRegisterValues(@ModelAttribute("user") User user,
                                      @RequestParam(value = "groupName") String groupName,
@@ -77,7 +80,11 @@ public class UserController {
 
         String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
 
-        //TODO: Regex Securitate
+        //Security Validations:
+        if (!user.getUsername().matches("[a-zA-Z0-9]*"))
+            return "redirect:/errorRegisterName";
+        if (!EmailValidator.getInstance().isValid(user.getMail()))
+            return "redirect:/errorRegisterMail";
 
         user.setUsername(user.getUsername().toLowerCase());
         if (groupName != null) {
@@ -100,6 +107,20 @@ public class UserController {
         user.setPassword(BCrypt.hashpw(user.getPassword(), hash));
         userService.add(user);
         return "redirect:/show-groups";
+    }
+
+    @RequestMapping(value = "/errorRegisterName", method = GET)
+    public String registerErrorHandlerName(Model model){
+        model.addAttribute("error", "Introduceti doar litere/cifre in campurile cu Nume");
+        model.addAttribute("groupList", groupService.getAllGroups());
+        return "/register";
+    }
+
+    @RequestMapping(value = "/errorRegisterMail", method = GET)
+    public String registerErrorHandlerMail(Model model){
+        model.addAttribute("error", "Introduceti doar litere/cifre si '@ .com, .md' pentru Mail");
+        model.addAttribute("groupList", groupService.getAllGroups());
+        return "/register";
     }
 
     @RequestMapping(value = "/json", method = GET)

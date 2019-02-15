@@ -35,6 +35,7 @@
         %>
         <form:form method="POST" action="${pageContext.servletContext.contextPath}/add-group" modelAttribute="group" cssClass="frm">
             <div class="container" align="left">
+                <p style="color:red">${error}</p>
                 <label>Numele grupei</label>
                 <input type="text" name="name" required="required" class="inp"/>
 

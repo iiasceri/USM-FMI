@@ -1,9 +1,6 @@
 package fmi.usm.md.mvc.controller;
 
-import fmi.usm.md.mvc.dao.impl.UserDaoImpl;
 import fmi.usm.md.mvc.model.Group;
-import fmi.usm.md.mvc.model.Privilege;
-import fmi.usm.md.mvc.model.User;
 import fmi.usm.md.mvc.service.GroupService;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -22,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.ServletContext;
 import java.io.*;
-import java.util.List;
-import java.util.Optional;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 import static org.springframework.web.bind.annotation.RequestMethod.POST;
@@ -58,8 +53,26 @@ public class GroupController {
 
     @RequestMapping(value = "/add-group", method = POST)
     public String getGroup(@ModelAttribute("group") Group group){
+        if (!group.getName().matches("[a-zA-Z0-9]*"))
+            return "redirect:/errorGroup";
         groupService.add(group);
         return "redirect:/show-groups";
+    }
+
+    @RequestMapping(value = "/errorGroup", method = GET)
+    public String groupsErrorHandler(Model model){
+        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+        String userName;
+        if (principal instanceof UserDetails)
+            userName = ((UserDetails)principal).getUsername();
+        else
+            userName = principal.toString();
+        String uName = userName;
+
+        model.addAttribute("userPrivilege", userService.getUserByUsername(uName).get().getPrivilege());
+        model.addAttribute("groupList", groupService.getAllGroups());
+        model.addAttribute("error", "Introduceti doar litere/cifre");
+        return "groups";
     }
 
     @RequestMapping(value = "/delete-by-id/{groupId}", method = GET)

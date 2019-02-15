@@ -22,6 +22,7 @@
             <h3 align="center" style="color:#009b76;">Completati Campurile!</h3>
 
             <div class="container" align="left">
+                <p style="color:red">${error}</p>
                 <label>Nume Utilizator:</label>
                 <input type="text" name="username" required="required" class="inp"/>
 
@@ -35,21 +36,21 @@
                 <input type="password" name="password" required="required" class="inp"/>
 
                 <label style="margin-right: 20px">Genul:</label>
-                <input type="radio" name="gender" value="FEMALE"> F
-                <input type="radio" name="gender" value="MALE"> M
+                <input type="radio" name="gender" value="FEMALE" required="required"> F
+                <input type="radio" name="gender" value="MALE" required="required"> M
 
                 <br>
                 <label style="margin-right: 15px">Grupa:</label>
-                <select name="groupName" id="groupName">
-                    <c:forEach var="groups" items="${groupList}">
+                <select name="groupName" id="groupName" required="required">
+                    <c:forEach var="groups" items="${groupList}" >
                         <option value="${groups.name}">${groups.name}</option>
                     </c:forEach>
                 </select>
                 <br>
                 <label style="margin-right: 10px">SubGrupa:</label>
-                <input type="radio" name="subGroup" value="I" id="subGroup"> I (s)
-                <input type="radio" name="subGroup" value="II" id="subGroup"> II (d)
-                <input type="radio" name="subGroup" value="Fara" id="subGroup"> Fara
+                <input type="radio" name="subGroup" value="I" id="subGroup" required="required"> I (s)
+                <input type="radio" name="subGroup" value="II" id="subGroup" required="required"> II (d)
+                <input type="radio" name="subGroup" value="Fara" id="subGroup" required="required"> Fara
                 <button type="submit" class="btn">Inregistreaza-ma</button>
             </div>
 
