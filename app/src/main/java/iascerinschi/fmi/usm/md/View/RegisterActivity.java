@@ -4,6 +4,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -204,6 +205,11 @@ public class RegisterActivity extends AppCompatActivity {
                 }
             }
         });
+
+        if (Utilities.checkConnection(getApplicationContext())) {
+        } else {
+            Snackbar.make(findViewById(R.id.layoutRegister), "Verificati Conexiunea la Internet!", Snackbar.LENGTH_LONG).show();
+        }
     }
 
     private void jsonParseGroupNames() {

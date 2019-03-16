@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
@@ -98,11 +99,12 @@ public class SettingsActivity extends ToolbarActivity {
             @Override
             public void onClick(View v) {
                 MaterialTextField idnpTMP = findViewById(R.id.IDMaterialTextFieldSettings);
-                if (idnpTMP.getEditText().getText().toString().length() != 13) {
+                String idnpStr = idnpTMP.getEditText().getText().toString();
+                if (!idnpStr.matches("[0-9]+") || idnpStr.length() != 13) {
                     AlertDialog alertDialog;
                     AlertDialog.Builder builder;
                     builder = new AlertDialog.Builder(SettingsActivity.this);
-                    builder.setMessage("IDNP introdus nu e de 13 cifre!");
+                    builder.setMessage("Introduceti IDNP de 13 cifre.");
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -115,13 +117,15 @@ public class SettingsActivity extends ToolbarActivity {
                     alertDialog = builder.create();
                     alertDialog.show();
                 }
-                String idnpStringToPrefs = idnpTMP.getEditText().getText().toString();
+                else {
+                    String idnpStringToPrefs = idnpTMP.getEditText().getText().toString();
 
-                SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
-                SharedPreferences.Editor prefsEditor = mPrefs.edit();
-                prefsEditor.putString("ID", idnpStringToPrefs).apply();
+                    SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                    SharedPreferences.Editor prefsEditor = mPrefs.edit();
+                    prefsEditor.putString("ID", idnpStringToPrefs).apply();
 
-                startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                    startActivity(new Intent(getApplicationContext(), MainActivity.class));
+                }
             }
         });
     }

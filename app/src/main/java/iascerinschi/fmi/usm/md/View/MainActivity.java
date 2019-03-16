@@ -145,9 +145,9 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
             Intent intent = new Intent(getApplicationContext(), MarksActivity.class);
             startActivity(intent);
         }
-        else if (id == R.id.nav_subheader_messages) {
-            Toast.makeText(getApplicationContext(), "Messages", Toast.LENGTH_SHORT).show();
-        }
+//        else if (id == R.id.nav_subheader_messages) {
+//            Toast.makeText(getApplicationContext(), "Messages", Toast.LENGTH_SHORT).show();
+//        }
         else if (id == R.id.nav_subheader_logout) {
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             SharedPreferences.Editor prefsEditor = mPrefs.edit();

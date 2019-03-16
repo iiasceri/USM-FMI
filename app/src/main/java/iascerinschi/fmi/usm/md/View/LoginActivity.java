@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.os.Handler;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -45,8 +46,6 @@ public class LoginActivity extends ToolbarActivity {
     private RequestQueue mQueue;
 
     CatLoadingView mView;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -140,6 +139,11 @@ public class LoginActivity extends ToolbarActivity {
                 }
             }
         });
+
+        if (Utilities.checkConnection(getApplicationContext())) {
+        } else {
+            Snackbar.make(findViewById(R.id.layoutLogin), "Verificati Conexiunea la Internet!", Snackbar.LENGTH_LONG).show();
+        }
     }
 
     private void jsonLoginUser(String username,
@@ -185,7 +189,10 @@ public class LoginActivity extends ToolbarActivity {
                 }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
-                error.printStackTrace();
+                String errorMsg = error.toString();
+                if (errorMsg.contains("com.android.volley.NoConnectionError")) {
+                    shoAlertDialog("Pentru a continua aveti nevoie de Internet");
+                }
             }
         });
 

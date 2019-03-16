@@ -18,15 +18,15 @@
                     android:icon="@drawable/ic_sentiment_very_satisfied_black_24dp"
                     android:title="@string/semestrial_marks" />
 
-                <item
-                    android:id="@+id/navigation_defend_diploma"
-                    android:icon="@drawable/ic_school_black_24dp"
-                    android:title="@string/diploma_exams"/>
+                <!--<item-->
+                    <!--android:id="@+id/navigation_defend_diploma"-->
+                    <!--android:icon="@drawable/ic_school_black_24dp"-->
+                    <!--android:title="@string/diploma_exams"/>-->
 
-                <item
-                    android:id="@+id/navigation_academic_calendar"
-                    android:icon="@drawable/ic_date_range_black_24dp"
-                    android:title="@string/academic_calendar"/>
+                <!--<item-->
+                    <!--android:id="@+id/navigation_academic_calendar"-->
+                    <!--android:icon="@drawable/ic_date_range_black_24dp"-->
+                    <!--android:title="@string/academic_calendar"/>-->
             </menu>
         </item>
 
@@ -34,15 +34,15 @@
 
     <group android:id="@+id/menu_bottom" android:checkableBehavior="single">
 
-            <item
-                android:title="@string/messages"
-                android:icon="@drawable/ic_message_black_24dp"
-                android:id="@+id/nav_subheader_messages"/>
+            <!--<item-->
+                <!--android:title="@string/messages"-->
+                <!--android:icon="@drawable/ic_message_black_24dp"-->
+                <!--android:id="@+id/nav_subheader_messages"/>-->
 
-            <item
-                android:title="@string/lessons"
-                android:icon="@drawable/ic_view_headline_black_24dp"
-                android:id="@+id/nav_subheadr_lessons"/>
+            <!--<item-->
+                <!--android:title="@string/lessons"-->
+                <!--android:icon="@drawable/ic_view_headline_black_24dp"-->
+                <!--android:id="@+id/nav_subheadr_lessons"/>-->
 
             <item
                 android:title="@string/settings"

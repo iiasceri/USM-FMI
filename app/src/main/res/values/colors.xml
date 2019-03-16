@@ -13,4 +13,6 @@
     <color name="pageColor3">#00e676</color>
     <color name="pageColor2">#469C75</color>
     <color name="pageColor1">#20505F</color>
+
+    <color name="icon">#28a13e</color>
 </resources>

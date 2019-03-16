@@ -27,7 +27,7 @@
     <string name="semestrial_marks">Note Semestriale</string>
     <string name="logout">Delogare</string>
     <string name="id_editText">IDNP</string>
-    <string name="saveRoundButton">Salveaza</string>
+    <string name="saveRoundButton">Salveaza IDNP</string>
     <string name="register_username">Nume Utilizator (Obligatoriu)</string>
     <string name="register_familyname">Nume Prenume</string>
     <string name="register_group">Alegeti grupa si subgrupa</string>

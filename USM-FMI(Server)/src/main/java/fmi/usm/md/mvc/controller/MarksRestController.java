@@ -96,6 +96,8 @@ public class MarksRestController {
 
             if (nr_semestru == 2)
                 max_discipline = 8;
+            else if (nr_semestru == 5)
+                max_discipline = 6;
             else
                 max_discipline = 7;
 

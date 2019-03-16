@@ -71,8 +71,6 @@ public class UserController {
         return "register";
     }
 
-
-
     @RequestMapping(value = "/register", method = POST)
     public String takeRegisterValues(@ModelAttribute("user") User user,
                                      @RequestParam(value = "groupName") String groupName,
