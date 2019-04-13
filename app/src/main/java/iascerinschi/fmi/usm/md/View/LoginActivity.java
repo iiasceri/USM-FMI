@@ -149,7 +149,7 @@ public class LoginActivity extends ToolbarActivity {
     private void jsonLoginUser(String username,
                                String password) {
 
-        String url = Utilities.getServerURL() +
+        String url = Utilities.getServerURL(getApplicationContext()) +
                 "login?" +
                 "username=" + username +
                 "&password=" + password;

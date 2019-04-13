@@ -214,7 +214,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void jsonParseGroupNames() {
 
-        String url = Utilities.getServerURL() + "getGroupNames";
+        String url = Utilities.getServerURL(getApplicationContext()) + "getGroupNames";
 
         JsonObjectRequest request = new JsonObjectRequest(Request.Method.GET, url, null,
                 new Response.Listener<JSONObject>() {
@@ -260,7 +260,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         familyName = familyName.replaceAll(" ", "%20");
 
-        String url = Utilities.getServerURL() +
+        String url = Utilities.getServerURL(getApplicationContext()) +
                 "register?" +
                 "username=" + username +
                 "&mail=" + mail +
@@ -318,7 +318,7 @@ public class RegisterActivity extends AppCompatActivity {
 
     private void jsonVerifyUserNameTaken(final String username) {
 
-        String url = Utilities.getServerURL() +
+        String url = Utilities.getServerURL(getApplicationContext()) +
                 "userNameTaken?" +
                 "username=" + username;
 

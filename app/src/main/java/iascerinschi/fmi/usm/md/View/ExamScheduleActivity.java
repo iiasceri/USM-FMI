@@ -137,7 +137,7 @@ public class ExamScheduleActivity extends ToolbarActivity {
     private void jsonGetExamSchedule(String groupName,
                                      String subGroup) {
 
-        String url = Utilities.getServerURL() +
+        String url = Utilities.getServerURL(getApplicationContext()) +
                 "get_schedule?" +
                 "groupName=" + groupName +
                 "&subGroup=" + subGroup +

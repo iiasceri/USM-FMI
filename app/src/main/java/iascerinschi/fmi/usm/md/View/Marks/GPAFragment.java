@@ -80,8 +80,12 @@ public class GPAFragment extends android.support.v4.app.Fragment {
                         System.out.println("its not number");
                     }
                     else {
-                        sumaSem += Float.valueOf(nota);
-                        counter++;
+                        try {
+                            sumaSem += Float.valueOf(nota);;
+                            counter++;
+                        } catch (Exception e) {
+                            e.printStackTrace();
+                        }
                     }
                 }
 

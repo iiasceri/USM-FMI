@@ -68,8 +68,12 @@
 
         <br>
         <div align="center">
-            <a href="<c:url value="//show-users" />" style="padding-right: 5px;">Lista Utilizatorilor</a>
-            <a style="padding-right: 5px;">|</a>
+
+            <%if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {%>
+                <a href="<c:url value="//show-users" />" style="padding-right: 5px;">Lista Utilizatorilor</a>
+                <a style="padding-right: 5px;">|</a>
+            <%}%>
+
             <a href="<c:url value="/logout" />">Iesire</a>
         </div>
 

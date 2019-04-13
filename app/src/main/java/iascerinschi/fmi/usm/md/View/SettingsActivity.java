@@ -7,12 +7,15 @@ import android.content.SharedPreferences;
 import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.KeyEvent;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.github.florent37.materialtextfield.MaterialTextField;
 import com.marozzi.roundbutton.RoundButton;
@@ -126,6 +129,44 @@ public class SettingsActivity extends ToolbarActivity {
 
                     startActivity(new Intent(getApplicationContext(), MainActivity.class));
                 }
+            }
+        });
+
+        RoundButton changeServer = findViewById(R.id.RBSettingsNewServer);
+
+        changeServer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                LayoutInflater li = LayoutInflater.from(getApplicationContext());
+                final View editDialogView = li.inflate(R.layout.edit_dialogs, null);
+                AlertDialog alertDialog;
+                AlertDialog.Builder builder;
+                builder = new AlertDialog.Builder(SettingsActivity.this);
+                builder.setView(editDialogView);
+                builder.setMessage("Introduceti noul server 'IP:Port'");
+                builder.setPositiveButton("Salveaza", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                        EditText serverEditText = editDialogView.findViewById(R.id.serverEditTextSettings);
+
+                        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+                        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+                        prefsEditor.putString("Server", serverEditText.getText().toString());
+
+                        prefsEditor.apply();
+                    }
+                });
+                builder.setNegativeButton("Inapoi", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+                alertDialog = builder.create();
+                alertDialog.show();
             }
         });
     }

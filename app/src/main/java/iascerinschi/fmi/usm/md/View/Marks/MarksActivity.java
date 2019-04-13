@@ -150,7 +150,7 @@ public class MarksActivity extends ToolbarActivity {
 
     private void jsonGetMarks(String idnp) {
 
-        String url = Utilities.getServerURL() +
+        String url = Utilities.getServerURL(getApplicationContext()) +
                 "get_marks?" +
                 "id=" + idnp;
 

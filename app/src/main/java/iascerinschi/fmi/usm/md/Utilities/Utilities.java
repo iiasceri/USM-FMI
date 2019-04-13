@@ -1,7 +1,9 @@
 package iascerinschi.fmi.usm.md.Utilities;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
+import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 
 import java.util.Calendar;
@@ -9,11 +11,24 @@ import java.util.Calendar;
 
 public class Utilities {
 
-    // TODO:
-    public static String getServerURL() {
+    /**
+     * @return default server address IP:Port
+     */
+    public static String getDefaultServerAddress() {
+        return "192.168.0.102:8080";
+    }
+
+    /**
+     * @param appContext from activity what u calling
+     * @return URL where to connect all requests
+     */
+    public static String getServerURL(Context appContext) {
+
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(appContext);
+        String jsonDataString = mPrefs.getString("Server", "");
         return  "http://" +
-                "192.168.0.101" +
-                ":8080/USMFMI/api/";
+                jsonDataString +
+                "/USMFMI/api/";
     }
 
     /**

@@ -70,8 +70,8 @@ public class S2Fragment extends android.support.v4.app.Fragment {
 
                 JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(i);
 
-                String denumire = menuItemObject.getString("denumire");
-                String nota = "(" + menuItemObject.getString("nota") + ")";
+                String denumire = menuItemObject.getString("denumire").replaceFirst("redNota", "");
+                String nota = " (" + menuItemObject.getString("nota").replaceFirst("redNota", "") + ")";
 
                 PojoMarks pojoMarks = new PojoMarks(denumire, nota);
                 mRecyclerViewItems.add(pojoMarks);

@@ -18,7 +18,7 @@ import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
 public class LoginRegisterActivity extends ToolbarActivity {
 
-    Toolbar toolbar;
+    private static final String DEFAULT_SERVER = Utilities.getDefaultServerAddress();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,6 +26,14 @@ public class LoginRegisterActivity extends ToolbarActivity {
         setContentView(R.layout.activity_login_register);
 
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+
+        //  ToDo: Planned to fix background before release
+        //prefsEditor.remove("isIntroShown").apply();
+
+        prefsEditor.putString("Server", DEFAULT_SERVER);
+
+        prefsEditor.apply();
 
         if (mPrefs.contains("User")) {
             final Intent intent = new Intent(getApplicationContext(), MainActivity.class);

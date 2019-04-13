@@ -169,7 +169,7 @@ public class ScheduleActivity extends ToolbarActivity {
     private void jsonGetSchedule(String groupName,
                                  String subGroup) {
 
-        String url = Utilities.getServerURL() +
+        String url = Utilities.getServerURL(getApplicationContext()) +
                 "get_schedule?" +
                 "groupName=" + groupName +
                 "&subGroup=" + subGroup +
