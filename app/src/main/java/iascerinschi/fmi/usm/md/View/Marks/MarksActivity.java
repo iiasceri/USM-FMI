@@ -11,11 +11,15 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentPagerAdapter;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v4.view.ViewPager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
+import android.view.MotionEvent;
+import android.view.View;
 import android.widget.TextView;
 
 import com.android.volley.DefaultRetryPolicy;
@@ -65,11 +69,14 @@ public class MarksActivity extends ToolbarActivity {
             new GPAFragment()
     };
 
-    @SuppressLint("SetTextI18n")
+    @SuppressLint({"SetTextI18n", "ClickableViewAccessibility"})
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_marks);
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.swipe_refresh_marks);
+        ViewPager mViewPager = findViewById(R.id.view_pager_marks);
+
 
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         if (!mPrefs.contains("ID")) {
@@ -90,28 +97,56 @@ public class MarksActivity extends ToolbarActivity {
             }
 
             if (!mPrefs.contains("Marks")) {
-                mQueue = Volley.newRequestQueue(this);
-                mQueue.start();
-                //start anim
-                mView = new CatLoadingView();
-                mView.show(getSupportFragmentManager(), "");
-                mView.setCanceledOnTouchOutside(false);
-                jsonGetMarks(mPrefs.getString("ID", ""));
+                getMarksData();
             }
             else {
                 // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
                 // (fragments) to the ViewPager, which the ViewPager needs to display.
                 // The ViewPager is responsible for sliding pages (fragments) in and out upon user input
-                ViewPager mViewPager = findViewById(R.id.viewpager);
                 mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+                mViewPager.setOnTouchListener(new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+
+                        switch (event.getAction()) {
+                            case MotionEvent.ACTION_MOVE:
+                                pullToRefresh.setEnabled(false);
+                                break;
+                            case MotionEvent.ACTION_UP:
+                            case MotionEvent.ACTION_CANCEL:
+                                pullToRefresh.setEnabled(true);
+                                break;
+                        }
+                        return false;
+                    }
+                });
 
                 // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
                 // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
                 // and when the ViewPager switches to a new page, the corresponding tab is selected)
-                TabLayout tabLayout = findViewById(R.id.tab_layout);
+                TabLayout tabLayout = findViewById(R.id.tab_layout_marks);
                 tabLayout.setupWithViewPager(mViewPager);
+                Objects.requireNonNull(tabLayout.getTabAt(6)).select();
             }
         }
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMarksData();
+                pullToRefresh.setRefreshing(false);
+            }
+        });
+    }
+
+    public void getMarksData() {
+        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        mQueue = Volley.newRequestQueue(this);
+        mQueue.start();
+        //start anim
+        mView = new CatLoadingView();
+        mView.show(getSupportFragmentManager(), "");
+        mView.setCanceledOnTouchOutside(false);
+        jsonGetMarks(mPrefs.getString("ID", ""));
     }
 
     @Override
@@ -174,23 +209,11 @@ public class MarksActivity extends ToolbarActivity {
                                 String json = response.getString("semestre");
 
                                 prefsEditor.putString("Marks", json);
-                                prefsEditor.putString("MarksSuccess", "yes");
                                 prefsEditor.apply();
-
-                                TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-                                toolbarTitle.setText("Semestre si Medii");
-
-                                // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
-                                // (fragments) to the ViewPager, which the ViewPager needs to display.
-                                // The ViewPager is responsible for sliding pages (fragments) in and out upon user input
-                                ViewPager mViewPager = findViewById(R.id.viewpager);
-                                mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-
-                                // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
-                                // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
-                                // and when the ViewPager switches to a new page, the corresponding tab is selected)
-                                TabLayout tabLayout = findViewById(R.id.tab_layout);
-                                tabLayout.setupWithViewPager(mViewPager);
+                                final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+                                final TabLayout tabLayout = findViewById(R.id.tab_layout_marks);
+                                Fragment currentFragment = PAGES[tabLayout.getSelectedTabPosition()];
+                                ft.detach(currentFragment).attach(currentFragment).commit();
                                 mView.dismiss();
                             }
                             else {

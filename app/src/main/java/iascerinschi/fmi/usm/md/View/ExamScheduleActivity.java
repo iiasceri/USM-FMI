@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -36,46 +37,30 @@ import iascerinschi.fmi.usm.md.Utilities.Utilities;
 public class ExamScheduleActivity extends ToolbarActivity {
 
     private List<Object> mRecyclerViewItems = new ArrayList<>();
-
     private RequestQueue mQueue;
-
     CatLoadingView mView;
-
 
     @SuppressLint("SetTextI18n")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_exam_schedule);
+        final SwipeRefreshLayout pullToRefresh = findViewById(R.id.swipe_refresh_exam_schedule);
 
         mQueue = Volley.newRequestQueue(this);
         mQueue.start();
-        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
+        final SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         JSONObject jo;
         try {
             jo = new JSONObject(mPrefs.getString("User", ""));
-            Log.i("user", mPrefs.getString("User", ""));
 
             if (!mPrefs.contains("ExamSchedule")) {
                 mView = new CatLoadingView();
                 mView.show(getSupportFragmentManager(), "");
                 jsonGetExamSchedule(jo.getString("groupName"), jo.getString("subGroup"));
             }
-            else {
-                RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
-                mRecyclerView.setHasFixedSize(true);
-
-                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(this);
-                mRecyclerView.setLayoutManager(layoutManager);
-
-                RecyclerView.Adapter adapter = new RecyclerViewAdapter(this, mRecyclerViewItems);
-                mRecyclerView.setAdapter(adapter);
-
+            else
                 addMenuItemsFromJson();
-            }
-
-            Log.i("groupName & subGroup", jo.getString("groupName") + jo.getString("subGroup"));
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -94,6 +79,20 @@ public class ExamScheduleActivity extends ToolbarActivity {
         TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
         toolbarTitle.setText("Succese La Examene!");
 
+        pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                try {
+                    JSONObject jo = new JSONObject(mPrefs.getString("User", ""));
+                    mView = new CatLoadingView();
+                    mView.show(getSupportFragmentManager(), "");
+                    jsonGetExamSchedule(jo.getString("groupName"), jo.getString("subGroup"));
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+                pullToRefresh.setRefreshing(false);
+            }
+        });
     }
 
     @Override
@@ -107,12 +106,25 @@ public class ExamScheduleActivity extends ToolbarActivity {
     }
 
     private void addMenuItemsFromJson() {
+
+        RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
+        mRecyclerView.setHasFixedSize(true);
+
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
+        mRecyclerView.setLayoutManager(layoutManager);
+
+        RecyclerView.Adapter adapter = new RecyclerViewAdapter(getApplicationContext(), mRecyclerViewItems);
+        mRecyclerView.setAdapter(adapter);
+
         try {
 
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
             String jsonDataString = mPrefs.getString("ExamSchedule", "");
             JSONArray menuItemsJsonArray = new JSONArray(jsonDataString);
 
+            if (!mRecyclerViewItems.isEmpty())
+                mRecyclerViewItems.clear();
+            
             for (int i = 0; i < menuItemsJsonArray.length(); ++i) {
 
                 JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(i);
@@ -162,17 +174,7 @@ public class ExamScheduleActivity extends ToolbarActivity {
                                 String json = response.getString("orar");
 
                                 prefsEditor.putString("ExamSchedule", json);
-                                prefsEditor.putString("ExamScheduleSuccess", "yes");
                                 prefsEditor.apply();
-
-                                RecyclerView mRecyclerView = findViewById(R.id.recycler_view);
-                                mRecyclerView.setHasFixedSize(true);
-
-                                RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
-                                mRecyclerView.setLayoutManager(layoutManager);
-
-                                RecyclerView.Adapter adapter = new RecyclerViewAdapter(getApplicationContext(), mRecyclerViewItems);
-                                mRecyclerView.setAdapter(adapter);
 
                                 addMenuItemsFromJson();
                                 mView.dismiss();
