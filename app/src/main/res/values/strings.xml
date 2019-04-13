@@ -32,5 +32,5 @@
     <string name="register_familyname">Nume Prenume</string>
     <string name="register_group">Alegeti grupa si subgrupa</string>
     <string name="change_server">Schimba Serverul</string>
-    <string name="serverEditHint">Exemplu: 213.48.3.94:8567</string>
+    <string name="serverEditHint">Exemplu: 213.48.3.94</string>
 </resources>

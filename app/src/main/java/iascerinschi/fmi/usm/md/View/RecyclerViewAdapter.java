@@ -1,6 +1,8 @@
 package iascerinschi.fmi.usm.md.View;
 
 import android.content.Context;
+import android.content.DialogInterface;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -113,6 +115,25 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
             case MENU_ITEM_VIEW_TYPE:
                 default:
                 MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
+                menuItemHolder.itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+
+                        // TODO: Display Profesor Data {mail, phone} +> Server Side
+                        AlertDialog alertDialog;
+                        AlertDialog.Builder builder;
+                        builder = new AlertDialog.Builder(mContext);
+                        builder.setMessage("Test\ntest");
+                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                System.out.println("You Pressed Ok");
+                            }
+                        });
+                        alertDialog = builder.create();
+                        alertDialog.show();
+                    }
+                });
                 Pojo menuItem = (Pojo) mRecyclerViewItems.get(position);
 
                 // Get the menu item image resource ID.

@@ -12,10 +12,10 @@ import java.util.Calendar;
 public class Utilities {
 
     /**
-     * @return default server address IP:Port
+     * @return default server IP
      */
-    public static String getDefaultServerAddress() {
-        return "192.168.0.102:8080";
+    public static String getDefaultServerIp() {
+        return "192.168.0.101";
     }
 
     /**
@@ -28,7 +28,7 @@ public class Utilities {
         String jsonDataString = mPrefs.getString("Server", "");
         return  "http://" +
                 jsonDataString +
-                "/USMFMI/api/";
+                ":8080/USMFMI/api/";
     }
 
     /**

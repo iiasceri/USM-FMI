@@ -144,7 +144,7 @@ public class SettingsActivity extends ToolbarActivity {
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(SettingsActivity.this);
                 builder.setView(editDialogView);
-                builder.setMessage("Introduceti noul server 'IP:Port'");
+                builder.setMessage("Introduceti IP Adresa");
                 builder.setPositiveButton("Salveaza", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {

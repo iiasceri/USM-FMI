@@ -124,7 +124,7 @@ public class ExamScheduleActivity extends ToolbarActivity {
 
             if (!mRecyclerViewItems.isEmpty())
                 mRecyclerViewItems.clear();
-            
+
             for (int i = 0; i < menuItemsJsonArray.length(); ++i) {
 
                 JSONObject menuItemObject = menuItemsJsonArray.getJSONObject(i);
