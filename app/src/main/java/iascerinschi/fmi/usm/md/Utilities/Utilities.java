@@ -15,7 +15,7 @@ public class Utilities {
      * @return default server IP
      */
     public static String getDefaultServerIp() {
-        return "192.168.0.101";
+        return "46.101.44.85";
     }
 
     /**

@@ -15,6 +15,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -50,7 +51,7 @@ public class GPAFragment extends android.support.v4.app.Fragment {
     private void addMenuItemsFromJson() {
         try {
 
-
+            DecimalFormat df2 = new DecimalFormat("#.##");
             SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getContext());
             String jsonDataString = mPrefs.getString("Marks", "");
 
@@ -91,7 +92,7 @@ public class GPAFragment extends android.support.v4.app.Fragment {
 
                 mediaSem = sumaSem / counter;
                 mediiList.add(mediaSem);
-                PojoMarks pojoMarks = new PojoMarks(denSem, mediaSem.toString());
+                PojoMarks pojoMarks = new PojoMarks(denSem, df2.format(mediaSem));
                 mRecyclerViewItems.add(pojoMarks);
             }
 
@@ -99,7 +100,7 @@ public class GPAFragment extends android.support.v4.app.Fragment {
             Float sumaMediilor = 0f;
             for (Object aMediiList : mediiList) sumaMediilor += (Float)aMediiList;
             mediaTotala = sumaMediilor / mediiList.size();
-            PojoMarks pojoMarks = new PojoMarks("Media la toate semestrele", Float.toString(mediaTotala));
+            PojoMarks pojoMarks = new PojoMarks("Media la toate semestrele", df2.format(mediaTotala));
             mRecyclerViewItems.add(pojoMarks);
 
 
