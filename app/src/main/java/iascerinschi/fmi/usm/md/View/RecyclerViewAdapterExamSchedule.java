@@ -20,6 +20,7 @@ import java.util.List;
 
 import iascerinschi.fmi.usm.md.Model.Pojo;
 import iascerinschi.fmi.usm.md.R;
+import iascerinschi.fmi.usm.md.View.ExamScheduleActivity;
 
 
 public class RecyclerViewAdapterExamSchedule extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
@@ -121,59 +122,91 @@ public class RecyclerViewAdapterExamSchedule extends RecyclerView.Adapter<Recycl
             case MENU_ITEM_VIEW_TYPE:
             default:
                 MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
-                menuItemHolder.itemView.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+                final Pojo menuItem = (Pojo) mRecyclerViewItems.get(position);
 
-                        AlertDialog alertDialog;
-                        AlertDialog.Builder builder;
-                        builder = new AlertDialog.Builder(mContext);
-                        builder.setMessage("Exam Schedule Activity Details");
-                        builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
-                            @Override
-                            public void onClick(DialogInterface dialog, int which) {
-                            }
-                        });
-                        alertDialog = builder.create();
-//                        alertDialog.show();
-                    }
-                });
-                Pojo menuItem = (Pojo) mRecyclerViewItems.get(position);
+//                menuItemHolder.itemView.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View v) {
+//                    try {
+//
+//                        SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(mContext);
+//                        String jsonMailString = mPrefs.getString("MailByName", "");
+//                        String jsonPhoneString = mPrefs.getString("PhoneByName", "");
+//                        String jsonProfessorsList = mPrefs.getString("Professors", "");
+//
+//                        JSONObject phones = new JSONObject(jsonPhoneString);
+//                        JSONObject mails = new JSONObject(jsonMailString);
+//                        JSONArray professors = new JSONArray(jsonProfessorsList);
+//
+//                        for (int i = 0; i < professors.length(); i++) {
+//
+//                            String professor = (String) professors.get(i);
+//
+//                            if (menuItem.getDescription().contains(professor)
+//                                    || menuItem.getCategory().contains(professor)) {
+//
+//                                AlertDialog alertDialog;
+//                                AlertDialog.Builder builder;
+//
+//                                LayoutInflater inflater = LayoutInflater.from(mContext);
+//
+//                                builder = new AlertDialog.Builder();
+//                                builder.setView(v);
+//
+//                                builder.setTitle("Detalii Profesor");
+//                                builder.setMessage("mail: " + mails.getString(professor)
+//                                        + "\ntelef: " + phones.getString(professor));
+//
+//                                builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+//                                    @Override
+//                                    public void onClick(DialogInterface dialog, int which) {
+//                                    }
+//                                });
+//                                alertDialog = builder.create();
+//                                alertDialog.show();
+//                            }
+//                        }
+//
+//                    } catch (JSONException e) {
+//                        e.printStackTrace();
+//                    }
+//                }
+//            });
 
-                // Get the menu item image resource ID.
-                String imageName = menuItem.getImageName();
-                int imageResID = mContext.getResources().getIdentifier(imageName, "drawable",
-                        mContext.getPackageName());
+            // Get the menu item image resource ID.
+            String imageName = menuItem.getImageName();
+            int imageResID = mContext.getResources().getIdentifier(imageName, "drawable",
+                    mContext.getPackageName());
 
-                // Add the menu item details to the menu item view.
-                menuItemHolder.menuItemImage.setImageResource(imageResID);
-                menuItemHolder.menuItemName.setText(menuItem.getName());
-                menuItemHolder.menuItemPrice.setText(menuItem.getPrice());
-                menuItemHolder.menuItemCategory.setText(menuItem.getCategory());
-                menuItemHolder.menuItemDescription.setText(menuItem.getDescription());
+            // Add the menu item details to the menu item view.
+            menuItemHolder.menuItemImage.setImageResource(imageResID);
+            menuItemHolder.menuItemName.setText(menuItem.getName());
+            menuItemHolder.menuItemPrice.setText(menuItem.getPrice());
+            menuItemHolder.menuItemCategory.setText(menuItem.getCategory());
+            menuItemHolder.menuItemDescription.setText(menuItem.getDescription());
 
-           /* case NATIVE_EXPRESS_AD_VIEW_TYPE:
-                // fall through
-            default:
-                NativeExpressAdViewHolder nativeExpressHolder =
-                        (NativeExpressAdViewHolder) holder;
-                NativeExpressAdView adView =
-                        (NativeExpressAdView) mRecyclerViewItems.get(position);
-                ViewGroup adCardView = (ViewGroup) nativeExpressHolder.itemView;
-                // The NativeExpressAdViewHolder recycled by the RecyclerView may be a different
-                // instance than the one used previously for this position. Clear the
-                // NativeExpressAdViewHolder of any subviews in case it has a different
-                // AdView associated with it, and make sure the AdView for this position doesn't
-                // already have a parent of a different recycled NativeExpressAdViewHolder.
-                if (adCardView.getChildCount() > 0) {
-                    adCardView.removeAllViews();
-                }
-                if (adView.getParent() != null) {
-                    ((ViewGroup) adView.getParent()).removeView(adView);
-                }
+       /* case NATIVE_EXPRESS_AD_VIEW_TYPE:
+            // fall through
+        default:
+            NativeExpressAdViewHolder nativeExpressHolder =
+                    (NativeExpressAdViewHolder) holder;
+            NativeExpressAdView adView =
+                    (NativeExpressAdView) mRecyclerViewItems.get(position);
+            ViewGroup adCardView = (ViewGroup) nativeExpressHolder.itemView;
+            // The NativeExpressAdViewHolder recycled by the RecyclerView may be a different
+            // instance than the one used previously for this position. Clear the
+            // NativeExpressAdViewHolder of any subviews in case it has a different
+            // AdView associated with it, and make sure the AdView for this position doesn't
+            // already have a parent of a different recycled NativeExpressAdViewHolder.
+            if (adCardView.getChildCount() > 0) {
+                adCardView.removeAllViews();
+            }
+            if (adView.getParent() != null) {
+                ((ViewGroup) adView.getParent()).removeView(adView);
+            }
 
-                // Add the Native Express ad to the native express ad view.
-                adCardView.addView(adView);*/
+            // Add the Native Express ad to the native express ad view.
+            adCardView.addView(adView);*/
         }
     }
 

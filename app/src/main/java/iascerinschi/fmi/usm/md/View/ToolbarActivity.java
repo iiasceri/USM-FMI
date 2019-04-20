@@ -1,6 +1,8 @@
 package iascerinschi.fmi.usm.md.View;
 
+import android.content.DialogInterface;
 import android.media.MediaPlayer;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -36,9 +38,26 @@ public abstract class ToolbarActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.menu_feedback) {
-            Toast.makeText(getApplicationContext(), "Feedback", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Multumesc ;)", Toast.LENGTH_SHORT).show();
             MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.yea_boii);
             mediaPlayer.start();
+        }
+        if (id == R.id.menu_about) {
+            AlertDialog alertDialog;
+            AlertDialog.Builder builder;
+            builder = new AlertDialog.Builder(ToolbarActivity.this);
+            builder.setTitle("Detalii Aplicatie");
+            builder.setMessage( ""
+                                + "\nAutor: Iascerinschi Ion"
+                                + "\nVersiune: 2.23");
+
+            builder.setPositiveButton("Inapoi", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                }
+            });
+            alertDialog = builder.create();
+            alertDialog.show();
         }
         return super.onOptionsItemSelected(item);
     }

@@ -36,7 +36,7 @@ public class LoginRegisterActivity extends ToolbarActivity {
         SharedPreferences mPrefs = PreferenceManager.getDefaultSharedPreferences(getApplicationContext());
         SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
-        //  ToDo: Planned to fix background before release
+        //Show Intro:
         //prefsEditor.remove("isIntroShown").apply();
 
         prefsEditor.putString("Server", DEFAULT_SERVER);
