@@ -2,6 +2,8 @@ package iascerinschi.fmi.usm.md.View;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
+import android.preference.PreferenceManager;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,13 +12,17 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.List;
 
 import iascerinschi.fmi.usm.md.Model.Pojo;
 import iascerinschi.fmi.usm.md.R;
 
 
-public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
+public class RecyclerViewAdapterExamSchedule extends RecyclerView.Adapter<RecyclerView.ViewHolder> {
     // A menu item view type.
     private static final int MENU_ITEM_VIEW_TYPE = 0;
 
@@ -30,7 +36,7 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
     private final List<Object> mRecyclerViewItems;
 
 
-    public RecyclerViewAdapter(Context context, List<Object> recyclerViewItems) {
+    public RecyclerViewAdapterExamSchedule(Context context, List<Object> recyclerViewItems) {
         this.mContext = context;
         this.mRecyclerViewItems = recyclerViewItems;
     }
@@ -96,10 +102,10 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
                         viewGroup.getContext()).inflate(R.layout.native_express_ad_container,
                         viewGroup, false);
                 return new NativeExpressAdViewHolder(nativeExpressLayoutView);*/
-         default:
-             View menuItemLayoutView = LayoutInflater.from(viewGroup.getContext()).inflate(
-                     R.layout.menu_item_container, viewGroup, false);
-             return new MenuItemViewHolder(menuItemLayoutView);
+            default:
+                View menuItemLayoutView = LayoutInflater.from(viewGroup.getContext()).inflate(
+                        R.layout.menu_item_container, viewGroup, false);
+                return new MenuItemViewHolder(menuItemLayoutView);
         }
 
     }
@@ -113,25 +119,23 @@ public class RecyclerViewAdapter extends RecyclerView.Adapter<RecyclerView.ViewH
         int viewType = getItemViewType(position);
         switch (viewType) {
             case MENU_ITEM_VIEW_TYPE:
-                default:
+            default:
                 MenuItemViewHolder menuItemHolder = (MenuItemViewHolder) holder;
                 menuItemHolder.itemView.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
 
-                        // TODO: Display Profesor Data {mail, phone} +> Server Side
                         AlertDialog alertDialog;
                         AlertDialog.Builder builder;
                         builder = new AlertDialog.Builder(mContext);
-                        builder.setMessage("Test\ntest");
+                        builder.setMessage("Exam Schedule Activity Details");
                         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {
-                                System.out.println("You Pressed Ok");
                             }
                         });
                         alertDialog = builder.create();
-                        alertDialog.show();
+//                        alertDialog.show();
                     }
                 });
                 Pojo menuItem = (Pojo) mRecyclerViewItems.get(position);

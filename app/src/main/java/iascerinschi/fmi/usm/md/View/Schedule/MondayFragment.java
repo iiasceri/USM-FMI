@@ -17,7 +17,6 @@ import java.util.ArrayList;
 import java.util.List;
 import iascerinschi.fmi.usm.md.Model.Pojo;
 import iascerinschi.fmi.usm.md.R;
-import iascerinschi.fmi.usm.md.View.RecyclerViewAdapter;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
 
 /* Fragment used as page 1 */
@@ -35,7 +34,7 @@ public class MondayFragment extends android.support.v4.app.Fragment {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new RecyclerViewAdapter(getContext(), mRecyclerViewItems);
+        RecyclerView.Adapter adapter = new RecyclerViewAdapterSchedule(getContext(), mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
 
         mRecyclerViewItems.clear();

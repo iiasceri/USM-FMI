@@ -220,7 +220,6 @@ public class ScheduleActivity extends ToolbarActivity {
                             SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
                             if (response.has("orar")) {
-
                                 String json = response.getString("orar");
 
                                 prefsEditor.putString("Schedule", json);

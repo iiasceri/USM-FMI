@@ -24,8 +24,14 @@ import android.widget.Toast;
 
 import com.google.gson.Gson;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 import iascerinschi.fmi.usm.md.R;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
@@ -115,6 +121,43 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
 
             Snackbar.make(findViewById(R.id.layoutMain), "Verificati Conexiunea La Internet Pentru a Putea Inoi Datele! (Nu e obligatoriu daca deja le-ati descarcat)", Snackbar.LENGTH_LONG).show();
         }
+
+        // Load all contact details:
+        Map<String, String> detailsPhone = new LinkedHashMap<>();
+        detailsPhone.put("N.Plesca", "(078) 717 525");
+        detailsPhone.put("M.Butnaru", "(067) 213 456");
+        detailsPhone.put("G.Sturza", "(068) 213 456");
+        detailsPhone.put("O.Cerbu", "(069) 444 555");
+        detailsPhone.put("V.Carhana", "(060) 677 533");
+        detailsPhone.put("T.Pasa", "(069) 46 30 40");
+        detailsPhone.put("Gh.Capatana", "(061) 999 822");
+        JSONObject jsonDetailsPhone = new JSONObject(detailsPhone);
+
+        Map<String, String> detailsMail = new LinkedHashMap<>();
+        detailsMail.put("N.Plesca", "natalia.plesca@exemplu.com");
+        detailsMail.put("M.Butnaru", "m.butnaru@exemplu.com");
+        detailsMail.put("G.Sturza", "greta.sturza@exemplu.com");
+        detailsMail.put("O.Cerbu", "olga.cerbu@exemplu.com");
+        detailsMail.put("V.Carhana", "v.carhana@exemplu.com");
+        detailsMail.put("T.Pasa", "tatiana.pasa@yahoo.com");
+        detailsMail.put("Gh.Capatana", "gh.capatana@gmail.com");
+        JSONObject jsonDetailsMail = new JSONObject(detailsMail);
+
+        List<String> profList = new ArrayList<>();
+        profList.add("N.Plesca");
+        profList.add("M.Butnaru");
+        profList.add("G.Sturza");
+        profList.add("O.Cerbu");
+        profList.add("V.Carhana");
+        profList.add("T.Pasa");
+        profList.add("Gh.Capatana");
+        JSONArray proffessorsJsonArray = new JSONArray(profList);
+
+        SharedPreferences.Editor prefsEditor = mPrefs.edit();
+        prefsEditor.putString("Professors", proffessorsJsonArray.toString());
+        prefsEditor.putString("PhoneByName", jsonDetailsPhone.toString());
+        prefsEditor.putString("MailByName", jsonDetailsMail.toString());
+        prefsEditor.apply();
 
     }
 

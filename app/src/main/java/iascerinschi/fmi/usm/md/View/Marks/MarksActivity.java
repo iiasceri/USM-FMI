@@ -203,9 +203,6 @@ public class MarksActivity extends ToolbarActivity {
                             SharedPreferences.Editor prefsEditor = mPrefs.edit();
 
                             if (response.has("semestre")) {
-
-                                Log.i("note", response.getString("semestre"));
-
                                 String json = response.getString("semestre");
 
                                 prefsEditor.putString("Marks", json);

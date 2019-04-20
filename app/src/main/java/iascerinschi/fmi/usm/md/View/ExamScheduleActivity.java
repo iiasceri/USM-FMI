@@ -33,6 +33,7 @@ import java.util.Objects;
 import iascerinschi.fmi.usm.md.Model.Pojo;
 import iascerinschi.fmi.usm.md.R;
 import iascerinschi.fmi.usm.md.Utilities.Utilities;
+import iascerinschi.fmi.usm.md.View.Schedule.RecyclerViewAdapterSchedule;
 
 public class ExamScheduleActivity extends ToolbarActivity {
 
@@ -113,7 +114,7 @@ public class ExamScheduleActivity extends ToolbarActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         mRecyclerView.setLayoutManager(layoutManager);
 
-        RecyclerView.Adapter adapter = new RecyclerViewAdapter(getApplicationContext(), mRecyclerViewItems);
+        RecyclerView.Adapter adapter = new RecyclerViewAdapterExamSchedule(getApplicationContext(), mRecyclerViewItems);
         mRecyclerView.setAdapter(adapter);
 
         try {
