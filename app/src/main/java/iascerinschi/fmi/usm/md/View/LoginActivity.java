@@ -105,11 +105,11 @@ public class LoginActivity extends ToolbarActivity {
                 DisplayMetrics displayMetrics = new DisplayMetrics();
                 getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
 
-                MaterialTextField materialTextField = findViewById(R.id.usernameMaterialTextFieldLogin);
-                MaterialTextField materialTextField2 = findViewById(R.id.passwordMaterialTextFieldLogin);
+                MaterialTextField usernameMTF = findViewById(R.id.usernameMaterialTextFieldLogin);
+                MaterialTextField passwordMTF = findViewById(R.id.passwordMaterialTextFieldLogin);
 
-                username = materialTextField.getEditText().getText().toString();
-                password = materialTextField2.getEditText().getText().toString();
+                username = usernameMTF.getEditText().getText().toString();
+                password = passwordMTF.getEditText().getText().toString();
 
                 if (username.isEmpty()) {
                     errorToasts("Introduceti Numele de Utilizator");
@@ -129,11 +129,12 @@ public class LoginActivity extends ToolbarActivity {
                         }
                     } else {
                         //Animatia: bring password field and get rid of mail field
-                        materialTextField2.expand();
-                        materialTextField.animate().translationXBy(-1000).setDuration(MEDIUM_ANIMATION_DURATION);
-                        materialTextField.animate().alpha(0f).setDuration(MEDIUM_ANIMATION_DURATION);
-                        materialTextField2.animate().translationXBy(-1000).setDuration(MEDIUM_ANIMATION_DURATION);
-                        materialTextField2.animate().alpha(1f).setDuration(MEDIUM_ANIMATION_DURATION);
+                        passwordMTF.expand();
+                        passwordMTF.setHasFocus(true);
+                        usernameMTF.animate().translationXBy(-1000).setDuration(MEDIUM_ANIMATION_DURATION);
+                        usernameMTF.animate().alpha(0f).setDuration(MEDIUM_ANIMATION_DURATION);
+                        passwordMTF.animate().translationXBy(-1000).setDuration(MEDIUM_ANIMATION_DURATION);
+                        passwordMTF.animate().alpha(1f).setDuration(MEDIUM_ANIMATION_DURATION);
                         flag = true;
                     }
                 }
@@ -224,10 +225,10 @@ public class LoginActivity extends ToolbarActivity {
                         materialTextField.animate().translationXBy(70).setDuration(SHORT_ANIMATION_DURATION);
 
                     }
-                }, SHORT_ANIMATION_DURATION);
+                }, SHORT_ANIMATION_DURATION + 90);
 
             }
-        }, SHORT_ANIMATION_DURATION);
+        }, SHORT_ANIMATION_DURATION + 90);
     }
 
     public void animatePasswordField(View view) {
@@ -261,7 +262,16 @@ public class LoginActivity extends ToolbarActivity {
         builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which) {
-                recreate();
+                MaterialTextField usernameMTF = findViewById(R.id.usernameMaterialTextFieldLogin);
+                MaterialTextField passwordMTF = findViewById(R.id.passwordMaterialTextFieldLogin);
+
+                usernameMTF.animate().translationXBy(1000).setDuration(MEDIUM_ANIMATION_DURATION);
+                usernameMTF.animate().alpha(1f).setDuration(MEDIUM_ANIMATION_DURATION);
+                passwordMTF.animate().translationXBy(1000).setDuration(MEDIUM_ANIMATION_DURATION);
+                passwordMTF.animate().alpha(0f).setDuration(MEDIUM_ANIMATION_DURATION);
+
+                usernameMTF.setHasFocus(true);
+                flag = false;
             }
         });
 
