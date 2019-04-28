@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -96,37 +97,36 @@ public class MarksActivity extends ToolbarActivity {
                 getSupportActionBar().setDisplayShowHomeEnabled(true);
             }
 
+            // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
+            // (fragments) to the ViewPager, which the ViewPager needs to display.
+            // The ViewPager is responsible for sliding pages (fragments) in and out upon user input
+            mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
+            mViewPager.setOnTouchListener(new View.OnTouchListener() {
+                @Override
+                public boolean onTouch(View v, MotionEvent event) {
+
+                    switch (event.getAction()) {
+                        case MotionEvent.ACTION_MOVE:
+                            pullToRefresh.setEnabled(false);
+                            break;
+                        case MotionEvent.ACTION_UP:
+                        case MotionEvent.ACTION_CANCEL:
+                            pullToRefresh.setEnabled(true);
+                            break;
+                    }
+                    return false;
+                }
+            });
+
+            // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
+            // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
+            // and when the ViewPager switches to a new page, the corresponding tab is selected)
+            TabLayout tabLayout = findViewById(R.id.tab_layout_marks);
+            tabLayout.setupWithViewPager(mViewPager);
+            Objects.requireNonNull(tabLayout.getTabAt(6)).select();
+
             if (!mPrefs.contains("Marks")) {
                 getMarksData();
-            }
-            else {
-                // Connect the ViewPager to our custom PagerAdapter. The PagerAdapter supplies the pages
-                // (fragments) to the ViewPager, which the ViewPager needs to display.
-                // The ViewPager is responsible for sliding pages (fragments) in and out upon user input
-                mViewPager.setAdapter(new MyPagerAdapter(getSupportFragmentManager()));
-                mViewPager.setOnTouchListener(new View.OnTouchListener() {
-                    @Override
-                    public boolean onTouch(View v, MotionEvent event) {
-
-                        switch (event.getAction()) {
-                            case MotionEvent.ACTION_MOVE:
-                                pullToRefresh.setEnabled(false);
-                                break;
-                            case MotionEvent.ACTION_UP:
-                            case MotionEvent.ACTION_CANCEL:
-                                pullToRefresh.setEnabled(true);
-                                break;
-                        }
-                        return false;
-                    }
-                });
-
-                // Connect the tabs with the ViewPager (the setupWithViewPager method does this for us in
-                // both directions, i.e. when a new tab is selected, the ViewPager switches to this page,
-                // and when the ViewPager switches to a new page, the corresponding tab is selected)
-                TabLayout tabLayout = findViewById(R.id.tab_layout_marks);
-                tabLayout.setupWithViewPager(mViewPager);
-                Objects.requireNonNull(tabLayout.getTabAt(6)).select();
             }
         }
         pullToRefresh.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
@@ -207,9 +207,14 @@ public class MarksActivity extends ToolbarActivity {
 
                                 prefsEditor.putString("Marks", json);
                                 prefsEditor.apply();
+
                                 final FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
                                 final TabLayout tabLayout = findViewById(R.id.tab_layout_marks);
                                 Fragment currentFragment = PAGES[tabLayout.getSelectedTabPosition()];
+                                if (tabLayout.getSelectedTabPosition() > 0) {
+                                    Fragment currentFragmentPrev = PAGES[tabLayout.getSelectedTabPosition() - 1];
+                                    ft.detach(currentFragmentPrev).attach(currentFragmentPrev);
+                                }
                                 ft.detach(currentFragment).attach(currentFragment).commit();
                                 mView.dismiss();
                             }

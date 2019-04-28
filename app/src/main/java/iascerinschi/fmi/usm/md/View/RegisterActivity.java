@@ -1,5 +1,7 @@
 package iascerinschi.fmi.usm.md.View;
 
+import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -9,8 +11,12 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RadioGroup;
 import android.widget.ScrollView;
 import android.widget.Toast;
@@ -58,11 +64,11 @@ public class RegisterActivity extends AppCompatActivity {
 
     CatLoadingView mView;
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
-
 
         usernameMaterialTextField = findViewById(R.id.usernameMaterialTextFieldRegister);
         mailMaterialTextField = findViewById(R.id.mailMaterialTextFieldRegister);
@@ -141,12 +147,26 @@ public class RegisterActivity extends AppCompatActivity {
         // Start the queue
         mRequestQueue.start();
 
+        MaterialSpinner groupMS = findViewById(R.id.groupSpinner);
+        groupMS.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(RegisterActivity.this);
+                return false;
+            }
+        });
         MaterialSpinner subGroupMaterialSpinner = findViewById(R.id.subGroupSpinner);
         subGroupMaterialSpinner.setItems("I (Securitate)", "II (Design)", "Fara Subrupe");
+        subGroupMaterialSpinner.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                hideKeyboard(RegisterActivity.this);
+                return false;
+            }
+        });
         subGroupMaterialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
 
             @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
-
                 switch (item) {
                     case "I (Securitate)":
                         subGroup = "I";
@@ -206,10 +226,19 @@ public class RegisterActivity extends AppCompatActivity {
             }
         });
 
-        if (Utilities.checkConnection(getApplicationContext())) {
-        } else {
+        if (!Utilities.checkConnection(getApplicationContext()))
             Snackbar.make(findViewById(R.id.layoutRegister), "Verificati Conexiunea la Internet!", Snackbar.LENGTH_LONG).show();
+    }
+
+    public static void hideKeyboard(Activity activity) {
+        InputMethodManager imm = (InputMethodManager) activity.getSystemService(Activity.INPUT_METHOD_SERVICE);
+        //Find the currently focused view, so we can grab the correct window token from it.
+        View view = activity.getCurrentFocus();
+        //If no view currently has focus, create a new one, just so we can grab a window token from it
+        if (view == null) {
+            view = new View(activity);
         }
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     private void jsonParseGroupNames() {
@@ -234,7 +263,6 @@ public class RegisterActivity extends AppCompatActivity {
                                 MaterialSpinner groupMaterialSpinner = findViewById(R.id.groupSpinner);
                                 groupMaterialSpinner.setItems(groupNames);
                                 groupMaterialSpinner.setOnItemSelectedListener(new MaterialSpinner.OnItemSelectedListener<String>() {
-
                                     @Override public void onItemSelected(MaterialSpinner view, int position, long id, String item) {
                                         groupName = item;
                                     }
