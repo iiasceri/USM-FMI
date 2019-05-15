@@ -1,3 +1,20 @@
+.body {
+    background-color: white;
+}
+
+.frm-container {
+    display: flex;
+    justify-content: center;
+    margin-top: 50px;
+    margin-bottom: 50px;
+}
+
+.frm-wrapper {
+    height: 100%;
+    width: 25%;
+    min-width: 280px;
+}
+
 .frm {
     border: 3px solid #f1f1f1;
 }

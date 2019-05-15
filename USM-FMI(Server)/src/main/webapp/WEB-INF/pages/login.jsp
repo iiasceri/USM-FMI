@@ -15,15 +15,10 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.1.3/flatly/bootstrap.min.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
-
-    <style>
-        body { background-color: #e9e9e9; }
-        .container { margin: 1px auto; }
-    </style>
 </head>
 <body>
-<div align="center">
-    <div style="width: 300px; height: 500px;">
+<div class="frm-container">
+    <div class="frm-wrapper">
         <form:form method="POST" action="${pageContext.servletContext.contextPath}/login" modelAttribute="user" cssClass="frm">
             <div class="imgcontainer">
                 <img src="<c:url value="/resources/pictures/usm_bottle_green_400x400.png" />" alt="Avatar" class="avatar">

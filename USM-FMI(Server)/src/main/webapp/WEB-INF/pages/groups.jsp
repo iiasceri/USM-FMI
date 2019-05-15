@@ -56,11 +56,12 @@
 
 
         <div id="test" class="panel panel-default">
-            <div class="panel-body">
+            <div class="panel-body" align="right" style="padding-right: 10px;">
                 <c:forEach items="${groupList}" var="group">
                     <p class="hea" style="cursor: pointer"> ${group.name}
                         <a href="schedule-by-name/${group.name}">Orar</a> |
-                        <a href="exam-schedule-by-name/${group.name}">Orar Sesiune</a>
+                        <a href="exam-schedule-by-name/${group.name}">Orar Sesiune</a> |
+                        <a href="<c:url value="/delete-by-id/${group.id}"/>">Sterge</a>
                     </p>
                 </c:forEach>
             </div>
@@ -70,7 +71,7 @@
         <div align="center">
 
             <%if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {%>
-                <a href="<c:url value="//show-users" />" style="padding-right: 5px;">Lista Utilizatorilor</a>
+                <a href="<c:url value="/show-users" />" style="padding-right: 5px;">Lista Utilizatorilor</a>
                 <a style="padding-right: 5px;">|</a>
             <%}%>
 

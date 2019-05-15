@@ -36,7 +36,7 @@
 </form:form>
 
 <div id="test" class="panel panel-default">
-    <div class="panel-body">
+    <div class="panel-body" align="right" style="padding-right: 15px;">
         <c:forEach items="${taskList}" var="task">
            <p class="hea" style="cursor: pointer"> ${task.description}
                <a href="/task/delete-by-id/${task.id}">X</a>

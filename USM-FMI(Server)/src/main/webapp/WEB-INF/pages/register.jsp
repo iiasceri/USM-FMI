@@ -13,8 +13,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
 </head>
 <body>
-<div align="center">
-    <div style="width: 300px; height: 500px;">
+<div class="frm-container">
+    <div class="frm-wrapper">
         <form:form method="POST" action="${pageContext.request.contextPath}/register" modelAttribute="user" cssClass="frm">
             <div class="imgcontainer">
                 <img src="<c:url value="/resources/pictures/usm_bottle_green_400x400.png" />" alt="Avatar" class="avatar">

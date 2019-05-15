@@ -31,8 +31,10 @@
     <h1 hidden class="typeSchedule">${scheduleType}</h1>
     <div id="header">
         Daca oraru inca nu a fost creat va fi aratat exemplul modificati-l si salvati-l
-	<br>
-	Simbolul "-" este folosit daca nu conteaza paritatea sau subgrupa
+        <br>
+        Simboluri pentru: paritate "par"/"impar", tipuri de grupe "I/II"
+        <br>
+        Simbolul "-" este folosit daca nu conteaza paritatea sau subgrupa
     </div>
 
 
@@ -53,14 +55,16 @@
     </div>
 
 
-    <label for='result_container'>Rezultatul:</label>
-    <textarea name="json" id='result_container' class='col-md-12'></textarea>
+    <label for='result_container'>Rezultatul:</label><br>
+    <textarea name="json" id='result_container' class='col-md-12' style="width: 800px"></textarea>
 
     <%
         String userPrivilege = request.getAttribute("userPrivilege").toString();
         if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {
     %>
-    <button type="submit" class="btn">Salveaza schimbarile</button>
+    <div align="center" id='button_container' class='col-md-3' style="width: 250px">
+    <button type="submit" class="btn btn-default btn-lg btn-block">Salveaza schimbarile</button>
+    </div>
     <%
     } else {
     %>
