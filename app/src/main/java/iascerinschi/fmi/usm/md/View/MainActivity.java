@@ -100,7 +100,8 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         webView.setWebViewClient(new WebViewClient());
         webView.setDownloadListener(new DownloadListener() {
             public void onDownloadStart(String url, String userAgent,
-                                        String contentDisposition, String mimetype,
+                                        String contentDisposition,
+                                        String mimetype,
                                         long contentLength) {
                 Intent i = new Intent(Intent.ACTION_VIEW);
                 i.setData(Uri.parse(url));

@@ -19,7 +19,7 @@
             <div class="imgcontainer">
                 <img src="<c:url value="/resources/pictures/usm_bottle_green_400x400.png" />" alt="Avatar" class="avatar">
             </div>
-            <h3 align="center" style="color:#009b76;">Completati Campurile!</h3>
+            <h3 align="center" style="color:#009b76;">Completați Câmpurile!</h3>
 
             <div class="container" align="left">
                 <p style="color:red">${error}</p>
@@ -50,14 +50,14 @@
                 <label style="margin-right: 10px">SubGrupa:</label>
                 <input type="radio" name="subGroup" value="I" id="subGroup" required="required"> I (s)
                 <input type="radio" name="subGroup" value="II" id="subGroup" required="required"> II (d)
-                <input type="radio" name="subGroup" value="Fara" id="subGroup" required="required"> Fara
-                <button type="submit" class="btn">Inregistreaza-ma</button>
+                <input type="radio" name="subGroup" value="Fără" id="subGroup" required="required"> Fara
+                <button type="submit" class="btn">Înregistrează-mă</button>
             </div>
 
 
         </form:form>
         <div align="right">
-             <a href="<c:url value="/logout" />">Iesire</a>
+             <a href="<c:url value="/logout" />">Ieșire</a>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

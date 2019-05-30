@@ -93,7 +93,7 @@
             android:id="@+id/passwordEditTextLogin"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Password"
+            android:hint="Parolă"
             android:inputType="textPassword"
             android:textColor="#000000"
             android:textSize="17sp" />

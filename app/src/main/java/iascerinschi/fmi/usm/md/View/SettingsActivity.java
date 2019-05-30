@@ -45,7 +45,7 @@ public class SettingsActivity extends ToolbarActivity {
         }
 
         TextView toolbarTitle = toolbar.findViewById(R.id.toolbar_title);
-        toolbarTitle.setText("Setari");
+        toolbarTitle.setText("Setări");
 
         MaterialTextField idnp = findViewById(R.id.IDMaterialTextFieldSettings);
 
@@ -54,7 +54,7 @@ public class SettingsActivity extends ToolbarActivity {
             AlertDialog alertDialog;
             AlertDialog.Builder builder;
             builder = new AlertDialog.Builder(SettingsActivity.this);
-            builder.setMessage("Introduceti IDNP dvs pentru a putea vizualiza notele");
+            builder.setMessage("Introduceți IDNP dvs pentru a putea vizualiza notele");
             builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
@@ -107,7 +107,7 @@ public class SettingsActivity extends ToolbarActivity {
                     AlertDialog alertDialog;
                     AlertDialog.Builder builder;
                     builder = new AlertDialog.Builder(SettingsActivity.this);
-                    builder.setMessage("Introduceti IDNP de 13 cifre.");
+                    builder.setMessage("Introduceți IDNP de 13 cifre.");
                     builder.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
@@ -144,8 +144,8 @@ public class SettingsActivity extends ToolbarActivity {
                 AlertDialog.Builder builder;
                 builder = new AlertDialog.Builder(SettingsActivity.this);
                 builder.setView(editDialogView);
-                builder.setMessage("Introduceti IP Adresa");
-                builder.setPositiveButton("Salveaza", new DialogInterface.OnClickListener() {
+                builder.setMessage("Introduceți IP Adresa");
+                builder.setPositiveButton("Salvează", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 
@@ -159,7 +159,7 @@ public class SettingsActivity extends ToolbarActivity {
                         prefsEditor.apply();
                     }
                 });
-                builder.setNegativeButton("Inapoi", new DialogInterface.OnClickListener() {
+                builder.setNegativeButton("Înapoi", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
 

@@ -6,7 +6,7 @@
 
 <html>
 <head>
-    <title>Adauga grupe</title>
+    <title>Adaugă grupe</title>
     <link rel="stylesheet" href="<c:url value="/resources/style/style.css" />" rel="stylesheet">
     <meta charset="UTF-8">
     <link href="https://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
@@ -15,7 +15,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
     <style>
-        body { background-color: #e9e9e9; }
         .container { margin: 1px auto; }
     </style>
 </head>
@@ -42,14 +41,14 @@
                     <%--<label>Anul [1-3]</label>--%>
                     <%--<input type="number" name="year" required="required" class="inp"/>--%>
 
-                <button type="submit" class="btn">Creaza Grupa</button>
+                <button type="submit" class="btn">Crează Grupa</button>
 
             </div>
         </form:form>
         <%
         } else {
         %>
-        <p>Pentru a putea crea grupe sau a vedea utilizatorii trebuie sa aveti drepturile necesare</p>
+        <p>Pentru a putea crea grupe sau a vedea utilizatorii trebuie să aveți drepturile necesare</p>
         <%
             }
         %>
@@ -60,8 +59,12 @@
                 <c:forEach items="${groupList}" var="group">
                     <p class="hea" style="cursor: pointer"> ${group.name}
                         <a href="schedule-by-name/${group.name}">Orar</a> |
-                        <a href="exam-schedule-by-name/${group.name}">Orar Sesiune</a> |
-                        <a href="<c:url value="/delete-by-id/${group.id}"/>">Sterge</a>
+                        <a href="exam-schedule-by-name/${group.name}">Orar Sesiune</a>
+                        <%
+                            if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {
+                        %>
+                         |<a href="<c:url value="/delete-by-id/${group.id}"/>">Șterge</a>
+                        <% } %>
                     </p>
                 </c:forEach>
             </div>
@@ -75,7 +78,7 @@
                 <a style="padding-right: 5px;">|</a>
             <%}%>
 
-            <a href="<c:url value="/logout" />">Iesire</a>
+            <a href="<c:url value="/logout" />">Ieșire</a>
         </div>
 
         <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

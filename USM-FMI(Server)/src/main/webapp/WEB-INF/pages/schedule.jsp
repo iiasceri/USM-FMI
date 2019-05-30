@@ -19,7 +19,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
     <style>
-        body { background-color: #e9e9e9; }
         .container { margin: 1px auto; }
     </style>
 </head>
@@ -30,16 +29,21 @@
     <h1>Grupa </h1><h1 class="nameGroup">${groupName}</h1>
     <h1 hidden class="typeSchedule">${scheduleType}</h1>
     <div id="header">
-        Daca oraru inca nu a fost creat va fi aratat exemplul modificati-l si salvati-l
+        Dacă orarul înca nu a fost creat va fi arătat un exempl, modificați-l și salvați-l
         <br>
+        <%
+            String scheduleType = request.getAttribute("scheduleType").toString();
+            if (scheduleType.equals("weekly")) {
+        %>
         Simboluri pentru: paritate "par"/"impar", tipuri de grupe "I/II"
         <br>
-        Simbolul "-" este folosit daca nu conteaza paritatea sau subgrupa
+        <% } %>
+        Simbolul "-" este folosit dacă nu contează paritatea sau subgrupa
     </div>
 
 
     <div align="center" id='button_container' class='col-md-3' style="width: 250px">
-        <button id='json_to_table_btn' type="button" class="btn btn-default btn-lg btn-block">Arata Orar</button>
+        <button id='json_to_table_btn' type="button" class="btn btn-default btn-lg btn-block">Arată Orar</button>
     </div>
 
     <div class="row mt-3">
@@ -47,11 +51,11 @@
     </div>
 
     <div id="toHeader" align="center" style="color:#006d16;">
-        Transformati in json apoi salvati schimbarile!
+        Transformati în json apoi salvați schimbările!
     </div>
 
     <div align="center" id='button_container' class='col-md-3' style="width: 250px">
-        <button id='table_to_json_btn' type="button" class="btn btn-default btn-lg btn-block">Transforma in JSON</button>
+        <button id='table_to_json_btn' type="button" class="btn btn-default btn-lg btn-block">Transformă în JSON</button>
     </div>
 
 
@@ -63,12 +67,12 @@
         if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {
     %>
     <div align="center" id='button_container' class='col-md-3' style="width: 250px">
-    <button type="submit" class="btn btn-default btn-lg btn-block">Salveaza schimbarile</button>
+    <button type="submit" class="btn btn-default btn-lg btn-block">Salvează schimbarile</button>
     </div>
     <%
     } else {
     %>
-    <p>Nu aveti drepturi pentru a salva schimbarile</p>
+    <p>Nu aveți drepturi pentru a salva schimbările</p>
     <%
         }
     %>
@@ -79,7 +83,7 @@
 
 
     <div align="center">
-        <a href="<c:url value="/logout" />">Iesire</a>
+        <a href="<c:url value="/logout" />">Ieșire</a>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>

@@ -23,7 +23,7 @@
             <div class="imgcontainer">
                 <img src="<c:url value="/resources/pictures/usm_bottle_green_400x400.png" />" alt="Avatar" class="avatar">
             </div>
-            <h3 align="center" style="color:#009b76;">Autentificati-va</h3>
+            <h3 align="center" style="color:#009b76;">Autentificați-vă</h3>
 
             <div class="container" align="left">
                 <label>Nume Utilizator</label>
@@ -36,7 +36,7 @@
                 <button type="submit" class="btn">Autentificare</button>
 
                 <div align="center">
-                    <a href="${pageContext.servletContext.contextPath}/register">Creaza cont!</a>
+                    <a href="${pageContext.servletContext.contextPath}/register">Crează cont!</a>
                 </div>
             </div>
         </form:form>

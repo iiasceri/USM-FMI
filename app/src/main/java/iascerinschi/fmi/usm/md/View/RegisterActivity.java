@@ -210,7 +210,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String confirmPassword = confirmPasswordMaterialTextField.getEditText().getText().toString();
 
                 if (username.contains(" ")) {
-                    showAlert("Numele continte simboluri nepermise!");
+                    showAlert("Numele de utilizator conținte simboluri nepermise!");
                 } else if (!password.equals(confirmPassword)){
                     showAlert("Parolele nu coincid!");
                 } else {

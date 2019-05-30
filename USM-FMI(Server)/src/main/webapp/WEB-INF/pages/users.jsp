@@ -35,7 +35,7 @@
             <%--</blockquote>--%>
         </div>
     </div>
-    <a href="<c:url value="/logout" />">Iesire</a>
+    <a href="<c:url value="/logout" />">Ieșire</a>
 </div>
 <%--<input type="button" value="JSON example" onclick="getAllUsersAsJson()" class="btn-danger btn-lg"/>--%>
 <%--<div id="users"></div>--%>

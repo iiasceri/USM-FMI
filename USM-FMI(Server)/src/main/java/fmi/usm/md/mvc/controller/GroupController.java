@@ -71,7 +71,7 @@ public class GroupController {
 
         model.addAttribute("userPrivilege", userService.getUserByUsername(uName).get().getPrivilege());
         model.addAttribute("groupList", groupService.getAllGroups());
-        model.addAttribute("error", "Introduceti doar litere/cifre");
+        model.addAttribute("error", "Introduceți doar litere/cifre");
         return "groups";
     }
 

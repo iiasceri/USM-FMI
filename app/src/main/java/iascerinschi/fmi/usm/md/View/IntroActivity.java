@@ -16,7 +16,7 @@ public class IntroActivity extends AppIntro2 {
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        addSlide(AppIntroFragment.newInstance("Buna!", "La moment, in aplicatie sunt urmatoarele functionalitati: Orar, Orar Sesiune, Note Semestriale, Setari, Delogare", R.drawable.usm_white_450x455, Color.parseColor("#04a01b")));
+        addSlide(AppIntroFragment.newInstance("Buna!", "La moment, in aplicatie sunt urmatoarele funcționalități: Orar, Orar Sesiune, Note Semestriale, Setări, Delogare", R.drawable.usm_white_450x455, Color.parseColor("#04a01b")));
 //        addSlide(AppIntroFragment.newInstance("Atentie", "Aplicatia este inca in dezvoltare", R.drawable.v2beta, Color.parseColor("#04a01b")));
         setBarColor(Color.parseColor("#04a01b"));
         showSkipButton(false);

@@ -77,8 +77,8 @@ public class LoginRegisterActivity extends ToolbarActivity {
                     AlertDialog.Builder builder;
                     builder = new AlertDialog.Builder(LoginRegisterActivity.this);
                     builder.setView(editDialogView);
-                    builder.setMessage("Introduceti IP Adresa");
-                    builder.setPositiveButton("Salveaza", new DialogInterface.OnClickListener() {
+                    builder.setMessage("Introduceți IP Adresa");
+                    builder.setPositiveButton("Salvează", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 
@@ -91,7 +91,7 @@ public class LoginRegisterActivity extends ToolbarActivity {
                             prefsEditor.apply();
                         }
                     });
-                    builder.setNegativeButton("Inapoi", new DialogInterface.OnClickListener() {
+                    builder.setNegativeButton("Înapoi", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
 

@@ -112,7 +112,7 @@ public class LoginActivity extends ToolbarActivity {
                 password = passwordMTF.getEditText().getText().toString();
 
                 if (username.isEmpty()) {
-                    errorToasts("Introduceti Numele de Utilizator");
+                    errorToasts("Introduceți Numele de Utilizator");
                     animateMailField(view);
                 }
                 else {
@@ -120,7 +120,7 @@ public class LoginActivity extends ToolbarActivity {
 
                     if (flag) {
                         if (password.isEmpty()) {
-                            errorToasts("Introduceti Parola");
+                            errorToasts("Introduceți Parola");
                             animatePasswordField(view);
                         } else {
                             mView = new CatLoadingView();
@@ -180,7 +180,7 @@ public class LoginActivity extends ToolbarActivity {
                                 startActivity(intent);
                             }
                             else {
-                                shoAlertDialog("Utilizator sau parola gresita");
+                                shoAlertDialog("Utilizator sau parolă greșită");
                             }
 
                         } catch (JSONException e) {

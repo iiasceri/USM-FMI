@@ -78,7 +78,7 @@ public class UserController {
 
         String hash = "$2a$10$mL0Xwpe8NThYuToTCepO3u";
 
-        //Security Validations:
+        //Validations:
         if (!user.getUsername().matches("[a-zA-Z0-9]*"))
             return "redirect:/errorRegisterName";
         if (!EmailValidator.getInstance().isValid(user.getMail()))
@@ -109,14 +109,14 @@ public class UserController {
 
     @RequestMapping(value = "/errorRegisterName", method = GET)
     public String registerErrorHandlerName(Model model){
-        model.addAttribute("error", "Introduceti doar litere/cifre in campurile cu Nume");
+        model.addAttribute("error", "Introduceți doar litere/cifre în câmpurile cu Nume");
         model.addAttribute("groupList", groupService.getAllGroups());
         return "/register";
     }
 
     @RequestMapping(value = "/errorRegisterMail", method = GET)
     public String registerErrorHandlerMail(Model model){
-        model.addAttribute("error", "Introduceti doar litere/cifre si '@ .com, .md' pentru Mail");
+        model.addAttribute("error", "Introduceți doar litere/cifre și '@ .com, .md' pentru Mail");
         model.addAttribute("groupList", groupService.getAllGroups());
         return "/register";
     }
@@ -145,27 +145,4 @@ public class UserController {
         model.addAttribute("error", "Datele introduse nu sunt valide");
         return "login";
     }
-
-    private String getPrincipal() {
-        String userName = null;
-        Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-        if (principal instanceof UserDetails) {
-            userName = ((UserDetails) principal).getUsername();
-        } else {
-            userName = principal.toString();
-        }
-        return userName;
-    }
-
-    //    @RequestMapping(value = "/show-users/{gender}", method = GET)
-    //    public String showUsersByGender(Model model, @PathVariable(name = "gender") String gender) {
-    //        model.addAttribute("userList", userService.getUsersByGender(Gender.valueOf(gender)));
-    //        return "users";
-    //    }
-    //
-    //    @RequestMapping(value = "/show-users/by-gender", method = GET)
-    //    public String showUsersByGenderForm(Model model, @RequestParam(name = "gender") String gender) {
-    //        model.addAttribute("userList", userService.getUsersByGender(Gender.valueOf(gender)));
-    //        return "users";
-    //    }
 }

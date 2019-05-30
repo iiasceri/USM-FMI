@@ -51,11 +51,11 @@ public class Utilities {
 
         String paritate;
         if (Utilities.getParitate().equals("par"))
-            paritate = "para";
+            paritate = "pară";
         else
-            paritate = "impara";
+            paritate = "impară";
 
-        return "Saptamana " + paritate;
+        return "Saptămână " + paritate;
     }
 
     /**
