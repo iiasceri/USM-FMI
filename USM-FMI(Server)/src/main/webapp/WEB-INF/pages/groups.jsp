@@ -30,7 +30,7 @@
 
         <%
             String userPrivilege = request.getAttribute("userPrivilege").toString();
-            if (userPrivilege.equals("ADMIN") || userPrivilege.equals("TEACHER")) {
+            if (userPrivilege.equals("ADMIN")) {
         %>
         <form:form method="POST" action="${pageContext.servletContext.contextPath}/add-group" modelAttribute="group" cssClass="frm">
             <div class="container" align="left">

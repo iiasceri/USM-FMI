@@ -38,18 +38,17 @@ public abstract class ToolbarActivity extends AppCompatActivity {
         int id = item.getItemId();
 
         if (id == R.id.menu_feedback) {
-            Toast.makeText(getApplicationContext(), "Multumesc ;)", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Mulțumesc ;)", Toast.LENGTH_SHORT).show();
         }
         if (id == R.id.menu_about) {
             AlertDialog alertDialog;
             AlertDialog.Builder builder;
             builder = new AlertDialog.Builder(ToolbarActivity.this);
-            builder.setTitle("Detalii Aplicatie");
+            builder.setTitle("Detalii Aplicație");
             builder.setMessage( ""
-                                + "\nAutor: Iascerinschi Ion"
+                                + "\nAutor: Iașcerinschi Ion"
                                 + "\nVersiune: 2.23");
-
-            builder.setPositiveButton("Inapoi", new DialogInterface.OnClickListener() {
+            builder.setPositiveButton("Înapoi", new DialogInterface.OnClickListener() {
                 @Override
                 public void onClick(DialogInterface dialog, int which) {
                 }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <dataSource name="usmfmi@localhost">
-  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.14">
+  <database-model serializer="dbm" dbms="POSTGRES" family-id="POSTGRES" format-version="4.15">
     <root id="1">
       <ServerVersion>11.1</ServerVersion>
     </root>
@@ -14,7 +14,7 @@
       <ObjectId>24764</ObjectId>
       <StateNumber>660</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionStateNumber>519</IntrospectionStateNumber>
+      <IntrospectionStateNumber>969</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </database>
@@ -65,8 +65,8 @@
       <CreateRole>1</CreateRole>
       <CreateDb>1</CreateDb>
       <CanLogin>1</CanLogin>
-      <Replication>1</Replication>
       <ConnectionLimit>-1</ConnectionLimit>
+      <Replication>1</Replication>
       <BypassRls>1</BypassRls>
     </role>
     <schema id="13" parent="3" name="information_schema">
@@ -101,8 +101,8 @@
       <Comment>standard public schema</Comment>
       <StateNumber>360</StateNumber>
       <Owner>postgres</Owner>
-      <IntrospectionTimestamp>2019-01-24.21:36:28.796</IntrospectionTimestamp>
-      <IntrospectionStateNumber>824</IntrospectionStateNumber>
+      <IntrospectionTimestamp>2019-06-09.23:04:25.477</IntrospectionTimestamp>
+      <IntrospectionStateNumber>970</IntrospectionStateNumber>
       <Current>1</Current>
       <Visible>1</Visible>
     </schema>
@@ -164,8 +164,8 @@
     </extension>
     <sequence id="26" parent="18" name="hibernate_sequence">
       <ObjectId>24968</ObjectId>
-      <Owner>postgres</Owner>
       <StateNumber>823</StateNumber>
+      <Owner>postgres</Owner>
       <SequenceIdentity>1</SequenceIdentity>
       <CacheSize>1</CacheSize>
       <DataType>bigint</DataType>
@@ -203,8 +203,8 @@
       <ObjectId>24959</ObjectId>
       <StateNumber>821</StateNumber>
       <ColNames>id</ColNames>
-      <UnderlyingIndexName>groups_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
+      <UnderlyingIndexName>groups_pkey</UnderlyingIndexName>
     </key>
     <column id="33" parent="28" name="id">
       <Position>1</Position>
@@ -277,8 +277,8 @@
       <ObjectId>24967</ObjectId>
       <StateNumber>822</StateNumber>
       <ColNames>id</ColNames>
-      <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
       <Primary>1</Primary>
+      <UnderlyingIndexName>users_pkey</UnderlyingIndexName>
     </key>
     <foreign-key id="45" parent="28" name="fkemfuglprp85bh5xwhfm898ysc">
       <ObjectId>24970</ObjectId>

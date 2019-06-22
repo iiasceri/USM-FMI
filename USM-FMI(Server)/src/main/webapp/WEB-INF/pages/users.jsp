@@ -10,7 +10,6 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.13/css/all.css" integrity="sha384-DNOHZ68U8hZfKXOrtjWvjxusGo9WQnrNx2sqG0tfsghAvtVlRW3tvkXWZh58N9jp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jquery-contextmenu/2.7.1/jquery.contextMenu.min.css">
     <style>
-        body { background-color: #e9e9e9; }
         .container { margin: 1px auto; }
     </style>
     <title>Users</title>
@@ -18,7 +17,7 @@
 <body>
 
 <div style="text-align: center; position: absolute; z-index: 15; top: 40%; left: 50%; margin: -150px 0 0 -150px;">
-    <h3>Lista Utilizatorilor:</h3>
+    <h3 align="center">Utilizatorii:</h3>
     <div class="container">
         <div class="panel-body">
             <label>X - Pentru a sterge utilizator</label>
