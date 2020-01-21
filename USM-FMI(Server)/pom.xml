@@ -8,7 +8,7 @@
     <name>USMFMI</name>
 
     <properties>
-        <spring.version>5.0.1.RELEASE</spring.version>
+        <spring.version>5.2.3.RELEASE</spring.version>
         <spring.security.version>4.1.4.RELEASE</spring.security.version>
     </properties>
 
