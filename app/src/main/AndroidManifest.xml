@@ -9,6 +9,7 @@
 
 
     <application
+        android:usesCleartextTraffic="true"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher_round"
         android:label="@string/app_name"
@@ -17,14 +18,14 @@
         android:theme="@style/AppTheme">
 
         <activity android:name=".View.SettingsActivity"></activity>
-        <activity android:name=".View.LoginRegisterActivity">
+        <activity android:name=".View.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".View.MainActivity" />
+        <activity android:name=".View.LoginRegisterActivity" />
         <activity android:name=".View.LoginActivity" />
         <activity android:name=".View.RegisterActivity" />
         <activity android:name=".View.ExamScheduleActivity" />

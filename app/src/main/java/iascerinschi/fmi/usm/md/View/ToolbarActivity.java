@@ -39,6 +39,8 @@ public abstract class ToolbarActivity extends AppCompatActivity {
 
         if (id == R.id.menu_feedback) {
             Toast.makeText(getApplicationContext(), "Mulțumesc ;)", Toast.LENGTH_SHORT).show();
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.yea_boii);
+            mediaPlayer.start();
         }
         if (id == R.id.menu_about) {
             AlertDialog alertDialog;

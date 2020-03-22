@@ -2,6 +2,7 @@ package iascerinschi.fmi.usm.md.View;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.media.MediaPlayer;
 import android.net.Uri;
 import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
@@ -207,8 +208,8 @@ public class MainActivity extends ToolbarActivity implements NavigationView.OnNa
         }
         else if (id == R.id.navigation_schedule) {
 //            Toast.makeText(getApplicationContext(), "Schedule", Toast.LENGTH_SHORT).show();
-//            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.orarhh);
-//            mediaPlayer.start();
+            MediaPlayer mediaPlayer = MediaPlayer.create(this, R.raw.orarhh);
+            mediaPlayer.start();
 
             Intent intent = new Intent(getApplicationContext(), ScheduleActivity.class);
             startActivity(intent);
